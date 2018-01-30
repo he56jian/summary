@@ -1,0 +1,59 @@
+css2设置元素背景的属性：
+	background-color:color值 || RGBA值;
+	background-image:url();
+	background-repeat:repeat || repeat-x ||repeat-y || no-repeat;
+	background-attachment:scroll || fixed;
+	background-position:<length> || <per>;
+	
+css3添加或增强了若干元素：
+	background-image:url();
+	background-position:<length>|| <per>;
+	background-size:<length> ||<per>;
+	background-repeat:repeat || repeat-x || repeat-y || no-repeat;
+	background-attachment:scroll || fixed;
+	background-clip:padding-box ||border-box || content-box;
+	background-origin:padding-box || border-box || content-box;
+	background-color:color值 || RGBA值;
+	
+语法结构：
+	background:background-image || background-position/background-size || 
+				background-repeat || background-attachment || background-clip ||
+				background-origin || background-color;
+background-size属性要跟着background-position后面，用"/"分开。
+考虑浏览器存在兼容性，推荐分开写。因为可能需要在属性前加浏览器厂商前缀。
+
+设置多背景：直接在每一项中，设置足够的图片参数即可。
+	例子：一个方框，四个角各个都有一个小方框。合成 第一张图。
+		1、如果是css2时，需要创建一个大的div包裹4个小div,并且每个都要添加对应class。
+		2、如果是css3时，只需设置一个div即可。再在样式中设置。
+		<style>
+			.bg{
+				width:215px;
+				height:165px;
+				background-attachment:scroll,scroll,scroll,scroll;  //????????
+				background-clip:border-box;                         //????????
+				background-color:transparent;                       //透明
+				background-image:url(1.jpg),url(2.jpg),url(3.jpg),url(4.jpg);
+				background-origin:border,border,border,border;      //？？？？？
+				background-origin:border-box,border-box;border-box,border-box;
+				//？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+				background-position:left top,right top,left bottom,right bottom;
+				background-repeat:no-repeat,no-repeat,no-repeat,no-repeat;
+				background-size:auto auto,auto auto,auto auto,auto auto;
+			}
+		</style>
+		<body>
+			<div class="bg"></div>
+		</body>
+		
+		
+		
+		
+使用css3,可以使用多个背景图叠加在一起。直接在后米添加。
+
+不过有几个属性没有了解到什么意思：
+background-attachment:scroll,scroll,scroll,scroll; 
+background-clip:border-box;        
+background-origin:border,border,border,border; 
+background-origin:border-box,border-box;border-box,border-box;
+background-size:auto auto,auto auto,auto auto,auto auto;
