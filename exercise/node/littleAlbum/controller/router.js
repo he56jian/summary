@@ -15,9 +15,7 @@ exports.showIndex = function (req,res) {
 			res.send(err)
 		}
 		res.render('index',{
-			"albums":allAlabums.albums,		//这个是文件夹
-			"albumImages":allAlabums.image,
-
+			"albums":allAlabums
 		})
 	})
 }
@@ -34,9 +32,10 @@ exports.showAlbum = function (req,res) {
 			res.render('err');
 			return;
 		}
+		console.log(imagesArrar);
 		res.render('albums',{
-			'albumname':req.params.albumName,
-			'albums':imagesArrar
+			'albumname':req.params.albumName,     //获取
+			'albums':imagesArrar         		//获取图片的数组
 		})
 	})
 

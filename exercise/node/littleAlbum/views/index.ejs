@@ -12,51 +12,50 @@
     <![endif]-->
 </head>
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">小小相册</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">全部相册 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">上传</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-
-    <div id="container">
-        <div class="row">
-            <% for(let i=0;i<albums.length;i++) { %>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="images/dir.jpg" alt="...">
-                    </a>
-                    <h4><%=albums[i]%></h4>
-                </div>
-            <% } %>
-            <!--  <% for(let i=0;i<albumImages.length;i++) { %>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        <img src="<%%>" alt="...">
-                    </a>
-                    <h4><%=albumImages[i]%></h4>
-                </div>
-            <% } %> -->
-
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">小小相册</a>
         </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">全部相册 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">上传</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div id="container">
+    <div class="row">
+        <% for(let key in albums){ %>
+        <% for(let i = 0;i < albums[key].length;i++) { %>
+        <div class="col-xs-6 col-md-3">
+            <a href="/<%=albums[key][i]%>" class="thumbnail">
+                <% if (key === 'folder'){ %>
+                <%console.log(i)%>
+                <img src="images/dir.jpg" alt="...">
+                <h4><%= albums[key][i] %></h4>
+                <% }else if(key === 'Images'){ %>
+                <img src="/<%=albums[key][i] %>" alt="...">
+                <h4><%= albums[key][i] %></h4>
+                <% } %>
+            </a>
+        </div>
+        <% } %>
+        <% } %>
     </div>
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
