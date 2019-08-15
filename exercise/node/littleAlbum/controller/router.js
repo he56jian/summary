@@ -15,7 +15,9 @@ exports.showIndex = function (req,res) {
 			res.send(err)
 		}
 		res.render('index',{
-			"albums":allAlabums
+			"albums":allAlabums.albums,		//这个是文件夹
+			"albumImages":allAlabums.image,
+
 		})
 	})
 }
@@ -24,11 +26,12 @@ exports.showIndex = function (req,res) {
 exports.showAlbum = function (req,res) {
 	// 遍历相册中的所有图片
 	// res.send('相册'+req.params.albumName);
-
+	let albumName = req.params.albumName;
 	//具体页面交给model
 	file.getAllImagesByAlbumName(albumName,function (err,imagesArrar) {
 		if(err){
-			res.send(err) ;
+			// console.log('出现错误了')
+			res.render('err');
 			return;
 		}
 		res.render('albums',{

@@ -1,0 +1,5 @@
+﻿.DS_Store
+
+# //在上传时，不会上传以下文件
+# /node_modules/
+/uploads/
