@@ -26,19 +26,18 @@ exports.showAlbum = function (req,res) {
 	// res.send('相册'+req.params.albumName);
 	let albumName = req.params.albumName;
 	//具体页面交给model
-	file.getAllImagesByAlbumName(albumName,function (err,imagesArrar) {
+	file.getAllImagesByAlbumName(albumName,function (err,allAlabums) {
 		if(err){
-			// console.log('出现错误了')
 			res.render('err');
 			return;
 		}
-		console.log(imagesArrar);
 		res.render('albums',{
-			'albumname':req.params.albumName,     //获取
-			'albums':imagesArrar         		//获取图片的数组
+			'albumsname':albumName,
+			'allAlabums':allAlabums
 		})
+		// res.render('albums',{
+		// 	'folder':allAlabums.folder,     //获取
+		// 	'images':allAlabums.images         		//获取图片的数组
+		// })
 	})
-
-
-
 }
