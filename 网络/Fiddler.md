@@ -141,4 +141,6 @@
 - 删除一条会话：选中会话，按del删除；
 - 清空列表：使用ctrl+X
 
-
+###出现的问题
+1. 开启Https截获时，出现“Unable to configure Windows to Trust the Fiddler Root certificate.The LOG tab may contain more infor”
+> 解决：
