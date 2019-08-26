@@ -5,8 +5,10 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,23 +31,60 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView imageView;
     private TextView textView;
     private EditText editText;
+    private Switch switcher;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        imageView = this.findViewById(R.id.imageView_zxing);
+
+
+        switcher = findViewById(R.id.switcher);                                    //开关
+        imageView = this.findViewById(R.id.imageView_zxing);                    //生成的二维码
 //        textView = this.findViewById(R.id.textview_zxing);                  //扫描二维码后生成的内容
-        editText = this.findViewById(R.id.edittext_zxing);
-        findViewById(R.id.button_zxing).setOnClickListener(this);           //生成二维码
+//        editText = this.findViewById(R.id.edittext_zxing);
+
 //        findViewById(R.id.button_start).setOnClickListener(this);
-//        findViewById(R.id.button_native).setOnClickListener(this);
+        findViewById(R.id.button_camera).setOnClickListener(this);              //点击camer mode
+        findViewById(R.id.button_trigger).setOnClickListener(this);               //点击trigger
+        findViewById(R.id.button_worktime).setOnClickListener(this);               //点击work time
+        findViewById(R.id.button_sendmode).setOnClickListener(this);            //点击sendmode
+        findViewById(R.id.button_control).setOnClickListener(this);                //点击control
+        findViewById(R.id.button_rename).setOnClickListener(this);                  //点击rename
+//        findViewById(R.id.button_overwrite).setOnClickListener(this);                  //点击overwrite
+        findViewById(R.id.button_zxing).setOnClickListener(this);           //生成二维码
+        onCheckChange();                                                               //点击overwrite
     }
+
+    public int over_write;
+
+    //overwrite选择器
+    public void onCheckChange() {
+        //overwrite选择器
+        CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton button, boolean isChecked) {
+                if (isChecked) {
+                    switcher.setChecked(true);
+                    over_write = 1;
+//                    System.out.println("ture");
+                } else {
+                    over_write = 0;
+//                    System.out.println("false");
+                }
+            }
+        };
+        switcher.setOnCheckedChangeListener(listener);
+    }
+
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_zxing:                                     //生成二维码
-                String count = editText.getText().toString().trim();
+//                String count = editText.getText().toString().trim();
+
+                String count = "哈哈哈哈哈哈哈哈";
                 if (TextUtils.isEmpty(count)) {                         //如果
                     Toast.makeText(MainActivity.this, "请输入内容", Toast.LENGTH_LONG).show();
                     return;
@@ -53,6 +92,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //生成二维码并显示在imageView上，宽和高都为600
                 imageView.setImageBitmap(generateBitmap(count, 600, 600));
                 break;
+
+            case R.id.button_camera:
+                setContentView(R.layout.camera_mode);
+                break;
+            case R.id.button_trigger:
+                setContentView(R.layout.trigger);
+                break;
+            case R.id.button_worktime:
+                setContentView(R.layout.worktime);
+                break;
+            case R.id.button_sendmode:
+                setContentView(R.layout.sendmode);
+                break;
+            case R.id.button_control:
+                setContentView(R.layout.remote_control);
+                break;
+            case R.id.button_rename:
+                setContentView(R.layout.rename);
+                break;
+            case R.id.button_overwrite:
+            break;
+
 //            case R.id.button_start:
 //                new IntentIntegrator(this)
 //                        .setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)// 扫码的类型,可选：一维码，二维码，一/二维码

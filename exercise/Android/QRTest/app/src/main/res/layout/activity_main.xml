@@ -7,12 +7,218 @@
     android:padding="5dp"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/edittext_zxing"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="输入需要生成二维码的内容" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        >
+
+        <Button
+            android:id="@+id/button_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:text="Camera Mode" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview_camera_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="photo ( 3Mp | 2photos)" />
+
+            <TextView
+                android:id="@+id/textview_camera_flash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Flash Power( High )" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        >
+
+        <Button
+            android:id="@+id/button_trigger"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:text="Trigger mode" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview_trigger_pir"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="PIR ( Auto | 5sec )" />
+
+            <TextView
+                android:id="@+id/textview_trigger_timelapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Timelapse( 3min )" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        >
+        <Button
+            android:id="@+id/button_worktime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Work time"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview_worktime1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="10:00-20:00" />
+
+            <TextView
+                android:id="@+id/textview_worktime2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="10:00-20:00" />
+
+            <TextView
+                android:id="@+id/textview_worktime3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="10:00-20:00" />
+
+            <TextView
+                android:id="@+id/textview_worktime4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="10:00-20:00" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        >
+        <Button
+            android:id="@+id/button_sendmode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="send mode"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textview_sendmode"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Instant ( Unlimited )" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        >
+        <Button
+            android:id="@+id/button_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:text="Remote control" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textview_control"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="( Delay 0.5H )" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        >
+        <Button
+            android:id="@+id/button_rename"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:text="rename" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textview_rename"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="CAMERA" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        >
+        <Button
+            android:id="@+id/button_overwrite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="overwrite"
+            android:layout_marginRight="10dp"
+        />
+        <Switch
+            android:id="@+id/switcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:switchMinWidth="20dp"
+            android:textOff="OFF"
+            android:textOn="ON"
+            android:thumb="@drawable/thumb"
+            android:track="@drawable/track" />
+    </LinearLayout>
     <Button
         android:id="@+id/button_zxing"
         android:layout_width="match_parent"
@@ -24,24 +230,33 @@
         android:layout_width="match_parent"
         android:layout_height="250dp" />
 
-<!--    <Button-->
-<!--        android:id="@+id/button_start"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="开启扫一扫(zxing自带扫码界面)" />-->
 
-<!--    <Button-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:id="@+id/button_native"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="开启扫一扫（自定义扫码界面）" />-->
+    <!--    -->
+    <!--    <EditText-->
+    <!--        android:id="@+id/edittext_zxing"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:hint="输入需要生成二维码的内容" />-->
 
 
-<!--    <TextView-->
-<!--        android:id="@+id/textview_zxing"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="扫码的结果" />-->
+    <!--    <Button-->
+    <!--        android:id="@+id/button_start"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="开启扫一扫(zxing自带扫码界面)" />-->
+
+    <!--    <Button-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:id="@+id/button_native"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="开启扫一扫（自定义扫码界面）" />-->
+
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textview_zxing"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="扫码的结果" />-->
 
 </LinearLayout>
