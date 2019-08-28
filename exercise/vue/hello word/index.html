@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">{{content}}</div>
+<div>{{content}}</div>
+
+<script>
+    let app = new Vue({
+        el:'#app',                          //定义接管范围
+        data:{                                         //定义接管内容
+        	content:'hello world'
+        }
+    })
+
+    setTimeout(function () {
+        app.$data.content = 'bye world'             //修改content内容
+	},2000);
+
+</script>
+</body>
+</html>

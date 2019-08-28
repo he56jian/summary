@@ -95,7 +95,8 @@ ___斜粗体___
 	let a =1
 	a+=1;
 	b=a;
-也可以用三个反引号包裹一段代码，并指定一种语言，或者不指定
+也可以用三个反引号包裹一段代码，并指定一种语言，或者不指定  
+
 ```javascript
 let a=1;
 function add(a,b){
@@ -105,7 +106,6 @@ $(document).ready(function (){
 	alert('runoob');
 });
 add(a,2);
-
 ```
 #11、链接
 用法：

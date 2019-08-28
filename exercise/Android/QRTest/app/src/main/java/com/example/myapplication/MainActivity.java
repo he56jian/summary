@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switcher.setOnCheckedChangeListener(listener);
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -94,6 +93,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.button_camera:
+                Intent intent = new Intent(MainActivity.this,CameraActivity.class);
+                startActivityForResult(intent, 1);
+
+
                 setContentView(R.layout.camera_mode);
                 break;
             case R.id.button_trigger:
@@ -112,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setContentView(R.layout.rename);
                 break;
             case R.id.button_overwrite:
-            break;
+                break;
 
 //            case R.id.button_start:
 //                new IntentIntegrator(this)
@@ -165,6 +168,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return null;
     }
 
+
+    //返回main界面的返回值
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -178,5 +183,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textView.setText("扫码结果：" + result);
             }
         }
+        if (requestCode == 1 && resultCode == 2) {
+            String content = data.getStringExtra("data");
+
+
+//　　　　　　tv2.setText(content);
+        }
+
     }
+
 }

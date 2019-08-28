@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todolist</title>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+<div>
+    <input id="inputValue" type="text">
+    <button id="btn">提交</button>
+    <ul id="list">
+       
+    </ul>
+</div>
+
+<script>
+
+	/***
+     * MVP
+     * M层，模型层，弱势，并没有展示
+     * V层，视图
+     * P层，控制器 ，使用dom 操作，改变V层。是V和M层的中转；
+	 * @constructor
+	 */
+
+
+	function Page() {
+
+	}
+
+	$.extend(Page.prototype, {
+		init: function () {
+			this.binEvents()
+		},
+		binEvents: function () {
+			let btn = $("#btn")
+			btn.on('click', $.proxy(this.handleBtnClick, this))             //btn的点击事件和handleBtnClick事件绑定在一起
+		},
+		handleBtnClick: function () {
+			let inputValue = $('#inputValue').val();
+            let inputElem = $('#inputValue');
+			let ulElem = $('#list');
+			ulElem.append(`<li>${inputValue}</li>`)
+			inputElem.val('');
+		}
+	})
+    let page = new Page()
+    page.init()
+
+</script>
+</body>
+</html>
