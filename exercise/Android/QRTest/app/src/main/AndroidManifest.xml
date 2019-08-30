@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".com.example.myapplication.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,6 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.myapplication.com.example.myapplication.activity.CameraActivity"/>
+        <activity android:name="com.example.myapplication.com.example.myapplication.activity.RemoteControlActivity"/>
+        <activity android:name="com.example.myapplication.com.example.myapplication.activity.RenameActivity"/>
+        <activity android:name="com.example.myapplication.com.example.myapplication.activity.SendModeActivity"/>
+        <activity android:name="com.example.myapplication.com.example.myapplication.activity.TriggerModeActivity"/>
+        <activity android:name="com.example.myapplication.com.example.myapplication.activity.WorkTimeActivity"/>
     </application>
 
 </manifest>

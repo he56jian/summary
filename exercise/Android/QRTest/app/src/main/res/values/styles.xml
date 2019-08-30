@@ -17,4 +17,13 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!--灰色8a8a8a18号字体，130宽，主要用于确认个人信息表格样式-->
+    <style name="style_table_gray6_18_130_text">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_18</item>
+        <item name="android:textColor">@color/c_gray_6</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/dimen_10</item>
+    </style>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.com.example.myapplication.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.QrCodeActivity;
 import com.example.myapplication.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView textView;
     private EditText editText;
     private Switch switcher;
-
+    private int camera_mode,trigger,raname,over_write,send_mode,work_time,remote_control;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         onCheckChange();                                                               //点击overwrite
     }
 
-    public int over_write;
-
     //overwrite选择器
     public void onCheckChange() {
         //overwrite选择器
@@ -76,13 +73,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         };
         switcher.setOnCheckedChangeListener(listener);
     }
-
+    Intent intent;
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_zxing:                                     //生成二维码
 //                String count = editText.getText().toString().trim();
-
                 String count = "哈哈哈哈哈哈哈哈";
                 if (TextUtils.isEmpty(count)) {                         //如果
                     Toast.makeText(MainActivity.this, "请输入内容", Toast.LENGTH_LONG).show();
@@ -91,28 +87,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //生成二维码并显示在imageView上，宽和高都为600
                 imageView.setImageBitmap(generateBitmap(count, 600, 600));
                 break;
-
             case R.id.button_camera:
-                Intent intent = new Intent(MainActivity.this,CameraActivity.class);
-                startActivityForResult(intent, 1);
-
-
-                setContentView(R.layout.camera_mode);
+                intent= new Intent(MainActivity.this,CameraActivity.class);
+                startActivityForResult(intent, 1);                //回执
                 break;
             case R.id.button_trigger:
-                setContentView(R.layout.trigger);
+                intent = new Intent(MainActivity.this,TriggerModeActivity.class);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.button_worktime:
-                setContentView(R.layout.worktime);
+                intent = new Intent(MainActivity.this,WorkTimeActivity.class);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.button_sendmode:
-                setContentView(R.layout.sendmode);
+                intent = new Intent(MainActivity.this,SendModeActivity.class);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.button_control:
-                setContentView(R.layout.remote_control);
+                intent = new Intent(MainActivity.this,RemoteControlActivity.class);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.button_rename:
-                setContentView(R.layout.rename);
+                intent = new Intent(MainActivity.this,RenameActivity.class);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.button_overwrite:
                 break;
@@ -173,6 +170,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        textView = findViewById(R.id.textview_container);
+        textView.setText("扫码结果：" + requestCode+"_"+resultCode);
         //扫码结果
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult != null) {

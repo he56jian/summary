@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.com.example.myapplication.activity;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.R;
 import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
