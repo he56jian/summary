@@ -11,15 +11,19 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".com.example.myapplication.activity.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.myapplication.com.example.myapplication.activity.CameraActivity"/>
+        <activity
+            android:label="Back"
+            android:theme="@style/AppTheme.AppBarOverlayLight"
+            android:name="com.example.myapplication.com.example.myapplication.activity.CameraActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.myapplication.com.example.myapplication.activity.MainActivity"></meta-data>
+        </activity>
         <activity android:name="com.example.myapplication.com.example.myapplication.activity.RemoteControlActivity"/>
         <activity android:name="com.example.myapplication.com.example.myapplication.activity.RenameActivity"/>
         <activity android:name="com.example.myapplication.com.example.myapplication.activity.SendModeActivity"/>

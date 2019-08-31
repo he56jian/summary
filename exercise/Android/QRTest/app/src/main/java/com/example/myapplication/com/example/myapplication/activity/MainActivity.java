@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private Bundle bundle;
     private ImageView imageView;
     private TextView textView;
     private EditText editText;
@@ -36,23 +37,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        init();
+    }
+    private void init() {
+        bundle = new Bundle();
         switcher = findViewById(R.id.switcher);                                    //开关
         imageView = this.findViewById(R.id.imageView_zxing);                    //生成的二维码
-//        textView = this.findViewById(R.id.textview_zxing);                  //扫描二维码后生成的内容
-//        editText = this.findViewById(R.id.edittext_zxing);
-
-//        findViewById(R.id.button_start).setOnClickListener(this);
         findViewById(R.id.button_camera).setOnClickListener(this);              //点击camer mode
         findViewById(R.id.button_trigger).setOnClickListener(this);               //点击trigger
         findViewById(R.id.button_worktime).setOnClickListener(this);               //点击work time
         findViewById(R.id.button_sendmode).setOnClickListener(this);            //点击sendmode
         findViewById(R.id.button_control).setOnClickListener(this);                //点击control
         findViewById(R.id.button_rename).setOnClickListener(this);                  //点击rename
-//        findViewById(R.id.button_overwrite).setOnClickListener(this);                  //点击overwrite
         findViewById(R.id.button_zxing).setOnClickListener(this);           //生成二维码
-        onCheckChange();                                                               //点击overwrite
+        onCheckChange();
     }
 
     //overwrite选择器
@@ -74,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switcher.setOnCheckedChangeListener(listener);
     }
     Intent intent;
+
+    //处理监听事件
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -164,8 +164,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return null;
     }
-
-
     //返回main界面的返回值
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -191,4 +189,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+
+    }
 }
