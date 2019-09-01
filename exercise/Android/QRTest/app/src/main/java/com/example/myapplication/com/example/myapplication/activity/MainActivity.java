@@ -8,12 +8,12 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.myapplication.DataApplication;
 import com.example.myapplication.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -32,16 +32,106 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView textView;
     private EditText editText;
     private Switch switcher;
-    private int camera_mode,trigger,raname,over_write,send_mode,work_time,remote_control;
+//    private int camera_mode, trigger, raname, over_write, send_mode, work_time, remote_control;
+    private String cameraMode,photoSize,photoBurst,burstSpeed,sendingOption,shutterSpeed,flashPower,videoSize,videoLength,
+            triggerPir,triggerTimelapse,wortTime1,workTime2,workTime3,workTime4,sendMode,remoteControl,rename,overWrite,
+            triggerSen;
+
+    private TextView textView_cameraMode,textView_cameraFlash,textView_triggerPir,textView_timelapse,
+            textView_worktime1,textView_worktime2,textView_worktime3,textView_worktime4
+            ;
+    private Spinner textView_control,textView_sendmode;
+    private EditText textView_rename;
+    private DataApplication dataApplication;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dataApplication = new DataApplication().getDataApplication();
+        dataApplication.defaultSetting();
         init();
     }
+    String message;
     private void init() {
-        bundle = new Bundle();
         switcher = findViewById(R.id.switcher);                                    //开关
+        cameraMode = dataApplication.getCameraMode();
+        photoSize = dataApplication.getPhotoSize();
+        photoBurst = dataApplication.getPhotoBurst();
+        burstSpeed = dataApplication.getBurstSpeed();
+        sendingOption = dataApplication.getSendingOption();
+        shutterSpeed = dataApplication.getShutterSpeed();
+        flashPower = dataApplication.getFlashPower();
+        videoSize = dataApplication.getVideoSize();
+        videoLength = dataApplication.getVideoLength();
+        triggerPir = dataApplication.getTriggerPir();
+        triggerSen = dataApplication.getTriggerSen();
+        triggerTimelapse = dataApplication.getTriggerTimelapse();
+        wortTime1 = dataApplication.getWortTime1();
+        workTime2 = dataApplication.getWorkTime2();
+        workTime3 = dataApplication.getWorkTime3();
+        workTime4 = dataApplication.getWorkTime4();
+        sendMode = dataApplication.getSendMode();
+        remoteControl = dataApplication.getRemoteControl();
+        rename = dataApplication.getRename();
+
+        textView_cameraMode = findViewById(R.id.textview_camera_mode);
+        textView_cameraFlash = findViewById(R.id.textview_camera_flash);
+        textView_triggerPir = findViewById(R.id.textview_trigger_pir);
+        textView_timelapse = findViewById(R.id.textview_trigger_timelapse);
+        textView_worktime1 = findViewById(R.id.textview_worktime1);
+        textView_worktime2 = findViewById(R.id.textview_worktime2);
+        textView_worktime3 = findViewById(R.id.textview_worktime3);
+        textView_worktime4 = findViewById(R.id.textview_worktime4);
+        textView_sendmode = findViewById(R.id.textview_sendmode);
+        textView_control = findViewById(R.id.textview_control);
+        textView_rename = findViewById(R.id.textview_rename);
+
+        if(cameraMode == "photo"){
+            message = cameraMode + " ( "+photoSize+" | "+photoBurst+" ) ";
+            textView_cameraMode.setText(message);
+            message =  "Flash Power( "+flashPower+" )";
+            textView_cameraFlash.setText(message);
+        }else{
+            message = cameraMode ;
+            textView_cameraMode.setText(message);
+            message =  " ( "+videoSize+" | "+ videoLength+"  ) ";
+            textView_cameraFlash.setText(message);
+        }
+        if(triggerSen == "off"){
+            message = "off";
+            textView_triggerPir.setText(message);
+        }else{
+            message = "PIR ( "+triggerSen +" | "+ triggerPir+" )";
+            textView_triggerPir.setText(message);
+        }
+        if(triggerTimelapse == "off"){
+            textView_timelapse.setText(triggerTimelapse);
+        }else{
+            message = "TimeLapse ( "+triggerTimelapse+" )";
+            textView_timelapse.setText(message);
+        }
+
+        if(wortTime1 == "off"){
+            textView_worktime1.setText(wortTime1);
+        }else{
+        }
+
+
+        message = wortTime1;
+        textView_worktime1.setText(message);
+        message = workTime2;
+        textView_worktime2.setText(message);
+        message = workTime3;
+        textView_worktime3.setText(message);
+        message = workTime4;
+        textView_worktime4.setText(message);
+//        message = sendMode;??
+//        textView_sendmode.setText(message);
+//        message = remoteControl;
+//        textView_control.(message);
+        message = rename;
+        textView_rename.setText(message);
+
         imageView = this.findViewById(R.id.imageView_zxing);                    //生成的二维码
         findViewById(R.id.button_camera).setOnClickListener(this);              //点击camer mode
         findViewById(R.id.button_trigger).setOnClickListener(this);               //点击trigger
@@ -61,16 +151,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onCheckedChanged(CompoundButton button, boolean isChecked) {
                 if (isChecked) {
                     switcher.setChecked(true);
-                    over_write = 1;
+//                    over_write = 1;
 //                    System.out.println("ture");
                 } else {
-                    over_write = 0;
+//                    over_write = 0;
 //                    System.out.println("false");
                 }
             }
         };
         switcher.setOnCheckedChangeListener(listener);
     }
+
     Intent intent;
 
     //处理监听事件
@@ -88,27 +179,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 imageView.setImageBitmap(generateBitmap(count, 600, 600));
                 break;
             case R.id.button_camera:
-                intent= new Intent(MainActivity.this,CameraActivity.class);
+                intent = new Intent(MainActivity.this, CameraActivity.class);
                 startActivityForResult(intent, 1);                //回执
                 break;
             case R.id.button_trigger:
-                intent = new Intent(MainActivity.this,TriggerModeActivity.class);
+                intent = new Intent(MainActivity.this, TriggerModeActivity.class);
                 startActivityForResult(intent, 1);
                 break;
             case R.id.button_worktime:
-                intent = new Intent(MainActivity.this,WorkTimeActivity.class);
+                intent = new Intent(MainActivity.this, WorkTimeActivity.class);
                 startActivityForResult(intent, 1);
                 break;
             case R.id.button_sendmode:
-                intent = new Intent(MainActivity.this,SendModeActivity.class);
+                intent = new Intent(MainActivity.this, SendModeActivity.class);
                 startActivityForResult(intent, 1);
                 break;
             case R.id.button_control:
-                intent = new Intent(MainActivity.this,RemoteControlActivity.class);
+                intent = new Intent(MainActivity.this, RemoteControlActivity.class);
                 startActivityForResult(intent, 1);
                 break;
             case R.id.button_rename:
-                intent = new Intent(MainActivity.this,RenameActivity.class);
+                intent = new Intent(MainActivity.this, RenameActivity.class);
                 startActivityForResult(intent, 1);
                 break;
             case R.id.button_overwrite:
@@ -164,12 +255,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return null;
     }
+
     //返回main界面的返回值
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         textView = findViewById(R.id.textview_container);
-        textView.setText("扫码结果：" + requestCode+"_"+resultCode);
+        textView.setText("扫码结果：" + requestCode + "_" + resultCode);
         //扫码结果
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult != null) {
@@ -192,7 +284,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onRestart() {
         super.onRestart();
-
-
+        init();
     }
 }

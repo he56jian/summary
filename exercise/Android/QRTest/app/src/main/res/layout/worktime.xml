@@ -1,15 +1,523 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="worktime1" />    <Switch
+    android:id="@+id/switch1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        android:textOn="on"
+        android:textOff="off"
+     />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/message_workTime1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="24dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="start:">
+        </TextView>
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"></TextView>
+
+
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="stop:">
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"></TextView>
+
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"></TextView>
+
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:textSize="12dp"
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="All" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sun" />
+
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mon" />
+
+        <CheckBox
+            android:id="@+id/checkBox4"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Tue" />
+
+        <CheckBox
+            android:id="@+id/checkBox5"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Wed" />
+
+        <CheckBox
+            android:id="@+id/checkBox6"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Thu" />
+
+        <CheckBox
+            android:id="@+id/checkBox7"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Fir" />
+
+        <CheckBox
+            android:id="@+id/checkBox8"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Sat" />
+
+    </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="worktime2" />  <Switch
+        android:id="@+id/switch2"
+        android:textOn="on"
+        android:textOff="off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/message_workTime2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="start:"></TextView>
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"></TextView>
+
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="stop:">      </TextView>
+
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"></TextView>
+
+
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/checkbox_All2"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="All" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Sun2"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sun" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Mon2"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mon" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Tue2"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tue" />
+
+        <CheckBox
+            android:id="@+id/checkbox_wed2"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Wed" />
+
+        <CheckBox
+            android:id="@+id/checkbox_thu2"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Thu" />
+
+        <CheckBox
+            android:id="@+id/checkbox_fir2"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Fir" />
+
+        <CheckBox
+            android:id="@+id/checkbox_sat2"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sat" />
+
+    </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="worktime"
-        />
-    <TextView
+        android:text="worktime3" /> <Switch
+        android:id="@+id/switch3"
+        android:textOn="on"
+        android:textOff="off"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+         />
+</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/message_workTime3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="24dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="start:"></TextView>
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="stop:">
+        </TextView>
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"></TextView>
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"></TextView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/checkbox_all3"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All" />
+
+        <CheckBox
+            android:id="@+id/checkbox_sun3"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sun" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Mon3"
+            android:layout_weight="1"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mon" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Tue3"
+            android:layout_weight="1"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tue" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Wed3"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wed" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Thu3"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thu" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Fir3"
+            android:layout_width="wrap_content"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Fir" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Sat3"
+            android:layout_weight="1"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sat" />
+
+    </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="worktime4" />
+        <Switch
+        android:id="@+id/switch4"
+            android:textOn="on"
+            android:textOff="off"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         />
+</LinearLayout>
+    <LinearLayout
+        android:id="@+id/message_workTime4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="24dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="start:"></TextView>
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"></TextView>
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="stop:"> </TextView>
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"></TextView>
+        <NumberPicker
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"></NumberPicker>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/checkbox_All4"
+            android:layout_width="wrap_content"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="All" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Sun4"
+            android:layout_weight="1"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sun" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Mon4"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mon" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Tue4"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tue" />
+
+        <CheckBox
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:id="@+id/checkbox_wed4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wed" />
+
+        <CheckBox
+            android:layout_weight="1"
+            android:textSize="12dp"
+            android:id="@+id/checkbox_thu4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thu" />
+
+        <CheckBox
+            android:id="@+id/checkbox_fir4"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fir" />
+
+        <CheckBox
+            android:id="@+id/checkbox_sat4"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sat" />
+
+    </LinearLayout>
+    </LinearLayout>
+
+
+
 
 </LinearLayout>

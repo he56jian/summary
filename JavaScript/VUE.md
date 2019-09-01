@@ -55,6 +55,15 @@ methods:{
 	</todo-item>
 `
 
+>**使用七.**使用子组件传值给父组件
+>>1. 在template:组件的标签中添加`@click=clickEnvent`属性,其为`v-on:click=clickEvent`简写
+>2. 在template同级，添加一个methods属性,其值为一个对象，键为组件标签的事件名clickEvent，值为事件function(){}；
+>3. 在子组件里，使用this.$emit('eventName'),执行一个事件eventName;//this.$emit可以带参数，第二个参数为携带给eventName的参数
+>4. 在父组件中，创建一个事件监听`@eventName='event'`，再在父组件中定义一个event事件；
+
+>**使用八.**在V-for="(item,index) in list"中，item为list对应的每一项，而index为对应的序号
+
+>**使用九.**在属性中v-bind：index和：index是一样的；
 
 
 

@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
-            <TextView
+            <Spinner
                 android:id="@+id/textview_sendmode"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -159,11 +159,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
-            <TextView
+            <Spinner
                 android:id="@+id/textview_control"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="( Delay 0.5H )" />
+                android:text=" Delay 0.5H " />
         </LinearLayout>
     </LinearLayout>
 
@@ -183,7 +183,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
-            <TextView
+            <EditText
                 android:id="@+id/textview_rename"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
