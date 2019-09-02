@@ -29,7 +29,7 @@
             android:name="com.example.myapplication.com.example.myapplication.activity.RemoteControlActivity"/>
         <activity
             android:theme="@style/AppTheme.AppBarOverlayLight"
-            android:name="com.example.myapplication.com.example.myapplication.activity.RenameActivity"/>
+            android:name="com.example.myapplication.com.example.myapplication.activity.SysActivity"/>
         <activity
             android:theme="@style/AppTheme.AppBarOverlayLight"
             android:name="com.example.myapplication.com.example.myapplication.activity.SendModeActivity"/>

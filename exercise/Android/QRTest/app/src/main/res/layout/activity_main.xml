@@ -166,52 +166,14 @@
                 android:text=" Delay 0.5H " />
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
         <Button
-            android:id="@+id/button_rename"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:layout_height="wrap_content"
-            android:text="rename" />
-        <LinearLayout
+            android:id="@+id/button_sys"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-            <EditText
-                android:id="@+id/textview_rename"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="CAMERA" />
-        </LinearLayout>
-    </LinearLayout>
+            android:text="SYS"
+            />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
-        <Button
-            android:id="@+id/button_overwrite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="overwrite"
-            android:layout_marginRight="10dp"
-        />
-        <Switch
-            android:id="@+id/switcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:switchMinWidth="20dp"
-            android:textOff="OFF"
-            android:textOn="ON"
-            android:thumb="@drawable/thumb"
-            android:track="@drawable/track" />
-    </LinearLayout>
+
     <TextView
         android:id="@+id/textview_container"
         android:layout_width="match_parent"

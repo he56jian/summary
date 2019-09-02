@@ -31,17 +31,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView imageView;
     private TextView textView;
     private EditText editText;
-    private Switch switcher;
+//    private Switch switcher;
 //    private int camera_mode, trigger, raname, over_write, send_mode, work_time, remote_control;
     private String cameraMode,photoSize,photoBurst,burstSpeed,sendingOption,shutterSpeed,flashPower,videoSize,videoLength,
             triggerPir,triggerTimelapse,wortTime1,workTime2,workTime3,workTime4,sendMode,remoteControl,rename,overWrite,
             triggerSen;
+    private Intent intent;
 
     private TextView textView_cameraMode,textView_cameraFlash,textView_triggerPir,textView_timelapse,
             textView_worktime1,textView_worktime2,textView_worktime3,textView_worktime4
             ;
     private Spinner textView_control,textView_sendmode;
-    private EditText textView_rename;
     private DataApplication dataApplication;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     String message;
     private void init() {
-        switcher = findViewById(R.id.switcher);                                    //开关
         cameraMode = dataApplication.getCameraMode();
         photoSize = dataApplication.getPhotoSize();
         photoBurst = dataApplication.getPhotoBurst();
@@ -84,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView_worktime4 = findViewById(R.id.textview_worktime4);
         textView_sendmode = findViewById(R.id.textview_sendmode);
         textView_control = findViewById(R.id.textview_control);
-        textView_rename = findViewById(R.id.textview_rename);
 
         if(cameraMode == "photo"){
             message = cameraMode + " ( "+photoSize+" | "+photoBurst+" ) ";
@@ -129,8 +127,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        textView_sendmode.setText(message);
 //        message = remoteControl;
 //        textView_control.(message);
-        message = rename;
-        textView_rename.setText(message);
+//        message = rename;
+//        textView_rename.setText(message);
 
         imageView = this.findViewById(R.id.imageView_zxing);                    //生成的二维码
         findViewById(R.id.button_camera).setOnClickListener(this);              //点击camer mode
@@ -138,31 +136,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.button_worktime).setOnClickListener(this);               //点击work time
         findViewById(R.id.button_sendmode).setOnClickListener(this);            //点击sendmode
         findViewById(R.id.button_control).setOnClickListener(this);                //点击control
-        findViewById(R.id.button_rename).setOnClickListener(this);                  //点击rename
+        findViewById(R.id.button_sys).setOnClickListener(this);                  //点击rename
         findViewById(R.id.button_zxing).setOnClickListener(this);           //生成二维码
-        onCheckChange();
     }
 
-    //overwrite选择器
-    public void onCheckChange() {
-        //overwrite选择器
-        CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton button, boolean isChecked) {
-                if (isChecked) {
-                    switcher.setChecked(true);
-//                    over_write = 1;
-//                    System.out.println("ture");
-                } else {
-//                    over_write = 0;
-//                    System.out.println("false");
-                }
-            }
-        };
-        switcher.setOnCheckedChangeListener(listener);
-    }
-
-    Intent intent;
 
     //处理监听事件
     @Override
@@ -190,21 +167,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(MainActivity.this, WorkTimeActivity.class);
                 startActivityForResult(intent, 1);
                 break;
-            case R.id.button_sendmode:
-                intent = new Intent(MainActivity.this, SendModeActivity.class);
+            case R.id.button_sys:
+                intent = new Intent(MainActivity.this, SysActivity.class);
                 startActivityForResult(intent, 1);
+                Toast.makeText(this,"Sys",Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.button_control:
-                intent = new Intent(MainActivity.this, RemoteControlActivity.class);
-                startActivityForResult(intent, 1);
-                break;
-            case R.id.button_rename:
-                intent = new Intent(MainActivity.this, RenameActivity.class);
-                startActivityForResult(intent, 1);
-                break;
-            case R.id.button_overwrite:
-                break;
-
 //            case R.id.button_start:
 //                new IntentIntegrator(this)
 //                        .setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)// 扫码的类型,可选：一维码，二维码，一/二维码
@@ -223,6 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                        .initiateScan();// 初始化扫码
 //                break;
         }
+//        startActivityForResult(intent, 1);
     }
 
     /**
