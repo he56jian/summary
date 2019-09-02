@@ -3,31 +3,34 @@ package com.example.myapplication;
 
 public class DataApplication {
     private String cameraMode, photoSize, photoBurst, burstSpeed, sendingOption, shutterSpeed, flashPower, videoSize, videoLength,
-            triggerPir, triggerTimelapse, triggerSen, wortTime1, workTime2, workTime3, workTime4, sendMode, remoteControl, rename, overWrite;
+            triggerPir, triggerTimelapse, triggerSen, wortTime1, workTime2, workTime3, workTime4, sendMode, remoteControl, rename, password;
+    private Boolean staName = false, staPassword = false, overWrite = false;
     private static DataApplication dataApplication = new DataApplication();
     private String status = "default";
 
-    public void defaultSetting(){
-            this.cameraMode = "photo";
-            this.photoSize = "3mp";
-            this.photoBurst = "1photo";
-            this.burstSpeed = "Fast(200ms)";
-            this.sendingOption = "1st";
-            this.shutterSpeed = "normal";
-            this.flashPower = "normal";
-            this.videoSize = "wvga";
-            this.videoLength = "5sec";
-            this.triggerPir = "30s";
-            this.triggerTimelapse = "5min";
-            this.wortTime1 = "off";
-            this.workTime2 = "off";
-            this.workTime3 = "off";
-            this.workTime4 = "off";
-            this.sendMode = "0";
-            this.remoteControl = "Delay 0.5H";
-            this.rename = "rename";
-            this.overWrite = "off";
-            this.triggerSen = "normal";
+    public void defaultSetting() {
+        this.cameraMode = "photo";
+        this.photoSize = "3mp";
+        this.photoBurst = "1photo";
+        this.burstSpeed = "Fast(200ms)";
+        this.sendingOption = "1st";
+        this.shutterSpeed = "normal";
+        this.flashPower = "normal";
+        this.videoSize = "wvga";
+        this.videoLength = "5sec";
+        this.triggerPir = "30s";
+        this.triggerTimelapse = "5min";
+        this.wortTime1 = "off";
+        this.workTime2 = "off";
+        this.workTime3 = "off";
+        this.workTime4 = "off";
+        this.sendMode = "0";
+        this.remoteControl = "Delay 0.5H";
+        this.rename = "CAMERA";
+        this.overWrite = false;
+        this.triggerSen = "normal";
+        this.password = "";
+
     }
 
     //这里提供了一个供外部访问本class的静态方法，可以直接访问
@@ -108,6 +111,9 @@ public class DataApplication {
     }
 
     public String getRename() {
+        if (rename.equals("")) {
+            rename = "";
+        }
         return rename;
     }
 
@@ -225,6 +231,12 @@ public class DataApplication {
             case "spinner_triggerTimeLapse":
                 dataApplication.setTriggerTimelapse(value);
                 break;
+            case "rename":
+                dataApplication.setRename(value);
+                break;
+            case "password":
+                dataApplication.setPassword(value);
+                break;
         }
     }
 
@@ -258,8 +270,54 @@ public class DataApplication {
             case "flashPower":
                 value = dataApplication.getFlashPower();
                 break;
+            case "rename":
+                value = dataApplication.getRename();
+                break;
+            case "password":
+                value = dataApplication.getPassword();
+                break;
         }
         return value;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        if (password.equals("")) {
+            password = "";
+        }
+        return password;
+    }
+
+    public void setStaName(Boolean value) {
+        staName = value;
+    }
+
+    public void setStaPassword(Boolean value) {
+        staPassword = value;
+    }
+
+    public int getStaRename() {
+        return  staName?1:0;
+    }
+
+    public int getStaPassword() {
+        return  staPassword?1:0;
+
+    }
+
+    public void setOverWrite(Boolean value) {
+        overWrite = value;
+    }
+
+    public int getOverWrite() {
+        if(overWrite){          //如果overWrite = on时为1；
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
 

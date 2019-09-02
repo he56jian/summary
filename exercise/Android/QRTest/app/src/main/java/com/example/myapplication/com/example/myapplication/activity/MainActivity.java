@@ -170,7 +170,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_sys:
                 intent = new Intent(MainActivity.this, SysActivity.class);
                 startActivityForResult(intent, 1);
-                Toast.makeText(this,"Sys",Toast.LENGTH_SHORT).show();
                 break;
 //            case R.id.button_start:
 //                new IntentIntegrator(this)

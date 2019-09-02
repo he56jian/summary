@@ -15,18 +15,17 @@
             android:layout_marginRight="10dp"
             android:text="rename" />
         <Switch
+            android:id="@+id/switch_rename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textOn="on"
             android:textOff="off"
             />
         <EditText
-            android:id="@+id/textview_rename"
+            android:id="@+id/edit_rename"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:hint="CAMERA"
             android:maxLength="8"
-            android:inputType="textPassword"
             android:visibility="invisible"
             />
     </LinearLayout>
@@ -41,22 +40,20 @@
             android:text="password" />
 
         <Switch
+            android:id="@+id/switch_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textOn="on"
             android:textOff="off"
             />
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/edit_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="password!"
             android:textScaleX="1.5"
-            android:ems="10"
             android:maxLength="4"
             android:visibility="invisible"
-            android:inputType="numberPassword" />
+            android:inputType="number" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -70,7 +67,7 @@
             android:layout_marginRight="10dp"
             />
         <Switch
-            android:id="@+id/switcher"
+            android:id="@+id/switch_overwrite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:switchMinWidth="20dp"
@@ -79,5 +76,12 @@
             android:thumb="@drawable/thumb"
             android:track="@drawable/track" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        ></Button>
 
 </LinearLayout>
