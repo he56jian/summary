@@ -126,7 +126,6 @@ public class SysActivity extends Activity implements CompoundButton.OnCheckedCha
                 break;
             case R.id.switch_password:
                 dataApplication.setStaPassword(b);
-
                 sta_password=(b?1:0);
                 if (sta_password == 1) {
                     edit_password.setVisibility(View.VISIBLE);
@@ -158,7 +157,7 @@ public class SysActivity extends Activity implements CompoundButton.OnCheckedCha
                 password = edit_password.getText().toString();
                 if (sta_rename == 1) {      //如果是on模式
                     dataApplication.setRename(rename);
-                    Toast.makeText(this, "rename的值：" + dataApplication.getRename(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, "rename的值：" + dataApplication.getRename(), Toast.LENGTH_SHORT).show();
                 }
                 if (sta_password ==1 ) {
                     dataApplication.setPassword(password);

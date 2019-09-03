@@ -111,10 +111,15 @@ public class DataApplication {
     }
 
     public String getRename() {
-        if (rename.equals("")) {
-            rename = "";
+        if(staName){
+            if (rename.equals("")) {
+                rename = "";
+            }
+            return rename;
+        }else{
+            return "";
         }
-        return rename;
+
     }
 
     public void setPhotoSize(String photoSize) {

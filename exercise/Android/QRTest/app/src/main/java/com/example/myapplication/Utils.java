@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Utils {
     private Context context;
-
     public Utils(Context context) {
         this.context = context;
         dataApplication = new DataApplication().getDataApplication();
@@ -47,9 +46,71 @@ public class Utils {
             }
         });
     }
-
-
-    public void showEle(){
-
+    private static final String BIN_SEPARATOR = " ";
+    //把字符串转成二进制字符串
+    public static String toBinaryString(String str) {
+        if (str == null) return null;
+        StringBuffer sb = new StringBuffer();           //创建一个StringBuffer类
+        byte[] bytes = str.getBytes();                  //把字符串转成一个个字符的ASCII码值
+        for (byte aByte : bytes) {
+            String a = Integer.toBinaryString(aByte);
+            sb.append(Integer.toBinaryString(aByte));
+        }
+        return sb.toString();
     }
+
+
+
+        //把字符串转成二进制数
+    public static byte[] hex2byte(String str) {
+        if (str == null){
+            return null;
+        }
+        str = str.trim();
+        int len = str.length();
+
+        if (len == 0 || len % 2 == 1){
+            return null;
+        }
+        byte[] b = new byte[len / 2];
+        try {
+            for (int i = 0; i < str.length(); i += 2) {
+                b[i / 2] = (byte) Integer.decode("0X" + str.substring(i, i + 2)).intValue();
+            }
+            return b;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+
+    // 二进制转字符串
+    public static String byte2hex(byte[] b)
+    {
+        StringBuffer sb = new StringBuffer();
+        String stmp = "";
+        for (int i = 0; i < b.length; i++) {
+            stmp = Integer.toHexString(b[i] & 0XFF);
+            if (stmp.length() == 1){
+                sb.append("0" + stmp);
+            }else{
+                sb.append(stmp);
+            }
+
+        }
+        return sb.toString();
+    }
+
+    /**
+     * byte数组转换为二进制字符串,每个字节以","隔开
+     **/
+    public static String byteArrToBinStr(byte[] b) {
+        StringBuffer result = new StringBuffer();
+        for (int i = 0; i < b.length; i++) {
+            result.append(Long.toString(b[i] & 0xff, 2) + ",");
+        }
+        return result.toString().substring(0, result.length() - 1);
+    }
+
+
 }

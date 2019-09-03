@@ -138,9 +138,9 @@ public class CameraActivity extends Activity {
             list_photoSize.add("3MP");
             list_photoSize.add("5MP");
             list_photoSize.add("8MP");
-            list_photoSize.add("12MP");
-            list_photoSize.add("16Mp");
-            list_photoSize.add("20MP");
+//            list_photoSize.add("12MP");
+//            list_photoSize.add("16Mp");
+//            list_photoSize.add("20MP");
         }
 
         //photo size选择器选择监听
@@ -151,13 +151,13 @@ public class CameraActivity extends Activity {
             list_photoBurst.add("1photo");
             list_photoBurst.add("2photos");
             list_photoBurst.add("3photos");
-            list_photoBurst.add("4photos");
-            list_photoBurst.add("5photos");
-            list_photoBurst.add("6photos");
-            list_photoBurst.add("7photos");
-            list_photoBurst.add("8photos");
-            list_photoBurst.add("9photos");
-            list_photoBurst.add("10photos");
+//            list_photoBurst.add("4photos");
+//            list_photoBurst.add("5photos");
+//            list_photoBurst.add("6photos");
+//            list_photoBurst.add("7photos");
+//            list_photoBurst.add("8photos");
+//            list_photoBurst.add("9photos");
+//            list_photoBurst.add("10photos");
         }
         //photo burst选择器选择监听
         utils.listSelect(list_photoBurst, spinner_photoBurst, "photoBurst");
@@ -171,16 +171,16 @@ public class CameraActivity extends Activity {
         spinner_sendingOption = findViewById(R.id.spinner_sendingOption);
 
         if (list_sendingOption.isEmpty()) {
-            list_sendingOption.add("1photo");
-            list_sendingOption.add("2photos");
-            list_sendingOption.add("3photos");
-            list_sendingOption.add("4photos");
-            list_sendingOption.add("5photos");
-            list_sendingOption.add("6photos");
-            list_sendingOption.add("7photos");
-            list_sendingOption.add("8photos");
-            list_sendingOption.add("9photos");
-            list_sendingOption.add("10photos");
+            list_sendingOption.add("1st");
+            list_sendingOption.add("2st");
+            list_sendingOption.add("3st");
+//            list_sendingOption.add("4photos");
+//            list_sendingOption.add("5photos");
+//            list_sendingOption.add("6photos");
+//            list_sendingOption.add("7photos");
+//            list_sendingOption.add("8photos");
+//            list_sendingOption.add("9photos");
+//            list_sendingOption.add("10photos");
         }
         utils.listSelect(list_sendingOption, spinner_sendingOption, "sendingOption");
 
