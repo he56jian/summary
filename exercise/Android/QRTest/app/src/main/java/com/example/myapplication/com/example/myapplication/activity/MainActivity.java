@@ -25,22 +25,28 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;import java.lang.reflect.Array;
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Bundle bundle;
     private ImageView imageView;
     private TextView textView;
     private EditText editText;
-    //    private Switch switcher;
-//    private int camera_mode, trigger, raname, over_write, send_mode, work_time, remote_control;
+
     private String cameraMode, photoSize, photoBurst, burstSpeed, sendingOption, shutterSpeed, flashPower, videoSize, videoLength,
             triggerPir, triggerTimelapse, wortTime1, workTime2, workTime3, workTime4, sendMode, remoteControl, rename, overWrite, passWord,
             triggerSen;
@@ -51,6 +57,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Spinner textView_control, textView_sendmode;
     private DataApplication dataApplication;
     private int sta_name, sta_password, sta_overWrite;
+
+    private EditText mEditText;
+    private TextView mTextView;
+    private static final String TAG = "TAG";
+    private static final String HOST = "192.168.253.135";
+    private static final int PORT = 21567;
+    private PrintWriter printWriter;
+    private BufferedReader in;
+    private ExecutorService mExecutorService = null;
+    private String receiveMsg;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +82,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void init() {
         getCamParam();
-
-
-
 
         textView_cameraMode = findViewById(R.id.textview_camera_mode);
         textView_cameraFlash = findViewById(R.id.textview_camera_flash);
@@ -119,12 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView_worktime3.setText(message);
         message = workTime4;
         textView_worktime4.setText(message);
-//        message = sendMode;??
-//        textView_sendmode.setText(message);
-//        message = remoteControl;
-//        textView_control.(message);
-//        message = rename;
-//        textView_rename.setText(message);
+
 
         imageView = this.findViewById(R.id.imageView_zxing);                    //生成的二维码
         findViewById(R.id.button_camera).setOnClickListener(this);              //点击camer mode
@@ -180,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     return;
                 }
                 System.out.println(count);
+
 //                textView = findViewById(R.id.textview_container);
 //                textView.setText(count);
                 //生成二维码并显示在imageView上，宽和高都为600
@@ -460,7 +470,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -487,5 +496,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String content = data.getStringExtra("data");
         }
     }
+
+
 
 }
