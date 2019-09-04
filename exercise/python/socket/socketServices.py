@@ -1,7 +1,7 @@
 #coding:utf-8
 
 from socket import *
-from time import ctiom
+from time import ctime
 print("============TCP Services=============")
 HOST=""
 PORT=21567

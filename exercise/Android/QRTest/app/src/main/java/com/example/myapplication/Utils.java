@@ -6,6 +6,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
@@ -59,6 +60,57 @@ public class Utils {
         return sb.toString();
     }
 
+    //把字符串转成字符数组
+//    public static char[] stringToCharList(String str) {
+//        if (str == null) return null;
+//        StringBuffer sb = new StringBuffer();           //创建一个StringBuffer类
+//        byte[] bytes = str.getBytes();                  //把字符串转成一个个字符的ASCII码值
+//        for (byte aByte : bytes) {
+//            String a = Integer.toBinaryString(aByte);
+//            sb.append(Integer.toBinaryString(aByte));
+//        }
+//    }
+
+    //把传进来的值转成对应字符数组
+    public static char[] strToCharList(Object object){
+        return null;
+    }
+
+    //合并字符数组
+    public static char[] method(String now, List<char[]> list) {
+        for(int i=0;i<list.size();i++){
+            for(int j=0;j<list.get(i).length;j++)
+                //获取了每一个char[]
+                now += list.get(i)[j];
+        }
+        char[] result = now.toCharArray();
+        return result;
+    }
+
+    //把字符串转成字符数组
+    public static char[] strToCharList(String str){
+        byte[] bytes = str.getBytes();
+        String ret = "";
+        for(int i=0;i< bytes.length;i++){
+            String hex = Integer.toHexString(bytes[i] & 0xFF);
+            if(hex.length()==1){
+                hex = "0" + hex;
+            }
+            ret+=hex;
+        }
+        System.out.println(ret);
+        char[] result = ret.toCharArray();
+        return result;
+    }
+    //把整型转成字符数组
+    public static char[] intToCharList(int num){
+        String hex = num+"";
+        if(hex.length() == 1){
+            hex = "0"+hex;
+        }
+        char[] result = hex.toCharArray();
+        return result;
+    }
 
 
         //把字符串转成二进制数
