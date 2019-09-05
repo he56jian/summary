@@ -21,7 +21,7 @@ import com.example.myapplication.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CameraActivity extends Activity {
+public class CameraActivity extends BaseActivity {
     private Switch switcher;
     private String cameraMode, photoSize, photoBurst, burstSpeed, sendingOption, shutterSpeed, flashPower, videoSize, videoLength, sInfo;
     private List<String> list_photoSize = new ArrayList<String>();
@@ -50,7 +50,6 @@ public class CameraActivity extends Activity {
     //    private App_Data app;
     private void init() {
         setContentView(R.layout.camera_mode);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
         dataApplication = DataApplication.getDataApplication();
         utils = new Utils(this);
     }
@@ -138,9 +137,9 @@ public class CameraActivity extends Activity {
             list_photoSize.add("3MP");
             list_photoSize.add("5MP");
             list_photoSize.add("8MP");
-//            list_photoSize.add("12MP");
-//            list_photoSize.add("16Mp");
-//            list_photoSize.add("20MP");
+            list_photoSize.add("12MP");
+            list_photoSize.add("16Mp");
+            list_photoSize.add("20MP");
         }
 
         //photo size选择器选择监听
@@ -151,13 +150,13 @@ public class CameraActivity extends Activity {
             list_photoBurst.add("1photo");
             list_photoBurst.add("2photos");
             list_photoBurst.add("3photos");
-//            list_photoBurst.add("4photos");
-//            list_photoBurst.add("5photos");
-//            list_photoBurst.add("6photos");
-//            list_photoBurst.add("7photos");
-//            list_photoBurst.add("8photos");
-//            list_photoBurst.add("9photos");
-//            list_photoBurst.add("10photos");
+            list_photoBurst.add("4photos");
+            list_photoBurst.add("5photos");
+            list_photoBurst.add("6photos");
+            list_photoBurst.add("7photos");
+            list_photoBurst.add("8photos");
+            list_photoBurst.add("9photos");
+            list_photoBurst.add("10photos");
         }
         //photo burst选择器选择监听
         utils.listSelect(list_photoBurst, spinner_photoBurst, "photoBurst");
@@ -174,13 +173,13 @@ public class CameraActivity extends Activity {
             list_sendingOption.add("1st");
             list_sendingOption.add("2st");
             list_sendingOption.add("3st");
-//            list_sendingOption.add("4photos");
-//            list_sendingOption.add("5photos");
-//            list_sendingOption.add("6photos");
-//            list_sendingOption.add("7photos");
-//            list_sendingOption.add("8photos");
-//            list_sendingOption.add("9photos");
-//            list_sendingOption.add("10photos");
+            list_sendingOption.add("4st");
+            list_sendingOption.add("5st");
+            list_sendingOption.add("6st");
+            list_sendingOption.add("7st");
+            list_sendingOption.add("8st");
+            list_sendingOption.add("9st");
+            list_sendingOption.add("10st");
         }
         utils.listSelect(list_sendingOption, spinner_sendingOption, "sendingOption");
 
@@ -198,27 +197,6 @@ public class CameraActivity extends Activity {
             list_flashPower.add("High");
         }
         utils.listSelect(list_flashPower, spinner_flashPower, "flashPower");
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                if (cameraMode == "video") {
-//                    Toast.makeText(this,,Toast.LENGTH_SHORT).show();
-                    //当前选择为video
-//                    System.out.println(data.getData("videoLength"));
-                } else {
-                    //当前选择为photo
-//                    Toast.makeText(this,data.toString(),Toast.LENGTH_SHORT).show();
-                }
-                finish();
-                break;
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 }

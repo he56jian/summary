@@ -1,0 +1,201 @@
+
+char[] = {
+	cameraMode,     1
+	photoSize,		1
+	photoBurst,     1
+	burstSpeed,     1
+	sendingOption,  1
+	shutterspeed,   1
+	flashPower,     1
+	videoSize,      1
+	videoLength,    1
+	triggerSen,     1
+	PIR,            1
+	Timelapse,      1
+	sendMode,       1
+	remoteControl,  1
+	staName,        1
+	camName,        8     
+	staPassword,	1
+	password        4
+}
+enum cameraMode{
+	photo,
+	video
+｝
+photoSize{
+	3MP,
+	5MP,
+	8MP
+}
+photoBurst{
+	1photos,
+	2photos,
+	3photos,
+	4photos,
+	5photos,
+	6photos,
+	7photos,
+	8photos,
+	9photos,
+	10photos
+}
+
+burstSpeed{
+	Fast(200ms),
+	Show(500ms)
+}
+
+sendingOption{
+	1st,
+	2st,
+	3st,
+	4st,
+	5st,
+	6st,
+	7st,
+	8st,
+	9st,
+	10st
+}        
+shutterSpeed{
+	Normal,
+	Fast,
+	High
+}       
+flashPower{
+	Low,
+	Normal,
+	High
+}           
+videoSize{
+	1440P,
+	1080P,
+	720P,
+	wvga,
+}            
+videoLength{
+	5sec,
+	10sec,
+	15sec,
+	20sec,
+	25sec,
+	30sec,
+	35sec,
+	40sec,
+	45sec,
+	50sec,
+	55sec,
+	60sec
+}            
+Sensitivity{
+	off,
+	Low,
+	Auto,
+	High
+}          
+PIR{
+	0Sec,
+	1Sec,
+	2Sec,
+	3Sec,
+	4Sec,
+	5Sec,
+	10Sec,
+	15Sec,
+	20Sec,
+	25Sec,
+	30Sec,
+	35Sec,
+	40Sec,
+	45Sec,
+	50Sec,
+	55Sec,
+	1min,
+	2min,
+	3min,
+	4min,
+	5min,
+	10min,
+	15min,
+	20min,
+	25min,
+	30min,
+	35min,
+	40min,
+	45min,
+	50min,
+	55min,
+	60min
+}                  
+Timelapse{
+	5Sec,
+	10Sec,
+	15Sec,
+	20Sec,
+	25Sec,
+	30Sec,
+	35Sec,
+	40Sec,
+	45Sec,
+	50Sec,
+	55Sec,
+	1min,
+	2min,
+	3min,
+	4min,
+	5min,
+	10min,
+	15min,
+	20min,
+	25min,
+	30min,
+	35min,
+	40min,
+	45min,
+	50min,
+	55min,
+	1Hour,
+	2Hour,
+	3Hour,
+	4Hour,
+	5Hour,
+	6Hour,
+	7Hour,
+	8Hour,
+	12Hour,
+	20Hour,
+	24Hour
+}                   
+sendMode{
+	Unlimited,
+	1 file/Day,
+	2 file/Day,
+	3 file/Day,
+	4 file/Day,
+	5 file/Day,
+	6 file/Day,
+	...
+	98 file/Day,
+	99 file/Day,
+}                
+remoteControl{
+	Realtime,
+	Delay 0.5H,
+	Delay 1H,
+	Delay 2H,
+	Delay 3H,
+	Delay 4H,
+	Delay 6H,
+	Delay 12H,
+	Delay 24H,
+}  
+status_Name{
+	false,
+	true
+}               
+enum status_Password{
+	false,
+	true
+}            
+           

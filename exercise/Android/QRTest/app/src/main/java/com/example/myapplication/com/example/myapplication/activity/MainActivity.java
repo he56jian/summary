@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Spinner textView_control, textView_sendmode;
     private DataApplication dataApplication;
     private int sta_name, sta_password, sta_overWrite;
-
+    char[] value10, value11;
     private EditText mEditText;
     private TextView mTextView;
     private static final String TAG = "TAG";
@@ -89,30 +89,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String receiveMsg;
     private char[] chs;
     private int length;
-    String message;
+    byte[] CamParam_t;
+    byte myBurstSpeed, myShutter, myOverWrite, myBuzzer, myStaPasswd, myGps, myStaRename;//1 个字节
+    short myMode, myFlashPower, myVideoRes;       //2个字节
+    int myPhotoRes, myBurstNum, mySendOption, myRes1;      //4个字节
+    int myVideoLength, myLanguage;         //8个字节
+    private int newValue = 1;
 
+
+    String message;
+    Socket socket;
+    private OutputStream outputStream;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dataApplication = new DataApplication().getDataApplication();
+        dataApplication = new DataApplication(this).getDataApplication();
         dataApplication.defaultSetting();
         init();
         setTextView();
-
+//        connectServer("192.168.1.224", 5001);
+    }
+//    创建一个socket对象，在构造时，会向服务器发送连接
+    private void connectServer(String host,int port) {
+        new Thread() {
+            @Override
+            public void run() {
+                //这里写入子线程需要做的工作
+                //创建Socket对象
+                try {
+                    socket = new Socket(host, port);
+                    outputStream = null;//获取一个输出流，向服务端发送信息
+                    outputStream = socket.getOutputStream();
+                    printWriter = new PrintWriter(outputStream);//将输出流包装成打印流
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                //根据输入输出流和服务端连接
+//                        isAvailableByPing("192.168.0.104");
+            }
+        }.start();
     }
 
     private void init() {
         getCamParam();      //获取相机参数
         getEle();           //获取元素
         showCameParam();//显示相机数据
-
-
         findViewById(R.id.button_camera).setOnClickListener(this);              //点击camer mode
         findViewById(R.id.button_trigger).setOnClickListener(this);               //点击trigger
         findViewById(R.id.button_worktime).setOnClickListener(this);               //点击work time
-        findViewById(R.id.button_sendmode).setOnClickListener(this);            //点击sendmode
-        findViewById(R.id.button_control).setOnClickListener(this);                //点击control
+        findViewById(R.id.button_net).setOnClickListener(this);            //点击net
+//        findViewById(R.id.button_control).setOnClickListener(this);                //点击control
         findViewById(R.id.button_sys).setOnClickListener(this);                  //点击rename
         findViewById(R.id.button_zxing).setOnClickListener(this);           //生成二维码
     }
@@ -157,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView_worktime4.setText(message);
 
     }
-
+    //获取元素
     private void getEle() {
         textView_cameraMode = findViewById(R.id.textview_camera_mode);
         textView_cameraFlash = findViewById(R.id.textview_camera_flash);
@@ -167,50 +194,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView_worktime2 = findViewById(R.id.textview_worktime2);
         textView_worktime3 = findViewById(R.id.textview_worktime3);
         textView_worktime4 = findViewById(R.id.textview_worktime4);
-        textView_sendmode = findViewById(R.id.textview_sendmode);
-        textView_control = findViewById(R.id.textview_control);
         imageView = this.findViewById(R.id.imageView_zxing);                    //生成的二维码
     }
-
-    byte[] CamParam_t;
-    byte myBurstSpeed, myShutter, myOverWrite, myBuzzer, myStaPasswd, myGps, myStaRename;//1 个字节
-    short myMode, myFlashPower, myVideoRes;       //2个字节
-    int myPhotoRes, myBurstNum, mySendOption, myRes1;      //4个字节
-    int myVideoLength, myLanguage;         //8个字节
-    private int newValue = 1;
 
     //处理监听事件
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_zxing:                                     //生成二维码
+                String count = setTextView();
+                imageView.setImageBitmap(generateBitmap(count, 600, 600));
+                break;
+            case R.id.button_send:                  //发送信息到服务端
                 String value = setTextView();
                 new Thread() {
                     @Override
                     public void run() {
-                        //这里写入子线程需要做的工作
-                        connectServerWithTCPSocket(value);
-//                        isAvailableByPing("192.168.0.104");
-                    }
-                }.start();
-
-
-//                char[] count = showValue;
-//                if (count.length == 0) {                         //如果
-//                    Toast.makeText(MainActivity.this, "请输入内容", Toast.LENGTH_LONG).show();
-//                    return;
-//                }
-//
+                        try {
+                            String host = "192.168.1.224";
+                            int port = 5001;
+                            socket = new Socket(host, port);
+                            outputStream = null;//获取一个输出流，向服务端发送信息
+                            outputStream = socket.getOutputStream();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        printWriter = new PrintWriter(outputStream);//将输出流包装成打印流
+                        sendWithTCPSocket(value);
+                    }}.start();
                 break;
-            case R.id.button_camera:
+            case R.id.button_get:                  //从服务器获取信息
+                getWithTCPSocket();
+                break;
+            case R.id.button_realtime:                  //实时接口
+                Toast.makeText(this,"more",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.button_other:                  //其他
+                Toast.makeText(this,"more",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.button_camera:                    //单击进入cameraMode界面
                 intent = new Intent(MainActivity.this, CameraActivity.class);
                 startActivityForResult(intent, 1);                //回执
                 break;
-            case R.id.button_trigger:
+            case R.id.button_trigger:                   //点击进入触发界面
                 intent = new Intent(MainActivity.this, TriggerModeActivity.class);
                 startActivityForResult(intent, 1);
                 break;
-            case R.id.button_worktime:
+            case R.id.button_net:                   //点击进入触发界面
+                intent = new Intent(MainActivity.this, NetActivity.class);
+                startActivityForResult(intent, 1);
+                break;
+            case R.id.button_worktime:                  //点击进入工作时间界面
                 intent = new Intent(MainActivity.this, WorkTimeActivity.class);
                 startActivityForResult(intent, 1);
                 break;
@@ -236,18 +270,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                        .initiateScan();// 初始化扫码
 //                break;
         }
-//        startActivityForResult(intent, 1);
     }
 
+    //显示二维码数
     private String setTextView() {
-        char[] showValue = getValue();
+        char[] showValue=dataApplication.getCharCam();
+        System.out.println(showValue);
+//        char[] showValue = getValue();
+//        System.out.println(showValue);
         String count = "";
         for (int i = 0; i < showValue.length; i++) {
             count += showValue[i];
         }
         textView = findViewById(R.id.textview_container);
         textView.setText(count);
-        imageView.setImageBitmap(generateBitmap(count, 600, 600));
         return count;
     }
 
@@ -282,18 +318,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return null;
     }
 
-    //传入一个是变成二进制的数，一个是字节数；
-    //把数值转换成二进制形式的字符串；
-    public String toFullBinaryString(long num, int type) {
-        length = type * 8;
-//        System.out.println(length);
-        chs = new char[length];
-        for (int i = 0; i < length; i++) {
-            chs[length - 1 - i] = (char) (((num >> i) & 1) + '0');
-        }
-        return new String(chs);
-    }
-
     //获取相机设置
     private void getCamParam() {
         cameraMode = dataApplication.getCameraMode();
@@ -319,206 +343,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sta_name = dataApplication.getStaRename();
         sta_password = dataApplication.getStaPassword();
         sta_overWrite = dataApplication.getOverWrite();
-    }
-
-    //把相机设置转成二进制字符数据；
-    private char[] getValue() {
-        switch (cameraMode) {
-            case "photo":
-                newValue = 0;
-                break;
-            case "video":
-                newValue = 1;
-                break;
-        }
-        myMode = (byte) newValue;
-        switch (flashPower) {
-            case "Low":
-                newValue = 0;
-                break;
-            case "Normal":
-                newValue = 1;
-                break;
-            case "High":
-                newValue = 2;
-                break;
-        }
-        myFlashPower = (byte) newValue;
-        switch (shutterSpeed) {
-            case "Normal":
-                newValue = 0;
-                break;
-            case "Fast":
-                newValue = 0;
-                break;
-        }
-        myShutter = (byte) newValue;
-        switch (burstSpeed) {
-            case "Fast(200ms)":
-                newValue = 0;
-                break;
-            case "Show(500ms)":
-                newValue = 1;
-                break;
-        }
-        myBurstSpeed = (byte) newValue;
-        switch (videoSize) {
-            case "1080P":
-                newValue = 0;
-                break;
-            case "720P":
-                newValue = 1;
-                break;
-            case "WVGA":
-                newValue = 1;
-                break;
-        }
-        myVideoRes = (byte) newValue;
-        switch (photoSize) {
-            case "3MP":
-                newValue = 0;
-                break;
-            case "5MP":
-                newValue = 1;
-                break;
-            case "8MP":
-                newValue = 2;
-                break;
-        }
-        myPhotoRes = (byte) newValue;
-        switch (photoBurst) {
-            case "1photo":
-                newValue = 0;
-                break;
-            case "2photos":
-                newValue = 1;
-                break;
-            case "3photos":
-                newValue = 2;
-                break;
-        }
-        myBurstNum = (byte) newValue;
-        switch (videoLength) {
-            case "5sec":
-                newValue = 0;
-                break;
-            case "10sec":
-                newValue = 1;
-                break;
-            case "15sec":
-                newValue = 2;
-                break;
-            case "20sec":
-                newValue = 3;
-                break;
-            case "25sec":
-                newValue = 4;
-                break;
-            case "30sec":
-                newValue = 5;
-                break;
-            case "35sec":
-                newValue = 6;
-                break;
-            case "40sec":
-                newValue = 7;
-                break;
-            case "45sec":
-                newValue = 8;
-                break;
-            case "50sec":
-                newValue = 9;
-                break;
-            case "55sec":
-                newValue = 10;
-                break;
-            case "60sec":
-                newValue = 11;
-                break;
-        }
-        myVideoLength = (byte) newValue;
-        switch (sendingOption) {
-            case "1st":
-                byte newValue = 0;
-                break;
-            case "2st":
-                newValue = 1;
-                break;
-            case "3st":
-                newValue = 2;
-                break;
-        }
-        mySendOption = (byte) newValue;
-        myStaRename = (byte) sta_name;
-        myStaPasswd = (byte) sta_password;
-        myOverWrite = (byte) sta_overWrite;
-        String newpassWord, newRename;
-        Utils utils = new Utils(this);
-        if (sta_password == 1) {
-            newpassWord = utils.toBinaryString(passWord);
-        }
-        if (sta_name == 1) {
-            newRename = utils.toBinaryString(rename);
-        }
-//        Log.i("当前password", "" + passWord);
-//        Log.i("当前ren", "" + rename);
-//        System.out.println("myMode----" + myMode);
-//        System.out.println("myFlashPower----" + myFlashPower);
-//        System.out.println("myShutter----" + myShutter);
-//        System.out.println("myBurstSpeed----" + myBurstSpeed);
-//        System.out.println("myVideoRes----" + myVideoRes);
-//        System.out.println("myPhotoRes----" + myPhotoRes);
-//        System.out.println("myBurstNum----" + myBurstNum);
-//        System.out.println("myVideoLength----" + myVideoLength);
-//        System.out.println("mySendOption----" + mySendOption);
-//        System.out.println("myStaPasswd----" + myStaPasswd);
-        char[] result = getCharCam();
-        return result;
-
-    }
-
-    char[] value10, value11;
-
-    //获取
-    public char[] getCharCam() {
-        char[] value1 = intToCharList(myMode);
-        char[] value2 = intToCharList(myFlashPower);
-        char[] value3 = intToCharList(myShutter);
-        char[] value4 = intToCharList(myBurstSpeed);
-        char[] value5 = intToCharList(myVideoRes);
-        char[] value6 = intToCharList(myBurstNum);
-        char[] value7 = intToCharList(myVideoLength);
-        char[] value8 = intToCharList(mySendOption);
-        char[] value9 = intToCharList(myStaPasswd);
-        if (myStaPasswd == 1) {
-            value10 = strToCharList(passWord);
-        } else {
-            value10 = intToCharList(00);
-        }
-        if (myStaRename == 1) {
-            value11 = strToCharList(rename);
-        } else {
-            value11 = intToCharList(00);
-        }
-
-        List<char[]> list = new ArrayList<>();
-        list.add(value1);
-        list.add(value2);
-        list.add(value3);
-        list.add(value4);
-        list.add(value5);
-        list.add(value6);
-        list.add(value7);
-        list.add(value8);
-        list.add(value9);
-        list.add(value10);
-        list.add(value11);
-//        System.out.println(value1);
-//        System.out.println(value2);
-//        System.out.println(list);
-        char[] value = method("", list);
-        return value;
-//        return null;
     }
 
 
@@ -550,38 +374,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void connectServerWithTCPSocket(String value){
+//    private void connectServerWithTCPSocket(String value){
+//
+//    }
+    private void sendWithTCPSocket(String value){
+        try {
+            printWriter.print("#1#"+ value);
+            printWriter.flush();
+            socket.shutdownOutput();//关闭输出流
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void getWithTCPSocket(){
+        InputStream inputStream = null;//获取一个输入流，接收服务端的信息
+        try {
+            inputStream = socket.getInputStream();
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);//包装成字符流，提高效率
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);//缓冲区
+            String info = "";
+            String temp = null;//临时变量
+            while ((temp = bufferedReader.readLine()) != null) {
+                info += temp;
+                System.out.println("客户端接收服务端发送信息：" + info);
+            }
+            //关闭相对应的资源
+            bufferedReader.close();
+            inputStream.close();
+            printWriter.close();
+            outputStream.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
 
-
-    //连接到socket
-//    private void connectServerWithTCPSocket(){
+//    //连接到socket
+//    private void connectServerWithTCPSocket(String value){
 //        try {
-//            //创建Socket对象
-//            Socket socket = new Socket("192.168.0.104", 21567);
-//            //根据输入输出流和服务端连接
-//            OutputStream outputStream = socket.getOutputStream();//获取一个输出流，向服务端发送信息
-//            PrintWriter printWriter = new PrintWriter(outputStream);//将输出流包装成打印流
-//            printWriter.print("服务端你好");
-//            printWriter.flush();
-//            socket.shutdownOutput();//关闭输出流
-//            InputStream inputStream = socket.getInputStream();//获取一个输入流，接收服务端的信息
-//            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);//包装成字符流，提高效率
-//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);//缓冲区
-//            String info = "";
-//            String temp = null;//临时变量
-//            while ((temp = bufferedReader.readLine()) != null) {
-//                info += temp;
-//                System.out.println("客户端接收服务端发送信息：" + info);
-//            }
-//            //关闭相对应的资源
-//            bufferedReader.close();
-//            inputStream.close();
-//            printWriter.close();
-//            outputStream.close();
-//            socket.close();
+//
 //        } catch (UnknownHostException e) {
 //            e.printStackTrace();
 //        } catch (IOException e) {
@@ -589,18 +422,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        }
 //
 //    }
-    //ping ip查看情况
-    private static void isAvailableByPing(String ip) {
-        //网络操作应在子线程中操作，避免阻塞UI线程，导致ANR
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                PingNetEntity pingNetEntity = new PingNetEntity(ip, 3, 5, new StringBuffer());
-                pingNetEntity = PingNet.ping(pingNetEntity);
-                Log.i("testPing", pingNetEntity.getIp());
-                Log.i("testPing", "time=" + pingNetEntity.getPingTime());
-                Log.i("testPing", pingNetEntity.isResult() + "");
-            }
-        }).start();
-    }
+
 }

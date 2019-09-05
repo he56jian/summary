@@ -46,7 +46,7 @@
             android:name="com.example.myapplication.com.example.myapplication.activity.SysActivity"/>
         <activity
             android:theme="@style/AppTheme.AppBarOverlayLight"
-            android:name="com.example.myapplication.com.example.myapplication.activity.SendModeActivity"/>
+            android:name="com.example.myapplication.com.example.myapplication.activity.NetActivity"/>
         <activity
             android:label="Back"
             android:theme="@style/AppTheme.AppBarOverlayLight"

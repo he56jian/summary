@@ -118,67 +118,55 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/button_net"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        >
-        <Button
-            android:id="@+id/button_sendmode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="send mode"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-            <Spinner
-                android:id="@+id/textview_sendmode"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Instant ( Unlimited )" />
-        </LinearLayout>
-    </LinearLayout>
+        android:text="net"/>
+    
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
-        <Button
-            android:id="@+id/button_control"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:text="Remote control" />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-            <Spinner
-                android:id="@+id/textview_control"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text=" Delay 0.5H " />
-        </LinearLayout>
-    </LinearLayout>
         <Button
             android:id="@+id/button_sys"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SYS"
             />
-
-
     <TextView
         android:id="@+id/textview_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/button_send"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="发送" />
+
+    <Button
+        android:id="@+id/button_get"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="获取回执" />
+
+    <Button
+        android:id="@+id/button_realtime"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="实时按钮" />
+
+    <Button
+        android:id="@+id/button_other"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="other" />
+</LinearLayout>
 
     <Button
         android:id="@+id/button_zxing"

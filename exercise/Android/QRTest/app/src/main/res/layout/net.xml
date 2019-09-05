@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <Button
+            android:id="@+id/button_sendmode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="send mode"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+            <Spinner
+                android:id="@+id/spinner_sendmode"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Instant ( Unlimited )" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <Button
+            android:id="@+id/button_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:text="Remote control" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+            <Spinner
+                android:id="@+id/spinner_control"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text=" Delay 0.5H " />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

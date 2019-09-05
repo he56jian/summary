@@ -156,11 +156,24 @@ public class SysActivity extends Activity implements CompoundButton.OnCheckedCha
                 rename = edit_rename.getText().toString();
                 password = edit_password.getText().toString();
                 if (sta_rename == 1) {      //如果是on模式
-                    dataApplication.setRename(rename);
-//                    Toast.makeText(this, "rename的值：" + dataApplication.getRename(), Toast.LENGTH_SHORT).show();
+                    if(rename.length()==0){
+                        dataApplication.setRename("uovision");
+                    }else{
+                        dataApplication.setRename(rename);
+                    }
+                }else{
+                    dataApplication.setRename("uovision");
                 }
                 if (sta_password ==1 ) {
+                    if(password.length()==0){
+                        dataApplication.setPassword("0000");
+                    }else{
+
                     dataApplication.setPassword(password);
+                    }
+                }else{
+                    dataApplication.setPassword("0000");
+
                 }
                 break;
         }

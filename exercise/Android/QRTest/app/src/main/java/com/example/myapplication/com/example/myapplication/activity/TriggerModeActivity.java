@@ -50,7 +50,6 @@ public class TriggerModeActivity extends Activity {
         if(list_triggerPir.isEmpty()){
 
             //往列表中添加选项
-
             list_triggerPir.add("0Sec");
             list_triggerPir.add("1Sec");
             list_triggerPir.add("2Sec");
@@ -89,12 +88,12 @@ public class TriggerModeActivity extends Activity {
 
         if(list_triggerTimeLapse.isEmpty()){
             //往列表中添加选项
-            list_triggerTimeLapse.add("off");
-            list_triggerTimeLapse.add("0Sec");
-            list_triggerTimeLapse.add("1Sec");
-            list_triggerTimeLapse.add("2Sec");
-            list_triggerTimeLapse.add("3Sec");
-            list_triggerTimeLapse.add("4Sec");
+//            list_triggerTimeLapse.add("off");
+//            list_triggerTimeLapse.add("0Sec");
+//            list_triggerTimeLapse.add("1Sec");
+//            list_triggerTimeLapse.add("2Sec");
+//            list_triggerTimeLapse.add("3Sec");
+//            list_triggerTimeLapse.add("4Sec");
             list_triggerTimeLapse.add("5Sec");
             list_triggerTimeLapse.add("10Sec");
             list_triggerTimeLapse.add("15Sec");
@@ -142,7 +141,6 @@ public class TriggerModeActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home:
-
                 DataApplication dataApplication = DataApplication.getDataApplication();
                 Toast.makeText(this,dataApplication.getTriggerPir(),Toast.LENGTH_SHORT).show();
                 finish();
