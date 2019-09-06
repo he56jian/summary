@@ -432,8 +432,6 @@ public class DataApplication {
 
     //把相机设置转成二进制；
     private int getCharWithPar(String key, String value) {
-
-
         int result = 0;
         switch (key) {
             case "cameraMode":
@@ -457,15 +455,15 @@ public class DataApplication {
                     case "8MP":
                         result = 2;
                     break;
-                    case "12MP":
-                        result = 3;
-                    break;
-                    case "16Mp":
-                        result = 4;
-                    break;
-                    case "20MP":
-                        result = 5;
-                    break;
+//                    case "12MP":
+//                        result = 3;
+//                    break;
+//                    case "16Mp":
+//                        result = 4;
+//                    break;
+//                    case "20MP":
+//                        result = 5;
+//                    break;
                 }
                 break;
             case "photoBurst":
@@ -577,13 +575,13 @@ public class DataApplication {
                     case "1440P":
                         result = 0;
                     case "1080P":
-                        result = 0;
-                    break;
-                    case "720P":
                         result = 1;
                     break;
-                    case "wvga":
+                    case "720P":
                         result = 2;
+                    break;
+                    case "wvga":
+                        result = 3;
                     break;
                 }
                 break;

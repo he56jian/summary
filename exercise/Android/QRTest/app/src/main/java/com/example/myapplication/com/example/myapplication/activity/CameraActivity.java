@@ -99,6 +99,7 @@ public class CameraActivity extends BaseActivity {
         spinner_videoSize = findViewById(R.id.spinner_videoSize);
         spinner_videoLength = findViewById(R.id.spinner_videoLength);
         if (list_videoSize.isEmpty()) {
+            list_videoSize.add("1440P");
             list_videoSize.add("1080P");
             list_videoSize.add("720P");
             list_videoSize.add("WVGA");
@@ -137,9 +138,9 @@ public class CameraActivity extends BaseActivity {
             list_photoSize.add("3MP");
             list_photoSize.add("5MP");
             list_photoSize.add("8MP");
-            list_photoSize.add("12MP");
-            list_photoSize.add("16Mp");
-            list_photoSize.add("20MP");
+//            list_photoSize.add("12MP");
+//            list_photoSize.add("16Mp");
+//            list_photoSize.add("20MP");
         }
 
         //photo size选择器选择监听
@@ -187,6 +188,7 @@ public class CameraActivity extends BaseActivity {
         if (list_shutterSpeed.isEmpty()) {
             list_shutterSpeed.add("Normal");
             list_shutterSpeed.add("Fast");
+            list_shutterSpeed.add("High");
         }
         utils.listSelect(list_shutterSpeed, spinner_shutterSpeed, "shutterSpeed");
 

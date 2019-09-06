@@ -211,8 +211,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void run() {
                         try {
-                            String host = "192.168.1.224";
-                            int port = 5001;
+//                            String host = "192.168.1.224";
+                            String host = "192.168.0.104";
+                            int port = 21567;
                             socket = new Socket(host, port);
                             outputStream = null;//获取一个输出流，向服务端发送信息
                             outputStream = socket.getOutputStream();
@@ -230,6 +231,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this,"more",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_other:                  //其他
+                Utils utils = new Utils(this);
+                System.out.println("XXXXXXXXXXXXXXXXXXXXXXX:运行到了这里");
+                utils.isAvailableByPing("192.168.0.104");
                 Toast.makeText(this,"more",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_camera:                    //单击进入cameraMode界面

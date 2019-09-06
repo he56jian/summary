@@ -52,8 +52,6 @@ public class Utils {
         });
     }
 
-
-
     private static final String BIN_SEPARATOR = " ";
     //把字符串转成二进制字符串
     public static String toBinaryString(String str) {
@@ -172,7 +170,7 @@ public class Utils {
     }
 
     //ping ip查看情况
-    private void isAvailableByPing(String ip) {
+    public void isAvailableByPing(String ip) {
         //网络操作应在子线程中操作，避免阻塞UI线程，导致ANR
         new Thread(new Runnable() {
             @Override
