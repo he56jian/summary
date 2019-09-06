@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,9 +10,16 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.myapplication.com.example.myapplication.activity.MainActivity;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Utils {
     private Context context;
@@ -171,6 +179,7 @@ public class Utils {
 
     //ping ip查看情况
     public void isAvailableByPing(String ip) {
+                Toast.makeText(context,"查看IP界面",Toast.LENGTH_SHORT).show();
         //网络操作应在子线程中操作，避免阻塞UI线程，导致ANR
         new Thread(new Runnable() {
             @Override
@@ -178,12 +187,44 @@ public class Utils {
                 PingNetEntity pingNetEntity = new PingNetEntity(ip, 3, 5, new StringBuffer());
                 pingNetEntity = PingNet.ping(pingNetEntity);
                 String msg = "连接时间:"+pingNetEntity.getPingTime()+";"+"连接结果："+pingNetEntity.isResult();
-                Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
                 Log.i("testPing", pingNetEntity.getIp());
                 Log.i("testPing", "time=" + pingNetEntity.getPingTime());
                 Log.i("testPing", pingNetEntity.isResult() + "");
             }
         }).start();
+    }
+
+
+    /**
+     * 生成固定大小的二维码(不需网络权限)
+     *
+     * @param content 需要生成的内容
+     * @param width   二维码宽度
+     * @param height  二维码高度
+     * @return
+     */
+    public Bitmap generateBitmap(String content, int width, int height) {
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        Map<EncodeHintType, String> hints = new HashMap<>();
+        hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+        try {
+            BitMatrix encode = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, width, height, hints);
+            int[] pixels = new int[width * height];
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
+                    if (encode.get(j, i)) {
+                        pixels[i * width + j] = 0x00000000;
+                    } else {
+                        pixels[i * width + j] = 0xffffffff;
+                    }
+                }
+            }
+            return Bitmap.createBitmap(pixels, 0, width, width, height, Bitmap.Config.RGB_565);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

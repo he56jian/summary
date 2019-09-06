@@ -21,7 +21,7 @@ import com.example.myapplication.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CameraActivity extends BaseActivity {
+public class CameraActivity extends Activity {
     private Switch switcher;
     private String cameraMode, photoSize, photoBurst, burstSpeed, sendingOption, shutterSpeed, flashPower, videoSize, videoLength, sInfo;
     private List<String> list_photoSize = new ArrayList<String>();

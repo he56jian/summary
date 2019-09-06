@@ -8,30 +8,34 @@ import android.widget.Toast;
 import com.example.myapplication.DataApplication;
 import com.example.myapplication.R;
 import com.example.myapplication.Utils;
-import com.journeyapps.barcodescanner.Util;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NetActivity extends BaseActivity {
+public class NetActivity extends Activity {
 
     private List<String> list_sendmode = new ArrayList<String>();
     private List<String> list_control = new ArrayList<String>();
     private Spinner spinner_sendmode, spinner_control;
-
+    private DataApplication dataApplication;
+    private String sendMode,remoteControl;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.net);
-        DataApplication dataApplication = new DataApplication(this).getDataApplication();
+        dataApplication = new DataApplication(this).getDataApplication();
         getView();
-        Toast.makeText(this, dataApplication.getCameraMode(), Toast.LENGTH_SHORT).show();
     }
 
     //获取元素
     private void getView() {
+        sendMode = dataApplication.getValue("sendMode");
+        remoteControl = dataApplication.getValue("remoteControl");
+
         spinner_sendmode = findViewById(R.id.spinner_sendmode);
         spinner_control = findViewById(R.id.spinner_control);
+
+        spinner_sendmode.setPrompt(sendMode);
         init();
     }
     //初始化参数

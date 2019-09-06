@@ -938,4 +938,20 @@ public class DataApplication {
         }
         return result;
     }
+
+    //显示二维码数
+    public String getQRCode() {
+        char[] showValue= getCharCam();
+//        System.out.println(showValue);
+//        char[] showValue = getValue();
+//        System.out.println(showValue);
+        String count = "";
+        for (int i = 0; i < showValue.length; i++) {
+            count += showValue[i];
+        }
+        return count;
+    }
+
+
+
 }

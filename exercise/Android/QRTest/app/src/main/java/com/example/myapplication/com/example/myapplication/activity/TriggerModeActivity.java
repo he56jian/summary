@@ -30,7 +30,7 @@ public class TriggerModeActivity extends Activity {
     }
 
     private void init() {
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
         utils = new Utils(this);
 
         spinner_triggerPir = findViewById(R.id.spinner_triggerPir);

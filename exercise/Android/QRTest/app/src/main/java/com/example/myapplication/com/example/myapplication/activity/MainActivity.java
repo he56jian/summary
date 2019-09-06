@@ -27,6 +27,9 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
@@ -48,6 +51,7 @@ import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -56,6 +60,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import io.socket.client.IO;
+import io.socket.emitter.Emitter;
 
 import static com.example.myapplication.Utils.intToCharList;
 import static com.example.myapplication.Utils.method;
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DataApplication dataApplication;
     private int sta_name, sta_password, sta_overWrite;
     char[] value10, value11;
-    private EditText mEditText;
+    private EditText edit_ip,edit_port;
     private TextView mTextView;
     private static final String TAG = "TAG";
     private static final String HOST = "192.168.253.135";
@@ -100,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String message;
     Socket socket;
     private OutputStream outputStream;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,11 +115,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dataApplication = new DataApplication(this).getDataApplication();
         dataApplication.defaultSetting();
         init();
-        setTextView();
+//        setTextView();
 //        connectServer("192.168.1.224", 5001);
     }
-//    创建一个socket对象，在构造时，会向服务器发送连接
-    private void connectServer(String host,int port) {
+
+    //    创建一个socket对象，在构造时，会向服务器发送连接
+    private void connectServer(String host, int port) {
         new Thread() {
             @Override
             public void run() {
@@ -139,9 +148,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.button_trigger).setOnClickListener(this);               //点击trigger
         findViewById(R.id.button_worktime).setOnClickListener(this);               //点击work time
         findViewById(R.id.button_net).setOnClickListener(this);            //点击net
-//        findViewById(R.id.button_control).setOnClickListener(this);                //点击control
+//        findViewById(R.id.button_).setOnClickListener(this);                //点击control
         findViewById(R.id.button_sys).setOnClickListener(this);                  //点击rename
         findViewById(R.id.button_zxing).setOnClickListener(this);           //生成二维码
+        findViewById(R.id.button_get).setOnClickListener(this);           //获取回执
+        findViewById(R.id.button_realtime).setOnClickListener(this);           //设置实时连接
+        findViewById(R.id.button_other).setOnClickListener(this);           //ping ip
+        findViewById(R.id.button_connect).setOnClickListener(this);           //连接ip
+        findViewById(R.id.button_startServer).setOnClickListener(this);           //开启服务
     }
 
     //显示相机数据
@@ -182,8 +196,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView_worktime3.setText(message);
         message = workTime4;
         textView_worktime4.setText(message);
-
     }
+
     //获取元素
     private void getEle() {
         textView_cameraMode = findViewById(R.id.textview_camera_mode);
@@ -195,25 +209,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView_worktime3 = findViewById(R.id.textview_worktime3);
         textView_worktime4 = findViewById(R.id.textview_worktime4);
         imageView = this.findViewById(R.id.imageView_zxing);                    //生成的二维码
+        edit_ip = this.findViewById(R.id.edit_ip);                    //生成的二维码
+        edit_port = this.findViewById(R.id.edit_port);                    //生成的二维码
     }
+
+    io.socket.client.Socket socket2 = null;
 
     //处理监听事件
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_zxing:                                     //生成二维码
-                String count = setTextView();
-                imageView.setImageBitmap(generateBitmap(count, 600, 600));
+                intent = new Intent(MainActivity.this, ShowQRCodeActivity.class);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.button_send:                  //发送信息到服务端
-                String value = setTextView();
+                String value = dataApplication.getQRCode();
+//                final String wsurl="*******";
                 new Thread() {
                     @Override
                     public void run() {
+                            String host = "192.168.1.183";
+//                        String host = "192.168.0.104";
+                        int port = 5001;
                         try {
-//                            String host = "192.168.1.224";
-                            String host = "192.168.0.104";
-                            int port = 21567;
                             socket = new Socket(host, port);
                             outputStream = null;//获取一个输出流，向服务端发送信息
                             outputStream = socket.getOutputStream();
@@ -221,39 +240,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             e.printStackTrace();
                         }
                         printWriter = new PrintWriter(outputStream);//将输出流包装成打印流
-                        sendWithTCPSocket(value);
-                    }}.start();
+                    }
+
+                }.start();
                 break;
             case R.id.button_get:                  //从服务器获取信息
                 getWithTCPSocket();
                 break;
             case R.id.button_realtime:                  //实时接口
-                Toast.makeText(this,"more",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "more", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_other:                  //其他
                 Utils utils = new Utils(this);
                 System.out.println("XXXXXXXXXXXXXXXXXXXXXXX:运行到了这里");
-                utils.isAvailableByPing("192.168.0.104");
-                Toast.makeText(this,"more",Toast.LENGTH_SHORT).show();
+                utils.isAvailableByPing("192.168.1.224");
+                Toast.makeText(this, "more", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_camera:                    //单击进入cameraMode界面
-                intent = new Intent(MainActivity.this, CameraActivity.class);
+                intent = new  Intent(MainActivity.this, CameraActivity.class);
                 startActivityForResult(intent, 1);                //回执
                 break;
             case R.id.button_trigger:                   //点击进入触发界面
-                intent = new Intent(MainActivity.this, TriggerModeActivity.class);
+                intent = new
+
+                        Intent(MainActivity.this, TriggerModeActivity.class);
+
                 startActivityForResult(intent, 1);
                 break;
             case R.id.button_net:                   //点击进入触发界面
-                intent = new Intent(MainActivity.this, NetActivity.class);
+                intent = new
+
+                        Intent(MainActivity.this, NetActivity.class);
+
                 startActivityForResult(intent, 1);
                 break;
             case R.id.button_worktime:                  //点击进入工作时间界面
-                intent = new Intent(MainActivity.this, WorkTimeActivity.class);
+                intent = new
+
+                        Intent(MainActivity.this, WorkTimeActivity.class);
+
                 startActivityForResult(intent, 1);
                 break;
             case R.id.button_sys:
-                intent = new Intent(MainActivity.this, SysActivity.class);
+                intent = new
+
+                        Intent(MainActivity.this, SysActivity.class);
+
                 startActivityForResult(intent, 1);
                 break;
 //            case R.id.button_start:
@@ -274,53 +306,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                        .initiateScan();// 初始化扫码
 //                break;
         }
+
     }
 
-    //显示二维码数
-    private String setTextView() {
-        char[] showValue=dataApplication.getCharCam();
-        System.out.println(showValue);
-//        char[] showValue = getValue();
-//        System.out.println(showValue);
-        String count = "";
-        for (int i = 0; i < showValue.length; i++) {
-            count += showValue[i];
-        }
-        textView = findViewById(R.id.textview_container);
-        textView.setText(count);
-        return count;
-    }
-
-    /**
-     * 生成固定大小的二维码(不需网络权限)
-     *
-     * @param content 需要生成的内容
-     * @param width   二维码宽度
-     * @param height  二维码高度
-     * @return
-     */
-    private Bitmap generateBitmap(String content, int width, int height) {
-        QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        Map<EncodeHintType, String> hints = new HashMap<>();
-        hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
-        try {
-            BitMatrix encode = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, width, height, hints);
-            int[] pixels = new int[width * height];
-            for (int i = 0; i < height; i++) {
-                for (int j = 0; j < width; j++) {
-                    if (encode.get(j, i)) {
-                        pixels[i * width + j] = 0x00000000;
-                    } else {
-                        pixels[i * width + j] = 0xffffffff;
-                    }
-                }
-            }
-            return Bitmap.createBitmap(pixels, 0, width, width, height, Bitmap.Config.RGB_565);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     //获取相机设置
     private void getCamParam() {
@@ -349,12 +337,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sta_overWrite = dataApplication.getOverWrite();
     }
 
-
     @Override
     protected void onRestart() {
         super.onRestart();
         init();
-        setTextView();
+//        setTextView();
     }
 
     //返回main界面的返回值
@@ -378,19 +365,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-//    private void connectServerWithTCPSocket(String value){
+    //    private void connectServerWithTCPSocket(String value){
 //
 //    }
-    private void sendWithTCPSocket(String value){
+    private void sendWithTCPSocket(String value) {
         try {
-            printWriter.print("#1#"+ value);
+            printWriter.print("#1#" + value);
             printWriter.flush();
             socket.shutdownOutput();//关闭输出流
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    private void getWithTCPSocket(){
+
+    private void getWithTCPSocket() {
         InputStream inputStream = null;//获取一个输入流，接收服务端的信息
         try {
             inputStream = socket.getInputStream();

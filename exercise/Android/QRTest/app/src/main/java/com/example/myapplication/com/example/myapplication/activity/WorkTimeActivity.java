@@ -20,18 +20,15 @@ public class WorkTimeActivity extends Activity implements CompoundButton.OnCheck
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.worktime);
-//        Log.i("xxxxxxxx","什么情况");
         getEle();
-
     }
 
     private void getEle() {
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
         workTimeSwitch1 = findViewById(R.id.switch1);
         workTimeSwitch2 = findViewById(R.id.switch2);
         workTimeSwitch3 = findViewById(R.id.switch3);
         workTimeSwitch4 = findViewById(R.id.switch4);
-
         message_workTime1 = findViewById(R.id.message_workTime1);
         message_workTime2 = findViewById(R.id.message_workTime2);
         message_workTime3 = findViewById(R.id.message_workTime3);

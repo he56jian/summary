@@ -25,20 +25,18 @@ import com.example.myapplication.DataApplication;
 import com.example.myapplication.R;
 
 public class SysActivity extends Activity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
-
     private DataApplication dataApplication;
     private Switch switch_password, switch_rename,switch_overwrite;
     private EditText edit_password, edit_rename;
     private Button button_save;
     private String rename, password;
-//    private boolean sta_rename, sta_password;
     private int overWrite,sta_rename,sta_password;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sys);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
         init();
     }
 
