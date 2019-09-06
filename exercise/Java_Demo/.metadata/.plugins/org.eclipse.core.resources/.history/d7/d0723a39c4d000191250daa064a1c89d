@@ -1,0 +1,15 @@
+package com.serversocket;
+
+public class ServerListener extends Thread {
+	
+	@Override
+	public void run(){
+		int port = 21567;
+		try{
+			ServerSocket seversocket = new ServerSocket(port);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+}

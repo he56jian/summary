@@ -1,0 +1,5 @@
+package com.chatclient.main;
+
+public class ChatManager {
+
+}

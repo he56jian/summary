@@ -1,0 +1,5 @@
+package com.serversocket;
+
+public class MyServerSocket {
+
+}

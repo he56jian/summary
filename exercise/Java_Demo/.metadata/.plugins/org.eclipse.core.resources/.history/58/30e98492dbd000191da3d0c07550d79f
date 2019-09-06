@@ -1,0 +1,30 @@
+package com.chatclient.main;
+
+import com.chatclient.view.MainWindow;
+
+public class ChatManager {
+
+	private ChatManager() {}
+	private static final ChatManager instance = new ChatManager();
+	public static ChatManager getCM() {
+		return instance;
+	}
+	
+	//链接服务器；
+	public void connect(String ip) {
+		
+	}
+
+	//发送数据
+	public void send(String out) {
+		 
+	}
+
+	MainWindow window;
+	
+	public setWindow(MainWindow window) {
+		this.window = window;
+	}
+	
+	
+}

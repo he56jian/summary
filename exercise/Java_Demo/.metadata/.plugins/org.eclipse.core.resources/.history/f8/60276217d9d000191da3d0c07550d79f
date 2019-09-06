@@ -1,0 +1,13 @@
+package com.chatclient.main;
+
+public class StartClient {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		
+	}
+
+}

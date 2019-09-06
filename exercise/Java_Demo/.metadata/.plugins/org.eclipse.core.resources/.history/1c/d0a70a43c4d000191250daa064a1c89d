@@ -1,0 +1,23 @@
+package com.serversocket;
+
+import java.net.ServerSocket;
+
+public class ServerListener extends Thread {
+	
+	@Override
+	public void run(){
+		int port = 21567;
+		try{
+			ServerSocket seversocket = new ServerSocket(port);
+			while(true){
+				Socket socket = serversocket.accept();
+				JOptionPane.showMessgeDialog(null,"有客户端连接");
+			}
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+}

@@ -1,0 +1,16 @@
+package com.serversocket;
+
+public class MyServerSocket {
+
+	public static void main(String[] args){
+		
+		try{
+			ServerSocket serversocket = new 
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	
+}

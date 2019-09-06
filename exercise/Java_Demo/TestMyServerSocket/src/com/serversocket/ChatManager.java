@@ -1,0 +1,32 @@
+package com.serversocket;
+
+import java.util.Vector;
+
+public class ChatManager {
+	//一个聊天服务器，只能有一个聊天的manager，要做单例处理
+	
+	private ChatManager(){}
+	private static final ChatManager cm = new ChatManager();
+	public static ChatManager getChatManager(){
+		return cm;
+	}
+	Vector<CharSocket> vector = new Vector<>();
+	
+	public void add(CharSocket cs){
+		vector.add(cs);
+	}
+	
+	//其中某个线程，可以通过该方法向其他客户端发送信息
+	public void publish(CharSocket cs,String out){
+		for (int i = 0; i < vector.size(); i++) {
+			CharSocket csChatSocket = vector.get(i);
+			//如果当前的聊天室和获取的聊天室不一致，则发送
+			if(!cs.equals(csChatSocket)){
+				csChatSocket.send(out);
+			}
+			
+		}
+	}
+	
+	
+}

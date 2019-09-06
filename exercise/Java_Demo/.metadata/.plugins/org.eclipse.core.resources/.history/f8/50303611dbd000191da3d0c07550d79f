@@ -1,0 +1,16 @@
+package com.chatclient.main;
+
+public class ChatManager {
+
+	private ChatManager() {}
+	private static final ChatManager instance = new ChatManager();
+	public static ChatManager getCM() {
+		return instance;
+	}
+	
+	//Á´½Ó·şÎñÆ÷£»
+	public void connect(String ip) {
+		
+	}
+
+}

@@ -1,0 +1,11 @@
+package com.serversocket;
+
+public class CharSocket extends Thread {
+
+	@Override
+	public void run() {
+
+	
+	}
+	
+}

@@ -1,0 +1,42 @@
+package com.chatclient.main;
+
+import java.net.Socket;
+
+import com.chatclient.view.MainWindow;
+
+public class ChatManager {
+	Socket socket;
+	int port = 22567;
+	String Ip;
+	private ChatManager() {}
+	private static final ChatManager instance = new ChatManager();
+	public static ChatManager getCM() {
+		return instance;
+	}
+	
+	//链接服务器；
+	public void connect(String ip) {
+		this.Ip = ip
+		new Thread() {
+
+			public void run() {
+				socket = new Socket(Ip, port);
+			}
+			
+		}.start();
+	}
+
+	//发送数据
+	public void send(String out) {
+		 
+	}
+
+	MainWindow window;
+	//和文本框的绑定
+	public void setWindow(MainWindow window) {
+		this.window = window;
+		window.appendText("文本框已经和ChatManager绑定");
+	}
+	
+	
+}

@@ -1,0 +1,26 @@
+package com.serversocket;
+
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import javax.swing.JOptionPane;
+
+public class ServerListener extends Thread {
+	
+	@Override
+	public void run(){
+		int port = 21567;
+		try{
+			ServerSocket serversocket = new ServerSocket(port);
+			while(true){
+				Socket socket = serversocket.accept();
+				JOptionPane.showMessageDialog(null,"有客户端连接");
+			}
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+}

@@ -1,0 +1,45 @@
+package com.serversocket;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.Socket;
+
+public class CharSocket extends Thread {
+
+	Socket socket;
+	
+	public CharSocket(Socket socket) {
+		this.socket = socket;
+	}
+	public void send(String out){
+		//要创建一个输出流，才能向外输出数据
+		try {
+			socket.getOutputStream().write(out.getBytes("utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void run() {
+//		执行后台功能
+		
+			int count = 0;
+			while(true){
+				send("loop:"+count);
+				count++;
+				try {
+					sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		
+	}
+	
+}
