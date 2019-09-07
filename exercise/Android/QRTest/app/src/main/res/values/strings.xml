@@ -4,4 +4,7 @@
     <string name="videos">当前选择为video</string>
     <string name="photos">当前选择为photo</string>
     <string name="wordAndNum">0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

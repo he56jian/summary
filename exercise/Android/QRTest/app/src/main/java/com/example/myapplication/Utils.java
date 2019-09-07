@@ -2,21 +2,18 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.myapplication.com.example.myapplication.activity.MainActivity;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -188,9 +185,9 @@ public class Utils {
                 pingNetEntity = PingNet.ping(pingNetEntity);
                 String msg = "连接时间:"+pingNetEntity.getPingTime()+";"+"连接结果："+pingNetEntity.isResult();
 //                Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
-                Log.i("testPing", pingNetEntity.getIp());
-                Log.i("testPing", "time=" + pingNetEntity.getPingTime());
-                Log.i("testPing", pingNetEntity.isResult() + "");
+                System.out.println("testPing"+ pingNetEntity.getIp());
+                System.out.println("testPing"+ "time=" + pingNetEntity.getPingTime());
+                System.out.println("ping:"+ pingNetEntity.isResult() + "");
             }
         }).start();
     }
