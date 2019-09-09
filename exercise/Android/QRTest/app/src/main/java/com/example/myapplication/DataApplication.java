@@ -11,6 +11,7 @@ import static com.example.myapplication.Utils.method;
 import static com.example.myapplication.Utils.strToCharList;
 
 public class DataApplication {
+    public Boolean protecte = false;
     private String cameraMode, photoSize, photoBurst, burstSpeed, sendingOption, shutterSpeed, flashPower, videoSize, videoLength,
             triggerPir, triggerTimelapse, triggerSen, wortTime1, workTime2, workTime3, workTime4, sendMode, remoteControl, rename, password;
     private Boolean staName = false, staPassword = false, overWrite = false;
@@ -21,6 +22,7 @@ public class DataApplication {
     int sta_connect = 0;
     List<String> serverMegList;
     private String retServer = "";
+
     public void defaultSetting() {
         this.cameraMode = "photo";
         this.photoSize = "3MP";
@@ -37,7 +39,7 @@ public class DataApplication {
         this.workTime2 = "off";
         this.workTime3 = "off";
         this.workTime4 = "off";
-        this.sendMode = "Unlimited";
+        this.sendMode = "00";
         this.remoteControl = "Delay 0.5H";
         this.rename = "uovision";
         this.overWrite = false;
@@ -48,7 +50,8 @@ public class DataApplication {
     public DataApplication(Context context) {
         this.context = context;
     }
-    public DataApplication(){
+
+    public DataApplication() {
 
     }
 
@@ -313,10 +316,10 @@ public class DataApplication {
                 value = dataApplication.getPassword();
                 break;
             case "sendMode":
-                dataApplication.getSendMode();
+                value = dataApplication.getSendMode();
                 break;
             case "remoteControl":
-                dataApplication.getRemoteControl();
+                value = dataApplication.getRemoteControl();
                 break;
         }
         return value;
@@ -361,7 +364,7 @@ public class DataApplication {
         }
     }
 
-    List<char[]> list ;
+    List<char[]> list;
 
     //获取设置的参数
     public char[] getCharCam() {
@@ -388,24 +391,24 @@ public class DataApplication {
         int charStaPassword = getCharWithPar("staPassword", staPassword + "");
 //        int charPassword = getCharWithPar("staName", password);
 
-        System.out.println("charCam:"+charCam+"   cameraMode："+cameraMode);
-        System.out.println("charPhotoSize:"+charPhotoSize+"   photoSize："+photoSize);
-        System.out.println("charPhotoBurst:"+charPhotoBurst+"   photoBurst："+photoBurst);
-        System.out.println("charBurstSpeed:"+charBurstSpeed+"   burstSpeed："+burstSpeed);
-        System.out.println("charSendingOption:"+charSendingOption+"   sendingOption："+sendingOption);
-        System.out.println("charShutterSpeed:"+charShutterSpeed+"   shutterSpeed："+shutterSpeed);
-        System.out.println("charFlashPower:"+charFlashPower+"   flashPower："+flashPower);
-        System.out.println("charVideoSize:"+charVideoSize+"   videoSize："+videoSize);
-        System.out.println("charVideoLength:"+charVideoLength+"   videoLength："+videoLength);
-        System.out.println("charTriggerSen:"+charTriggerSen+"   triggerSen："+triggerSen);
-        System.out.println("charTriggerPir:"+charTriggerPir+"   triggerPir："+triggerPir);
-        System.out.println("charTriggerTimelapse:"+charTriggerTimelapse+"   triggerTimelapse："+triggerTimelapse);
-        System.out.println("charSendMode:"+charSendMode+"   sendMode："+sendMode);
-        System.out.println("charRemoteControl:"+charRemoteControl+"   remoteControl："+remoteControl);
-        System.out.println("charStaName:"+charStaName+"   staName："+staName);
-        System.out.println("rename:"+rename+"   rename："+rename);
-        System.out.println("charStaPassword:"+charStaPassword+"   staPassword："+staPassword);
-        System.out.println("password:"+password+"   password："+password);
+        System.out.println("charCam:" + charCam + "   cameraMode：" + cameraMode);
+        System.out.println("charPhotoSize:" + charPhotoSize + "   photoSize：" + photoSize);
+        System.out.println("charPhotoBurst:" + charPhotoBurst + "   photoBurst：" + photoBurst);
+        System.out.println("charBurstSpeed:" + charBurstSpeed + "   burstSpeed：" + burstSpeed);
+        System.out.println("charSendingOption:" + charSendingOption + "   sendingOption：" + sendingOption);
+        System.out.println("charShutterSpeed:" + charShutterSpeed + "   shutterSpeed：" + shutterSpeed);
+        System.out.println("charFlashPower:" + charFlashPower + "   flashPower：" + flashPower);
+        System.out.println("charVideoSize:" + charVideoSize + "   videoSize：" + videoSize);
+        System.out.println("charVideoLength:" + charVideoLength + "   videoLength：" + videoLength);
+        System.out.println("charTriggerSen:" + charTriggerSen + "   triggerSen：" + triggerSen);
+        System.out.println("charTriggerPir:" + charTriggerPir + "   triggerPir：" + triggerPir);
+        System.out.println("charTriggerTimelapse:" + charTriggerTimelapse + "   triggerTimelapse：" + triggerTimelapse);
+        System.out.println("charSendMode:" + charSendMode + "   sendMode：" + sendMode);
+        System.out.println("charRemoteControl:" + charRemoteControl + "   remoteControl：" + remoteControl);
+        System.out.println("charStaName:" + charStaName + "   staName：" + staName);
+        System.out.println("rename:" + rename + "   rename：" + rename);
+        System.out.println("charStaPassword:" + charStaPassword + "   staPassword：" + staPassword);
+        System.out.println("password:" + password + "   password：" + password);
 
         list.add(intToCharList(charCam));
         list.add(intToCharList(charPhotoSize));
@@ -422,15 +425,15 @@ public class DataApplication {
         list.add(intToCharList(charSendMode));
         list.add(intToCharList(charRemoteControl));
         list.add(intToCharList(charStaName));
-        if(staName){
+        if (staName) {
             list.add(strToCharList(rename));
-        }else{
+        } else {
             list.add(strToCharList("uovision"));
         }
         list.add(intToCharList(charStaPassword));
-        if(staPassword){
+        if (staPassword) {
             list.add(strToCharList(password));
-        }else{
+        } else {
             list.add(strToCharList("0000"));
         }
 
@@ -445,24 +448,24 @@ public class DataApplication {
             case "cameraMode":
                 switch (value) {
                     case "photo":
-                        result =  0;
-                    break;
+                        result = 0;
+                        break;
                     case "video":
                         result = 1;
-                    break;
+                        break;
                 }
                 break;
             case "photoSize":
                 switch (value) {
                     case "3MP":
-                        result =  0;
-                    break;
+                        result = 0;
+                        break;
                     case "5MP":
                         result = 1;
-                    break;
+                        break;
                     case "8MP":
                         result = 2;
-                    break;
+                        break;
 //                    case "12MP":
 //                        result = 3;
 //                    break;
@@ -478,104 +481,104 @@ public class DataApplication {
                 switch (value) {
                     case "1photo":
                         result = 0;
-                    break;
+                        break;
                     case "2photos":
                         result = 1;
-                    break;
+                        break;
                     case "3photos":
                         result = 2;
-                    break;
+                        break;
                     case "4photos":
                         result = 3;
-                    break;
+                        break;
                     case "5photos":
                         result = 4;
-                    break;
+                        break;
                     case "6photos":
                         result = 5;
-                    break;
+                        break;
                     case "7photos":
                         result = 6;
-                    break;
+                        break;
                     case "8photos":
                         result = 7;
-                    break;
+                        break;
                     case "9photos":
                         result = 8;
-                    break;
+                        break;
                     case "10photos":
                         result = 9;
-                    break;
+                        break;
                 }
                 break;
             case "burstSpeed":
                 switch (value) {
                     case "Fast(200ms)":
                         result = 0;
-                    break;
+                        break;
                     case "Show(500ms)":
                         result = 1;
-                    break;
+                        break;
                 }
                 break;
             case "sendingOption":
                 switch (value) {
                     case "1st":
                         result = 0;
-                    break;
+                        break;
                     case "2st":
                         result = 1;
-                    break;
+                        break;
                     case "3st":
                         result = 2;
-                    break;
+                        break;
                     case "4st":
                         result = 0;
-                    break;
+                        break;
                     case "5st":
                         result = 1;
-                    break;
+                        break;
                     case "6st":
                         result = 2;
-                    break;
+                        break;
                     case "7st":
                         result = 0;
-                    break;
+                        break;
                     case "8st":
                         result = 1;
-                    break;
+                        break;
                     case "9st":
                         result = 2;
-                    break;
+                        break;
                     case "10st":
                         result = 2;
-                    break;
+                        break;
                 }
                 break;
             case "shutterSpeed":
                 switch (value) {
                     case "Normal":
                         result = 0;
-                    break;
+                        break;
                     case "Fast":
                         result = 1;
-                    break;
+                        break;
                     case "High":
                         result = 2;
-                    break;
+                        break;
                 }
                 break;
             case "flashPower":
                 switch (value) {
                     case "Low":
                         result = 0;
-                    break;
+                        break;
                     case "Normal":
                         result = 1;
-                    break;
+                        break;
                     case "High":
                         result = 2;
-                    break;
+                        break;
                 }
                 break;
             case "videoSize":
@@ -584,69 +587,69 @@ public class DataApplication {
                         result = 0;
                     case "1080P":
                         result = 1;
-                    break;
+                        break;
                     case "720P":
                         result = 2;
-                    break;
+                        break;
                     case "wvga":
                         result = 3;
-                    break;
+                        break;
                 }
                 break;
             case "videoLength":
                 switch (value) {
                     case "5sec":
                         result = 0;
-                    break;
+                        break;
                     case "10sec":
                         result = 1;
-                    break;
+                        break;
                     case "15sec":
                         result = 2;
-                    break;
+                        break;
                     case "20sec":
                         result = 3;
-                    break;
+                        break;
                     case "25sec":
                         result = 4;
-                    break;
+                        break;
                     case "30sec":
                         result = 5;
-                    break;
+                        break;
                     case "35sec":
                         result = 6;
-                    break;
+                        break;
                     case "40sec":
                         result = 7;
-                    break;
+                        break;
                     case "45sec":
                         result = 8;
-                    break;
+                        break;
                     case "50sec":
                         result = 9;
-                    break;
+                        break;
                     case "55sec":
                         result = 10;
-                    break;
+                        break;
                     case "60sec":
                         result = 11;
-                    break;
+                        break;
                 }
                 break;
             case "triggerSen":
                 switch (value) {
                     case "off":
                         result = 0;
-                    break;
+                        break;
                     case "Low":
                         result = 1;
-                    break;
+                        break;
                     case "Auto":
                         result = 2;
-                    break;
+                        break;
                     case "High":
                         result = 3;
-                    break;
+                        break;
                 }
                 break;
             case "triggerPir":
@@ -654,100 +657,100 @@ public class DataApplication {
                 switch (value) {
                     case "0Sec":
                         result = 0;
-                    break;
+                        break;
                     case "1Sec":
                         result = 1;
-                    break;
+                        break;
                     case "2Sec":
                         result = 2;
-                    break;
+                        break;
                     case "3Sec":
                         result = 3;
-                    break;
+                        break;
                     case "4Sec":
                         result = 4;
-                    break;
+                        break;
                     case "5Sec":
                         result = 5;
-                    break;
+                        break;
                     case "10Sec":
                         result = 6;
-                    break;
+                        break;
                     case "15Sec":
                         result = 7;
-                    break;
+                        break;
                     case "20Sec":
                         result = 8;
-                    break;
+                        break;
                     case "25Sec":
                         result = 9;
-                    break;
+                        break;
                     case "30Sec":
                         result = 10;
-                    break;
+                        break;
                     case "35Sec":
                         result = 11;
-                    break;
+                        break;
                     case "40Sec":
                         result = 12;
-                    break;
+                        break;
                     case "45Sec":
                         result = 13;
-                    break;
+                        break;
                     case "50Sec":
                         result = 14;
-                    break;
+                        break;
                     case "55Sec":
                         result = 15;
-                    break;
+                        break;
                     case "1min":
                         result = 16;
-                    break;
+                        break;
                     case "2min":
                         result = 17;
-                    break;
+                        break;
                     case "3min":
                         result = 18;
-                    break;
+                        break;
                     case "4min":
                         result = 19;
-                    break;
+                        break;
                     case "5min":
                         result = 20;
-                    break;
+                        break;
                     case "10min":
                         result = 21;
-                    break;
+                        break;
                     case "15min":
                         result = 22;
-                    break;
+                        break;
                     case "20min":
                         result = 23;
-                    break;
+                        break;
                     case "25min":
                         result = 24;
-                    break;
+                        break;
                     case "30min":
                         result = 25;
-                    break;
+                        break;
                     case "35min":
                         result = 26;
-                    break;
+                        break;
                     case "40min":
                         result = 27;
-                    break;
+                        break;
                     case "45min":
                         result = 28;
-                    break;
+                        break;
                     case "50min":
                         result = 29;
-                    break;
+                        break;
                     case "55min":
                         result = 30;
-                    break;
+                        break;
                     case "60min":
                         result = 31;
-                    break;
+                        break;
                 }
                 break;
             case "triggerTimelapse":
@@ -769,178 +772,169 @@ public class DataApplication {
 //                    break;
                     case "5Sec":
                         result = 1;
-                    break;
+                        break;
                     case "10Sec":
                         result = 2;
-                    break;
+                        break;
                     case "15Sec":
                         result = 3;
-                    break;
+                        break;
                     case "20Sec":
                         result = 4;
-                    break;
+                        break;
                     case "25Sec":
                         result = 5;
-                    break;
+                        break;
                     case "30Sec":
                         result = 60;
-                    break;
+                        break;
                     case "35Sec":
                         result = 7;
-                    break;
+                        break;
                     case "40Sec":
                         result = 8;
-                    break;
+                        break;
                     case "45Sec":
                         result = 9;
-                    break;
+                        break;
                     case "50Sec":
                         result = 10;
-                    break;
+                        break;
                     case "55Sec":
                         result = 11;
-                    break;
+                        break;
                     case "1min":
                         result = 12;
-                    break;
+                        break;
                     case "2min":
                         result = 13;
-                    break;
+                        break;
                     case "3min":
                         result = 14;
-                    break;
+                        break;
                     case "4min":
                         result = 15;
-                    break;
+                        break;
                     case "5min":
                         result = 16;
-                    break;
+                        break;
                     case "10min":
                         result = 17;
-                    break;
+                        break;
                     case "15min":
                         result = 18;
-                    break;
+                        break;
                     case "20min":
                         result = 19;
-                    break;
+                        break;
                     case "25min":
                         result = 20;
-                    break;
+                        break;
                     case "30min":
                         result = 21;
-                    break;
+                        break;
                     case "35min":
                         result = 22;
-                    break;
+                        break;
                     case "40min":
                         result = 23;
-                    break;
+                        break;
                     case "45min":
                         result = 24;
-                    break;
+                        break;
                     case "50min":
                         result = 25;
-                    break;
+                        break;
                     case "55min":
                         result = 26;
-                    break;
+                        break;
                     case "1Hour":
                         result = 27;
-                    break;
+                        break;
                     case "2Hour":
                         result = 28;
-                    break;
+                        break;
                     case "3Hour":
                         result = 29;
-                    break;
+                        break;
                     case "4Hour":
                         result = 30;
-                    break;
+                        break;
                     case "5Hour":
                         result = 31;
-                    break;
+                        break;
                     case "6Hour":
                         result = 32;
-                    break;
+                        break;
                     case "7Hour":
                         result = 33;
                     case "8Hour":
                         result = 34;
-                    break;
+                        break;
                     case "12Hour":
                         result = 35;
-                    break;
+                        break;
                     case "20Hour":
                         result = 36;
-                    break;
+                        break;
                     case "24Hour":
                         result = 37;
-                    break;
+                        break;
                 }
                 break;
             case "sendMode":
-                switch (value) {
-                    case "Unlimited":
-                        result = 0;
-                    break;
-                    default:
-//                        result = value.charAt(0) - "0";
-                        String[] str = value.split(" ");
-                        int sendMode2 = Integer.parseInt(str[0]);
-                        result = sendMode2;
-                    break;
-                }
+                int sendMode2 = Integer.parseInt(value);
+                result = sendMode2;
                 break;
             case "remoteControl":
                 switch (value) {
                     case "Realtime":
                         result = 0;
-                    break;
+                        break;
                     case "Delay 0.5H":
                         result = 1;
-                    break;
+                        break;
                     case "Delay 1H":
                         result = 2;
-                    break;
+                        break;
                     case "Delay 2H":
                         result = 3;
-                    break;
+                        break;
                     case "Delay 3H":
                         result = 4;
-                    break;
+                        break;
                     case "Delay 4H":
                         result = 5;
-                    break;
+                        break;
                     case "Delay 6H":
                         result = 6;
-                    break;
+                        break;
                     case "Delay 12H":
                         result = 7;
-                    break;
+                        break;
                     case "Delay 24H":
                         result = 8;
-                    break;
+                        break;
                 }
                 break;
             case "staName":
                 switch (value) {
                     case "false":
                         result = 0;
-                    break;
+                        break;
                     case "true":
                         result = 1;
-                    break;
+                        break;
                 }
                 break;
             case "staPassword":
                 switch (value) {
                     case "false":
                         result = 0;
-                    break;
+                        break;
                     case "true":
                         result = 1;
-                    break;
+                        break;
                 }
                 break;
         }
@@ -949,7 +943,7 @@ public class DataApplication {
 
     //显示二维码数
     public String getQRCode() {
-        char[] showValue= getCharCam();
+        char[] showValue = getCharCam();
 //        System.out.println(showValue);
 //        char[] showValue = getValue();
 //        System.out.println(showValue);
@@ -959,26 +953,29 @@ public class DataApplication {
         }
         return count;
     }
+
     //保存服务器返回的数据
     public void setServerMeg(String value) {
         addServerMegList(value);
         this.retServer = value;
     }
+
     //获取服务器返回的数据
     public String getServerMeg() {
         return retServer;
     }
 
-    public void addServerMegList(String value){
+    public void addServerMegList(String value) {
         serverMegList.add(value);
     }
 
     //设置链接状态
-    public void setStaConnect(int status){
+    public void setStaConnect(int status) {
         this.sta_connect = status;
     }
+
     //获取当前链接状态
-    public int getStaConnect(){
+    public int getStaConnect() {
         return sta_connect;
     }
 

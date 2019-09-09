@@ -26,24 +26,22 @@ import com.example.myapplication.com.example.myapplication.activity.WorkTimeActi
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class ParamFragment extends Fragment implements View.OnClickListener {
-    private Context context ;
+    private Context context;
     private DataApplication dataApplication;
     private View view;
     private Intent intent;
-    private String cameraMode,photoSize,photoBurst,sendingOption,shutterSpeed,flashPower,videoSize,videoLength
-            ,triggerPir,triggerSen,triggerTimelapse,wortTime1,workTime2,workTime3,workTime4,sendMode
-            ,remoteControl,passWord,rename;
+    private String cameraMode, photoSize, photoBurst, sendingOption, shutterSpeed, flashPower, videoSize, videoLength, triggerPir, triggerSen, triggerTimelapse, wortTime1, workTime2, workTime3, workTime4, sendMode, remoteControl, passWord, rename;
 
-    private int sta_name,sta_password,sta_overWrite;
+    private int sta_name, sta_password, sta_overWrite;
 
-    private TextView textView_cameraMode,textView_cameraFlash,textView_triggerPir,textView_timelapse,textView_worktime1,textView_worktime2,textView_worktime3,textView_worktime4;
+    private TextView textView_cameraMode, textView_cameraFlash, textView_triggerPir, textView_timelapse, textView_worktime1, textView_worktime2, textView_worktime3, textView_worktime4;
     private ImageView imageView;
 
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
-//        ChatManager.getCM().connect("192.168.1.224", 5001);
-//        ChatManager.getCM().send("#02#");
+        ChatManager.getCM().connect(context,"192.168.1.224", 5001);
+        ChatManager.getCM().send("#01#");               //一开始就发送#01#
     }
 
     @Override
@@ -66,6 +64,7 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
         dataApplication.defaultSetting();
         init();
     }
+
     private void init() {
         getCamParam();      //获取相机参数
         getEle();           //获取元素
@@ -76,7 +75,8 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.button_net).setOnClickListener(this);            //点击net
 //        findViewById(R.id.button_).setOnClickListener(this);                //点击control
         view.findViewById(R.id.button_sys).setOnClickListener(this);                  //点击rename
-        view.findViewById(R.id.button_zxing).setOnClickListener(this);           //生成二维码
+//        view.findViewById(R.id.button_zxing).setOnClickListener(this);           //生成二维码
+        view.findViewById(R.id.button_send).setOnClickListener(this);           //发送参数
     }
 
     //获取相机设置
@@ -105,16 +105,17 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
         sta_password = dataApplication.getStaPassword();
         sta_overWrite = dataApplication.getOverWrite();
     }
+
     //获取元素
     private void getEle() {
         textView_cameraMode = view.findViewById(R.id.textview_camera_mode);
-        textView_cameraFlash =  view.findViewById(R.id.textview_camera_flash);
-        textView_triggerPir =  view.findViewById(R.id.textview_trigger_pir);
-        textView_timelapse =  view.findViewById(R.id.textview_trigger_timelapse);
-        textView_worktime1 =  view.findViewById(R.id.textview_worktime1);
-        textView_worktime2 =  view.findViewById(R.id.textview_worktime2);
-        textView_worktime3 =  view.findViewById(R.id.textview_worktime3);
-        textView_worktime4 =  view.findViewById(R.id.textview_worktime4);
+        textView_cameraFlash = view.findViewById(R.id.textview_camera_flash);
+        textView_triggerPir = view.findViewById(R.id.textview_trigger_pir);
+        textView_timelapse = view.findViewById(R.id.textview_trigger_timelapse);
+        textView_worktime1 = view.findViewById(R.id.textview_worktime1);
+        textView_worktime2 = view.findViewById(R.id.textview_worktime2);
+        textView_worktime3 = view.findViewById(R.id.textview_worktime3);
+        textView_worktime4 = view.findViewById(R.id.textview_worktime4);
         imageView = view.findViewById(R.id.imageView_zxing);                    //生成的二维码
     }
 
@@ -162,9 +163,13 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.button_zxing:                                     //生成二维码
-                intent = new Intent(context, ShowQRCodeActivity.class);
-                startActivityForResult(intent, 1);
+//            case R.id.button_zxing:                                     //生成二维码
+//                intent = new Intent(context, ShowQRCodeActivity.class);
+//                startActivityForResult(intent, 1);
+//                break;
+            case R.id.button_send:                    //发送信息
+               String message =  dataApplication.getQRCode();
+                ChatManager.getCM().send("#02#"+message);           //点击发送时，把参数发送出去
                 break;
             case R.id.button_camera:                    //单击进入cameraMode界面
                 intent = new Intent(context, CameraActivity.class);
@@ -207,50 +212,50 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
-
     @Override
     public void onStart() {
         super.onStart();
-        Log.d(TAG,"onStart");
+        Log.d(TAG, "onStart");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(TAG,"onResume");
+        Log.d(TAG, "onResume");
+        if(dataApplication.protecte){
+            ChatManager.getCM().send("#04#");           //关闭
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.d(TAG,"onPause");
+        Log.d(TAG, "onPause");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.d(TAG,"onStop");
+        Log.d(TAG, "onStop");
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.d(TAG,"onDestroyView");
+        Log.d(TAG, "onDestroyView");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG,"onDestroy");
+        Log.d(TAG, "onDestroy");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        Log.d(TAG,"onDetach");
+        Log.d(TAG, "onDetach");
     }
-
 
 
 }

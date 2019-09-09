@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
@@ -47,13 +48,12 @@ public class Utils {
                 sInfo = adapterView.getItemAtPosition(i).toString();
 //                    app.setData(name,sInfo);
                 dataApplication.setValue(name, sInfo);
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                //获取选择的项的值
                 sInfo = adapterView.getItemAtPosition(0).toString();
-//                    data.setData(name,sInfo);
                 dataApplication.setValue(name, sInfo);
             }
         });
@@ -243,12 +243,17 @@ public class Utils {
     }
 
 
-    public Thread getThread(){
-        return new Thread(){
-            @Override
-            public void run() {
-                super.run();
+    public void setSpinnerDefaultValue(Spinner spinner, String value) {
+        SpinnerAdapter apsAdapter = spinner.getAdapter();
+        int size = apsAdapter.getCount();
+        System.out.println(value);
+        for (int i = 0; i < size; i++) {
+            if (value.equals(apsAdapter.getItem(i).toString())) {
+                System.out.println(i);
+                spinner.setSelection(i,true);
+                break;
             }
-        };
+        }
     }
+
 }

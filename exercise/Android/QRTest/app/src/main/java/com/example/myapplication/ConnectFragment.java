@@ -46,7 +46,9 @@ public class ConnectFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ChatManager.getCM().send("#03#");
+        dataApplication = new DataApplication(context).getDataApplication();
+        dataApplication.protecte = true;
     }
 
     @Nullable
@@ -60,63 +62,59 @@ public class ConnectFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        init();
-        thread = new Thread() {
-            @Override
-            public void run() {
-                while (true) {
-                    if (sta_connect == 1) {
-                        addView(showMessage,"connecting...");
-                        //如果一有服务器端发来的数据，直接使用；
-                        reader = ChatManager.getCM().getServerMeg();
-                        try {
-                            if (((line = reader.readLine()) != null)) {
-                                System.out.println(line);
-                                dataApplication.setValue("retServer", line);//把服务器的返回结果保存到dataApplication.retServer里面；
-                                String message = "服务器：" + line;
-                                addView(showMessage,message);
-                                dataApplication.setValue("retServer", "");
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        addView(showMessage,"链接失败...");
-                        System.out.println("链接失败");
-                    }
-                    try {
-                        sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                }
-            }
-        };
-
-        thread.start();
+//        init();
+//        thread = new Thread() {
+//            @Override
+//            public void run() {
+//                while (true) {
+//                    if (sta_connect == 1) {
+//                        addView(showMessage,"connecting...");
+//                        //如果一有服务器端发来的数据，直接使用；
+//                        reader = ChatManager.getCM().getServerMeg();
+//                        try {
+//                            if (((line = reader.readLine()) != null)) {
+//                                System.out.println(line);
+//                                dataApplication.setValue("retServer", line);//把服务器的返回结果保存到dataApplication.retServer里面；
+//                                String message = "服务器：" + line;
+//                                addView(showMessage,message);
+//                                dataApplication.setValue("retServer", "");
+//                            }
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                    } else {
+//                        addView(showMessage,"链接失败...");
+//                        System.out.println("链接失败");
+//                    }
+//                    try {
+//                        sleep(5000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    break;
+//                }
+//            }
+//        };
+//
+//        thread.start();
     }
 
-    private void init() {
-        showMessage = view.findViewById(R.id.showMessage);
-        dataApplication = new DataApplication(context).getDataApplication();
-        eqcode = dataApplication.getQRCode();
-        sta_connect = dataApplication.getStaConnect();
+//    private void init() {
+//        showMessage = view.findViewById(R.id.showMessage);
+//        dataApplication = new DataApplication(context).getDataApplication();
+//        eqcode = dataApplication.getQRCode();
+//        sta_connect = dataApplication.getStaConnect();
+//
+//        editText = view.findViewById(R.id.edit_qrcode);
+//        editText.setText(eqcode);
+//
+//        button_send = view.findViewById(R.id.button_send);
+//        button_send.setOnClickListener(this);
+//
+//        utils = new Utils(context);
+//
+//    }
 
-        editText = view.findViewById(R.id.edit_qrcode);
-        editText.setText(eqcode);
-
-        button_send = view.findViewById(R.id.button_send);
-        button_send.setOnClickListener(this);
-
-        utils = new Utils(context);
-
-    }
-
-    //展示内容到框架内
-    public void showMessage(){
-
-    }
 
     //添加View
     public void addView(LinearLayout linearLayout,String value) {

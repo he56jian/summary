@@ -20,10 +20,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
-            <Spinner
+            <EditText
                 android:id="@+id/spinner_sendmode"
+                android:maxLength="2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:inputType="number"
                 android:text="Instant ( Unlimited )" />
         </LinearLayout>
     </LinearLayout>
@@ -51,4 +53,10 @@
                 android:text=" Delay 0.5H " />
         </LinearLayout>
     </LinearLayout>
+    <Button
+        android:id="@+id/button_save"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="save"></Button>
 </LinearLayout>

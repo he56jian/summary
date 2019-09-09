@@ -137,12 +137,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"/>
-
     <Button
-        android:id="@+id/button_zxing"
+        android:id="@+id/button_send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="生成二维码" ></Button>
+        android:text="发送" ></Button>
+
+<!--    <Button-->
+<!--        android:id="@+id/button_zxing"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="生成二维码" ></Button>-->
 
 </LinearLayout>
 

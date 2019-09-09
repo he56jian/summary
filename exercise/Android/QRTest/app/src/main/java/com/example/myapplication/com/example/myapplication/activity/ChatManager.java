@@ -22,6 +22,7 @@ public class ChatManager {
     PrintWriter writer;
     DataApplication dataApplication;
     String message;
+
     private ChatManager() {
         dataApplication = DataApplication.getDataApplication();
     }
@@ -33,7 +34,7 @@ public class ChatManager {
     }
 
     //链接服务器
-    public void connect(Context context,String ip, int port) {
+    public void connect(Context context, String ip, int port) {
         this.IP = ip;
         this.PORT = port;
         new Thread() {
@@ -47,21 +48,21 @@ public class ChatManager {
                     reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     System.out.println("获取输入流：" + reader);
                     System.out.println("获取输出流：" + writer);
-                    message = IP+":"+PORT+"链接成功";
-//                    Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
+                    message = IP + ":" + PORT + "链接成功";
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                     dataApplication.setStaConnect(1);           //链接成功
                 } catch (IOException ex) {
                     dataApplication.setStaConnect(0);           //链接失败
-                    message = IP+":"+PORT+"链接失败";
+                    message = IP + ":" + PORT + "链接失败";
 //                    Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
-                    System.out.println("链接IP：" + IP + "链接port:" + PORT+"，链接失败");
-                    try {
-                        sleep(5000);
-                        connect(context,ip,port);           //等待5s后自动重新链接
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                        System.out.println("等待出现了问题" );
-                    }
+                    System.out.println("链接IP：" + IP + "链接port:" + PORT + "，链接失败");
+//                    try {
+//                        sleep(5000);
+//                        connect(context,ip,port);           //等待5s后自动重新链接
+//                    } catch (InterruptedException e) {
+////                        e.printStackTrace();
+//                        System.out.println("等待出现了问题" );
+//                    }
                 }
             }
         }.start();
@@ -72,9 +73,13 @@ public class ChatManager {
         if (writer != null) {
             writer.write(out + "\n");
             writer.flush();
+            if (out=="#03#" || out=="#04#") {
+                dataApplication.protecte = !dataApplication.protecte;
+            }
         }
     }
-    public BufferedReader getServerMeg(){
+
+    public BufferedReader getServerMeg() {
         return this.reader;
     }
 
