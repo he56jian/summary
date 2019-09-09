@@ -66,7 +66,7 @@ public class ConnectScoket extends Activity implements View.OnClickListener {
                 }.start();
                 break;
             case R.id.button_tcp_connec:
-                ChatManager.getCM().connect(host,port);
+                ChatManager.getCM().connect(this,host,port);
 //                new Thread() {
 //                    @Override
 //                    public void run() {

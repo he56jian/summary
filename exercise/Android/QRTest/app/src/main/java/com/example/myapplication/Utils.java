@@ -14,6 +14,8 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -225,5 +227,28 @@ public class Utils {
     }
 
 
+    /**
+     * 将时间戳转换为时间
+     */
+    public String dateToStamp(long s) {
+        String res;
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date(s);
+            res = simpleDateFormat.format(date);
+        } catch (Exception e) {
+            return "";
+        }
+        return res;
+    }
 
+
+    public Thread getThread(){
+        return new Thread(){
+            @Override
+            public void run() {
+                super.run();
+            }
+        };
+    }
 }

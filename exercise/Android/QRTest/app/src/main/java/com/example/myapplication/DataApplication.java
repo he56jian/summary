@@ -16,7 +16,11 @@ public class DataApplication {
     private Boolean staName = false, staPassword = false, overWrite = false;
     private static DataApplication dataApplication = new DataApplication();
     private String status = "default";
+
     Context context;
+    int sta_connect = 0;
+    List<String> serverMegList;
+    private String retServer = "";
     public void defaultSetting() {
         this.cameraMode = "photo";
         this.photoSize = "3MP";
@@ -215,6 +219,8 @@ public class DataApplication {
 
     public static void setValue(String key, String value) {
         switch (key) {
+            case "retServer":
+                dataApplication.setServerMeg(value);
             case "cameraMode":
                 dataApplication.setCameraMode(value);
                 break;
@@ -266,9 +272,13 @@ public class DataApplication {
         }
     }
 
+
     public String getValue(String key) {
         String value = "";
         switch (key) {
+            case "retServer":
+                value = dataApplication.getServerMeg();
+                break;
             case "cameraMode":
                 value = dataApplication.getCameraMode();
                 break;
@@ -396,8 +406,6 @@ public class DataApplication {
         System.out.println("rename:"+rename+"   rename："+rename);
         System.out.println("charStaPassword:"+charStaPassword+"   staPassword："+staPassword);
         System.out.println("password:"+password+"   password："+password);
-
-
 
         list.add(intToCharList(charCam));
         list.add(intToCharList(charPhotoSize));
@@ -951,7 +959,28 @@ public class DataApplication {
         }
         return count;
     }
+    //保存服务器返回的数据
+    public void setServerMeg(String value) {
+        addServerMegList(value);
+        this.retServer = value;
+    }
+    //获取服务器返回的数据
+    public String getServerMeg() {
+        return retServer;
+    }
 
+    public void addServerMegList(String value){
+        serverMegList.add(value);
+    }
+
+    //设置链接状态
+    public void setStaConnect(int status){
+        this.sta_connect = status;
+    }
+    //获取当前链接状态
+    public int getStaConnect(){
+        return sta_connect;
+    }
 
 
 }
