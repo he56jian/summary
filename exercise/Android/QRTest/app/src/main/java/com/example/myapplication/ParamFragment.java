@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -40,10 +42,10 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
-        ChatManager.getCM().connect(context,"192.168.1.224", 5001);
-        ChatManager.getCM().send("#01#");               //一开始就发送#01#
-    }
 
+    }
+    String IP;
+    int PORT;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +64,7 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         dataApplication = new DataApplication(context).getDataApplication();
         dataApplication.defaultSetting();
+
         init();
     }
 
@@ -77,6 +80,8 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.button_sys).setOnClickListener(this);                  //点击rename
 //        view.findViewById(R.id.button_zxing).setOnClickListener(this);           //生成二维码
         view.findViewById(R.id.button_send).setOnClickListener(this);           //发送参数
+        view.findViewById(R.id.button_setting).setOnClickListener(this);           //发送参数
+        view.findViewById(R.id.button_connectServer).setOnClickListener(this);           //发送参数
     }
 
     //获取相机设置
@@ -168,8 +173,16 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
 //                startActivityForResult(intent, 1);
 //                break;
             case R.id.button_send:                    //发送信息
-               String message =  dataApplication.getQRCode();
-                ChatManager.getCM().send("#02#"+message);           //点击发送时，把参数发送出去
+                char[] message = dataApplication.getCharCam();
+                char [] arr = new char[]{'#', '0', '2','#'};
+//                Utils utils =new Utils(context);
+//                utils.method("#02#",message);
+                if(dataApplication.sta_connect == 1 ){          //只有连接上了才能点击发送
+                    ChatManager.getCM().send(arr);           //点击发送时，把参数发送出去
+                    ChatManager.getCM().send(message);           //点击发送时，把参数发送出去
+                }else{
+                    Toast.makeText(context,"没有连接到服务器",Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.button_camera:                    //单击进入cameraMode界面
                 intent = new Intent(context, CameraActivity.class);
@@ -190,6 +203,17 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
             case R.id.button_sys:
                 intent = new Intent(context, SysActivity.class);
                 startActivityForResult(intent, 1);
+                break;
+            case R.id.button_setting:
+                intent = new Intent(context,ConnectSetting.class);
+                startActivityForResult(intent,1);
+                break;
+
+            case R.id.button_connectServer:
+                IP = dataApplication.getIP();
+                PORT = dataApplication.getPORT();
+                Toast.makeText(context,"连接到"+IP,Toast.LENGTH_SHORT).show();
+                ChatManager.getCM().connect(context, IP, PORT);
                 break;
 //            case R.id.button_start:
 //                new IntentIntegrator(this)
@@ -217,13 +241,13 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
         super.onStart();
         Log.d(TAG, "onStart");
     }
-
+    char [] arr = new char[]{'#','0','4','#'};
     @Override
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume");
-        if(dataApplication.protecte){
-            ChatManager.getCM().send("#04#");           //关闭
+        if (dataApplication.protecte) {
+            ChatManager.getCM().send(arr);           //关闭
         }
     }
 

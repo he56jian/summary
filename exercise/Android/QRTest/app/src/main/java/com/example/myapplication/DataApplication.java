@@ -17,7 +17,8 @@ public class DataApplication {
     private Boolean staName = false, staPassword = false, overWrite = false;
     private static DataApplication dataApplication = new DataApplication();
     private String status = "default";
-
+    private String IP;
+    private int PORT;
     Context context;
     int sta_connect = 0;
     List<String> serverMegList;
@@ -45,6 +46,8 @@ public class DataApplication {
         this.overWrite = false;
         this.triggerSen = "Auto";
         this.password = "0000";
+        this.PORT=5001;
+        this.IP="192.168.0.1";
     }
 
     public DataApplication(Context context) {
@@ -366,7 +369,7 @@ public class DataApplication {
 
     List<char[]> list;
 
-    //获取设置的参数
+    //获取设置的参数的字节数组
     public char[] getCharCam() {
         list = new ArrayList<>();
         Utils utils = new Utils(context);
@@ -583,15 +586,15 @@ public class DataApplication {
                 break;
             case "videoSize":
                 switch (value) {
-                    case "1440P":
+                    case "wvga":
                         result = 0;
-                    case "1080P":
+                    case "720P":
                         result = 1;
                         break;
-                    case "720P":
+                    case "1080P":
                         result = 2;
                         break;
-                    case "wvga":
+                    case "1440P":
                         result = 3;
                         break;
                 }
@@ -954,6 +957,8 @@ public class DataApplication {
         return count;
     }
 
+
+
     //保存服务器返回的数据
     public void setServerMeg(String value) {
         addServerMegList(value);
@@ -979,5 +984,20 @@ public class DataApplication {
         return sta_connect;
     }
 
+    public void setIP(String value){
+        this.IP = value;
+    }
+
+    public String getIP() {
+        return IP;
+    }
+
+    public void setPORT(int value){
+        this.PORT = value;
+    }
+
+    public int getPORT(){
+        return PORT;
+    }
 
 }

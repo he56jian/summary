@@ -46,7 +46,8 @@ public class ConnectFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ChatManager.getCM().send("#03#");
+        char[] arr = "#03#".toCharArray();
+        ChatManager.getCM().send(arr);
         dataApplication = new DataApplication(context).getDataApplication();
         dataApplication.protecte = true;
     }
@@ -130,12 +131,12 @@ public class ConnectFragment extends Fragment implements View.OnClickListener {
     String sendMessage;
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.button_send:
-                sendMessage = editText.getText().toString();
-                ChatManager.getCM().send(sendMessage);
-                addView(showMessage,"发送内容:"+sendMessage);
-                break;
-        }
+//        switch (view.getId()){
+//            case R.id.button_send:
+//                sendMessage = editText.getText().toString();
+//                ChatManager.getCM().send(sendMessage);
+//                addView(showMessage,"发送内容:"+sendMessage);
+//                break;
+//        }
     }
 }

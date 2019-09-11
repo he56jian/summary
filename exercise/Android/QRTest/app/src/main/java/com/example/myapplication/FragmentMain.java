@@ -15,17 +15,35 @@ public class FragmentMain extends FragmentActivity implements View.OnClickListen
     Button btn_parcam,btn_connect,btn_other;
     FrameLayout show_des;
     ParamFragment paramFragment;
+    String IP = "192.168.1.30";
+    int PORT = 5001;
     ConnectFragment con;
+    char[] chars=  new char[]{'#','0','1','#'};
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_main);
         ParamFragment paramFragment = new ParamFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.show_des, paramFragment).commit();
-        ChatManager.getCM().connect(this,"192.168.0.104",22567);
-        ChatManager.getCM().send("#02#");
-//        ChatManager.getCM().connect("192.168.1.224", 5001);
-//        ChatManager.getCM().send("#02#");
+
+        DataApplication dataApplication = DataApplication.getDataApplication();
+
+        ChatManager.getCM().connect(this, IP, PORT);
+
+        System.out.println("运行了FragmentMain界面");
+        new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    if (dataApplication.sta_connect == 1) {
+                        ChatManager.getCM().send(chars);               //一开始就发送#01#
+                        break;
+                    }
+                }
+            }
+        }.start();
+
+
 
         show_des = findViewById(R.id.show_des);
         btn_parcam = findViewById(R.id.btn_parcam);

@@ -98,6 +98,24 @@ public class Utils {
         char[] result = now.toCharArray();
         return result;
     }
+//    两个字符数组合并
+    public char[] addChar(char[] arr, char[] arr2){
+       String text =  charToString(arr) + charToString(arr2);
+        char [] value = text.toCharArray();
+        return value;
+    }
+
+    //把字符数组转换成字符串
+    public String charToString(char[] arr){
+        String text ="";
+        for(int i = 0; i < arr.length; i++){
+            text += arr[i];
+        }
+        String value = text;
+        return value;
+    }
+
+
 
     //把字符串转成字符数组
     public static char[] strToCharList(String str){
@@ -254,6 +272,11 @@ public class Utils {
                 break;
             }
         }
+    }
+
+
+    public void writeFile(View view){
+
     }
 
 }
