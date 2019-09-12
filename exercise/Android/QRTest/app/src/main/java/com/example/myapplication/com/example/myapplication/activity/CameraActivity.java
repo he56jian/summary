@@ -40,6 +40,8 @@ public class CameraActivity extends Activity {
     private DataApplication dataApplication;
     private Utils utils;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,17 @@ public class CameraActivity extends Activity {
         setContentView(R.layout.camera_mode);
         dataApplication = DataApplication.getDataApplication();
         utils = new Utils(this);
+
+        cameraMode = dataApplication.getCameraMode();
+        photoBurst = dataApplication.getPhotoBurst();
+        photoSize = dataApplication.getPhotoSize();
+        burstSpeed = dataApplication.getBurstSpeed();
+        sendingOption = dataApplication.getSendingOption();
+        shutterSpeed = burstSpeed = dataApplication.getShutterSpeed();
+        flashPower = dataApplication.getFlashPower();
+        videoSize = dataApplication.getVideoSize();
+        videoLength = dataApplication.getVideoLength();
+
     }
 
     private RadioGroup rg;
@@ -91,7 +104,12 @@ public class CameraActivity extends Activity {
                 }
             }
         });
-        rb_photo.setChecked(true);
+        if(dataApplication.getCameraMode() == "photo"){
+            rb_photo.setChecked(true);
+        }else{
+            rb_video.setChecked(true);
+        }
+
     }
 
     ////选择video的时候的初始化操作
@@ -124,14 +142,19 @@ public class CameraActivity extends Activity {
         //photo size选择器选择监听
         utils.listSelect(list_videoLength, spinner_videoLength, "videoLength");
 
+        utils.setSpinnerDefaultValue(spinner_videoSize,videoSize);
+        utils.setSpinnerDefaultValue(spinner_videoLength,videoLength);
+
     }
 
     //选择图片的时候的初始化操作
     private void init_photo() {
-
         spinner_photoSize = findViewById(R.id.spinner_photoSize);
         spinner_photoBurst = findViewById(R.id.spinner_photoBurst);
         spinner_burstSpeed = findViewById(R.id.spinner_burstSpeed);
+        spinner_shutterSpeed = findViewById(R.id.spinner_shutterSpeed);
+        spinner_flashPower = findViewById(R.id.spinner_flashPower);
+        spinner_sendingOption = findViewById(R.id.spinner_sendingOption);
 
         if (list_photoSize.isEmpty()) {
             //往列表中添加选项
@@ -168,8 +191,6 @@ public class CameraActivity extends Activity {
         }
         utils.listSelect(list_burstSpeed, spinner_burstSpeed, "burstSpeed");
 
-        spinner_sendingOption = findViewById(R.id.spinner_sendingOption);
-
         if (list_sendingOption.isEmpty()) {
             list_sendingOption.add("1st");
             list_sendingOption.add("2st");
@@ -183,8 +204,6 @@ public class CameraActivity extends Activity {
             list_sendingOption.add("10st");
         }
         utils.listSelect(list_sendingOption, spinner_sendingOption, "sendingOption");
-
-        spinner_shutterSpeed = findViewById(R.id.spinner_shutterSpeed);
         if (list_shutterSpeed.isEmpty()) {
             list_shutterSpeed.add("Normal");
             list_shutterSpeed.add("Fast");
@@ -192,13 +211,23 @@ public class CameraActivity extends Activity {
         }
         utils.listSelect(list_shutterSpeed, spinner_shutterSpeed, "shutterSpeed");
 
-        spinner_flashPower = findViewById(R.id.spinner_flashPower);
         if (list_flashPower.isEmpty()) {
             list_flashPower.add("Low");
             list_flashPower.add("Normal");
             list_flashPower.add("High");
         }
         utils.listSelect(list_flashPower, spinner_flashPower, "flashPower");
+
+        utils.setSpinnerDefaultValue(spinner_photoSize,photoSize);
+        utils.setSpinnerDefaultValue(spinner_photoBurst,photoBurst);
+        utils.setSpinnerDefaultValue(spinner_burstSpeed,burstSpeed);
+        utils.setSpinnerDefaultValue(spinner_shutterSpeed,shutterSpeed);
+        utils.setSpinnerDefaultValue(spinner_flashPower,flashPower);
+        utils.setSpinnerDefaultValue(spinner_sendingOption,sendingOption);
+
     }
+
+
+
 
 }

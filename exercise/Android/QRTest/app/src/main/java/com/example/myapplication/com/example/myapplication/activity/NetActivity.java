@@ -40,6 +40,7 @@ public class NetActivity extends Activity {
     private void getView() {
         sendMode = dataApplication.getValue("sendMode");
         remoteControl = dataApplication.getValue("remoteControl");
+
         edit_sendmode.setText(sendMode);
         utils.setSpinnerDefaultValue(spinner_control, remoteControl);
 

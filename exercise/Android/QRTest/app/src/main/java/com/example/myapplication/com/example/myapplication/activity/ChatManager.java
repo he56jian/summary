@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.DataApplication;
 import com.example.myapplication.R;
+import com.example.myapplication.Utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,6 +21,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketAddress;
 
 import static java.lang.Thread.sleep;
 
@@ -30,23 +32,30 @@ public class ChatManager {
     BufferedReader reader;
     PrintWriter writer;
     DataApplication dataApplication;
-    String message;
+    String message,status;
     private Object File;
-
-    private ChatManager() {
-        dataApplication = DataApplication.getDataApplication();
-    }
+    Utils utils;
     private static final ChatManager instance = new ChatManager();
     public static ChatManager getCM() {
         return instance;
     }
     public int clock = 0;
-    private Handler subHandler;
+    private ChatManager(){
+        dataApplication = DataApplication.getDataApplication();
+    }
+
     //链接服务器
     public void connect(Context context, String ip, int port) {
         this.IP = ip;
         this.PORT = port;
-        Toast.makeText(context,"连接到了connect界面,连接信息："+dataApplication.getStaConnect(),Toast.LENGTH_SHORT).show();
+//        dataApplication.setIP(ip);
+//        dataApplication.setPORT(port);
+        utils = new Utils(context);
+        if(dataApplication.getStaConnect() == 1){
+            Toast.makeText(context,"已经连接上了"+IP+":"+PORT,Toast.LENGTH_SHORT).show();
+        }else if(dataApplication.getStaConnect() == 2){
+            Toast.makeText(context,"正在连接"+IP+":"+PORT,Toast.LENGTH_SHORT).show();
+        }
         if(dataApplication.getStaConnect() == 0){
             new Thread(new Runnable() {
                 @Override
@@ -54,40 +63,26 @@ public class ChatManager {
                     Looper.prepare();
                     try {
                         dataApplication.setStaConnect(2);
-                        System.out.println("正在连接IP：" + IP + ":" + PORT);
-                        socket = new Socket(IP, PORT);
+                        utils.subHandler.sendEmptyMessage(2);
+                        socket = new Socket(IP,PORT);
                         //获取socket的输入流和输出流，客户端的输入流和服务端的输出流项链
                         writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
                         reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                         System.out.println("获取输入流：" + reader);
                         System.out.println("获取输出流：" + writer);
-                        message = IP + ":" + PORT + "链接成功";
-
-                        subHandler = new Handler() {
-                            public void handleMessage(Message msg) {
-                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                            }
-                        };
-//                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                        utils.subHandler.sendEmptyMessage(1);
                         dataApplication.setStaConnect(1);           //链接成功
                     } catch (IOException ex) {
                         dataApplication.setStaConnect(0);           //链接失败
-                        message = IP + ":" + PORT + "链接失败";
-                        subHandler = new Handler() {
-                            public void handleMessage(Message msg) {
-                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                            }
-                        };
-                        if(clock < 5){
-                            clock++;
-                            SystemClock.sleep(5000);
-                            System.out.println("链接IP：" + IP + "链接port:" + PORT + "，链接失败，等待5s后重新连接");
-                            connect(context, IP, PORT);
-                        }else{
-                            System.out.println(" 连接失败，请检查");
-                       }
-
-//                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                        utils.subHandler.sendEmptyMessage(0);
+//                        if(clock < 2){
+//                            clock++;
+//                            SystemClock.sleep(2000);
+////                            System.out.println("链接IP：" + IP + "链接port:" + PORT + "，链接失败，等待2s后重新连接");
+//                            connect(context, IP, PORT);
+//                        }else{
+//                            utils.isAvailableByPing(ip);
+//                       }
 //                    }
                     }
                     Looper.loop();

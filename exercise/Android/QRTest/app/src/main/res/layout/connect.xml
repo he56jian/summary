@@ -54,13 +54,13 @@
             >
         </Button>
 
-<!--        <Button-->
-<!--            android:id="@+id/button_udp_connect"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="udp连接server"-->
-<!--            >-->
-<!--        </Button>-->
+        <Button
+            android:id="@+id/button_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="连接测试"
+            >
+        </Button>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -203,14 +205,55 @@ public class Utils {
             public void run() {
                 PingNetEntity pingNetEntity = new PingNetEntity(ip, 3, 5, new StringBuffer());
                 pingNetEntity = PingNet.ping(pingNetEntity);
-                String msg = "连接时间:"+pingNetEntity.getPingTime()+";"+"连接结果："+pingNetEntity.isResult();
+                msgPing = "连接时间:"+pingNetEntity.getPingTime()+";"+"连接结果："+pingNetEntity.isResult();
 //                Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
-                System.out.println("testPing"+ pingNetEntity.getIp());
-                System.out.println("testPing"+ "time=" + pingNetEntity.getPingTime());
-                System.out.println("ping:"+ pingNetEntity.isResult() + "");
+//                System.out.println("testPing"+ pingNetEntity.getIp());
+//                System.out.println("testPing"+ "time=" + pingNetEntity.getPingTime());
+//                System.out.println("ping:"+ pingNetEntity.isResult() + "");
+                pingResult = pingNetEntity.isResult();
+                if(pingResult){
+                    subHandler.sendEmptyMessage(4);
+                }else{
+                    subHandler.sendEmptyMessage(4);
+                }
+
             }
         }).start();
     }
+    String msgPing;
+    Boolean pingResult;
+    private String status;
+    private String message;
+    public Handler subHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 1:
+                    message = "成功连接到了"+dataApplication.getIP() + ":"+ dataApplication.getPORT();
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                    break;
+                case 0:
+                    status = "连接失败";
+                    message = "连接"+dataApplication.getIP() + ":"+ dataApplication.getPORT() +"状态："+ status;
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                    break;
+                case 2:
+                    status = "正在连接";
+//                    message = "连接"+dataApplication.getIP() + ":"+ dataApplication.getPORT() +"状态："+ status;
+                    Toast.makeText(context, status, Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    status = "重新连接两次失败,ping:"+dataApplication.getIP() + ":"+dataApplication.getPORT() +",情况为："+pingResult;
+                    Toast.makeText(context, status, Toast.LENGTH_SHORT).show();
+                    break;
+                case 4:
+                    Toast.makeText(context, msgPing, Toast.LENGTH_SHORT).show();
+                    break;
+                case 99:
+                    Toast.makeText(context,"测试专用",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
 
 
     /**
@@ -264,7 +307,6 @@ public class Utils {
     public void setSpinnerDefaultValue(Spinner spinner, String value) {
         SpinnerAdapter apsAdapter = spinner.getAdapter();
         int size = apsAdapter.getCount();
-        System.out.println(value);
         for (int i = 0; i < size; i++) {
             if (value.equals(apsAdapter.getItem(i).toString())) {
                 System.out.println(i);

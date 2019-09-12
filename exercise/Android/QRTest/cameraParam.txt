@@ -1,6 +1,6 @@
 
 char[] = {
-	cameraMode,     1
+	cameraMode,     1			
 	photoSize,		1
 	photoBurst,     1
 	burstSpeed,     1
@@ -69,10 +69,10 @@ flashPower{
 	High
 }           
 videoSize{
-	1440P,
-	1080P,
-	720P,
 	wvga,
+	720P,
+	1080P,
+	1440P
 }            
 videoLength{
 	5sec,

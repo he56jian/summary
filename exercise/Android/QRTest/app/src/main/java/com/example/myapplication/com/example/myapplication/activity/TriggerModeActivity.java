@@ -22,6 +22,7 @@ public class TriggerModeActivity extends Activity {
     private List<String> list_triggerSen = new ArrayList<String>();
     private List<String> list_triggerTimeLapse = new ArrayList<String>();
     private Utils utils;
+    private String triggerPir,triggetSen,triggerTimelapse;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +33,18 @@ public class TriggerModeActivity extends Activity {
     private void init() {
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
         utils = new Utils(this);
+        DataApplication dataApplication = DataApplication.getDataApplication();
+
+        triggerPir = dataApplication.getTriggerPir();
+        triggetSen = dataApplication.getTriggerSen();
+        triggerTimelapse = dataApplication.getTriggerTimelapse();
 
         spinner_triggerPir = findViewById(R.id.spinner_triggerPir);
         spinner_triggerSen = findViewById(R.id.spinner_triggerSen);
         spinner_triggerTimeLapse = findViewById(R.id.spinner_triggerTimeLapse);
+
+
+
 
         if(list_triggerSen.isEmpty()){
             //往列表中添加选项
@@ -135,6 +144,11 @@ public class TriggerModeActivity extends Activity {
         }
         //photo size选择器选择监听
         utils.listSelect(list_triggerTimeLapse, spinner_triggerTimeLapse,"spinner_triggerTimeLapse");
+
+        utils.setSpinnerDefaultValue(spinner_triggerPir,triggerPir);
+        utils.setSpinnerDefaultValue(spinner_triggerSen,triggetSen);
+        utils.setSpinnerDefaultValue(spinner_triggerTimeLapse,triggerTimelapse);
+
     }
 
     @Override

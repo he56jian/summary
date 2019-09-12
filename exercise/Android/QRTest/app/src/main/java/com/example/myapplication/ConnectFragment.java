@@ -39,8 +39,6 @@ public class ConnectFragment extends Fragment implements View.OnClickListener {
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
-//        ChatManager.getCM().connect("192.168.1.224", 5001);
-//        ChatManager.getCM().send("#02#");
     }
 
     @Override

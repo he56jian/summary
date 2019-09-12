@@ -31,14 +31,12 @@
             <TextView
                 android:id="@+id/textview_camera_mode"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="photo ( 3Mp | 2photos)" />
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/textview_camera_flash"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Flash Power( High )" />
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -64,14 +62,12 @@
             <TextView
                 android:id="@+id/textview_trigger_pir"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="PIR ( Auto | 5sec )" />
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/textview_trigger_timelapse"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Timelapse( 3min )" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
 
@@ -96,26 +92,22 @@
             <TextView
                 android:id="@+id/textview_worktime1"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="10:00-20:00" />
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/textview_worktime2"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="10:00-20:00" />
+                android:layout_height="match_parent"/>
 
             <TextView
                 android:id="@+id/textview_worktime3"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="10:00-20:00" />
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/textview_worktime4"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="10:00-20:00" />
+                android:layout_height="match_parent"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -146,7 +138,22 @@
         android:id="@+id/button_connectServer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="连接服务器" ></Button>
+        android:text="连接" ></Button>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/button_connectServer1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="连接192.168.0.1" ></Button>
+        <Button
+            android:id="@+id/button_connectServer2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="连接192.168.1.30" ></Button>
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_setting"

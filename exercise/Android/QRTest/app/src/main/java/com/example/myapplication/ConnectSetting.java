@@ -7,8 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-
 import com.example.myapplication.com.example.myapplication.activity.ChatManager;
 
 public class ConnectSetting extends Activity implements View.OnClickListener {
@@ -16,7 +14,7 @@ public class ConnectSetting extends Activity implements View.OnClickListener {
     DataApplication dataApplication;
     String IP;
 
-    Button button_tcp_connec, button_send, button_save;
+    Button button_tcp_connec, button_send, button_save,button_test;
     int PORT =5001;
 
     @Override
@@ -32,10 +30,12 @@ public class ConnectSetting extends Activity implements View.OnClickListener {
         button_tcp_connec = findViewById(R.id.button_tcp_connec);
         button_save = findViewById(R.id.button_save);
         button_send = findViewById(R.id.button_send);
+        button_test = findViewById(R.id.button_test);
 
         button_tcp_connec.setOnClickListener(this);
         button_save.setOnClickListener(this);
         button_send.setOnClickListener(this);
+        button_test.setOnClickListener(this);
     }
 
     @Override
@@ -79,6 +79,11 @@ public class ConnectSetting extends Activity implements View.OnClickListener {
                     Toast.makeText(this,"未输入内容",Toast.LENGTH_SHORT);
                 }
                break;
+            case R.id.button_test:
+                Utils utils = new Utils(this);
+                dataApplication.getIP();
+                utils.isAvailableByPing( dataApplication.getIP());
+                break;
         }
     }
 }

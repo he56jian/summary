@@ -36,13 +36,12 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
 
     private int sta_name, sta_password, sta_overWrite;
 
-    private TextView textView_cameraMode, textView_cameraFlash, textView_triggerPir, textView_timelapse, textView_worktime1, textView_worktime2, textView_worktime3, textView_worktime4;
+    private TextView textView_cameraMode, textView_cameraFlash, textView_triggerPir, textView_timelapse, textView_worktime1, textView_worktime2, textView_worktime3, textView_worktime4,textview_container;
     private ImageView imageView;
 
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
-
     }
     String IP;
     int PORT;
@@ -64,52 +63,52 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         dataApplication = new DataApplication(context).getDataApplication();
         dataApplication.defaultSetting();
-
         init();
     }
 
     private void init() {
-        getCamParam();      //获取相机参数
+//        getCamParam();      //获取相机参数
         getEle();           //获取元素
-        showCameParam();//显示相机数据
+//        showCameParam();//显示相机数据
         view.findViewById(R.id.button_camera).setOnClickListener(this);              //点击camer mode
         view.findViewById(R.id.button_trigger).setOnClickListener(this);               //点击trigger
         view.findViewById(R.id.button_worktime).setOnClickListener(this);               //点击work time
         view.findViewById(R.id.button_net).setOnClickListener(this);            //点击net
-//        findViewById(R.id.button_).setOnClickListener(this);                //点击control
         view.findViewById(R.id.button_sys).setOnClickListener(this);                  //点击rename
 //        view.findViewById(R.id.button_zxing).setOnClickListener(this);           //生成二维码
         view.findViewById(R.id.button_send).setOnClickListener(this);           //发送参数
         view.findViewById(R.id.button_setting).setOnClickListener(this);           //发送参数
         view.findViewById(R.id.button_connectServer).setOnClickListener(this);           //发送参数
+        view.findViewById(R.id.button_connectServer1).setOnClickListener(this);           //发送参数
+        view.findViewById(R.id.button_connectServer2).setOnClickListener(this);           //发送参数
     }
 
     //获取相机设置
-    private void getCamParam() {
-        cameraMode = dataApplication.getCameraMode();
-        photoSize = dataApplication.getPhotoSize();
-        photoBurst = dataApplication.getPhotoBurst();
-        photoBurst = dataApplication.getBurstSpeed();
-        sendingOption = dataApplication.getSendingOption();
-        shutterSpeed = dataApplication.getShutterSpeed();
-        flashPower = dataApplication.getFlashPower();
-        videoSize = dataApplication.getVideoSize();
-        videoLength = dataApplication.getVideoLength();
-        triggerPir = dataApplication.getTriggerPir();
-        triggerSen = dataApplication.getTriggerSen();
-        triggerTimelapse = dataApplication.getTriggerTimelapse();
-        wortTime1 = dataApplication.getWortTime1();
-        workTime2 = dataApplication.getWorkTime2();
-        workTime3 = dataApplication.getWorkTime3();
-        workTime4 = dataApplication.getWorkTime4();
-        sendMode = dataApplication.getSendMode();
-        remoteControl = dataApplication.getRemoteControl();
-        passWord = dataApplication.getPassword();
-        rename = dataApplication.getRename();
-        sta_name = dataApplication.getStaRename();
-        sta_password = dataApplication.getStaPassword();
-        sta_overWrite = dataApplication.getOverWrite();
-    }
+//    private void getCamParam() {
+//        cameraMode = dataApplication.getCameraMode();
+//        photoSize = dataApplication.getPhotoSize();
+//        photoBurst = dataApplication.getPhotoBurst();
+//        photoBurst = dataApplication.getBurstSpeed();
+//        sendingOption = dataApplication.getSendingOption();
+//        shutterSpeed = dataApplication.getShutterSpeed();
+//        flashPower = dataApplication.getFlashPower();
+//        videoSize = dataApplication.getVideoSize();
+//        videoLength = dataApplication.getVideoLength();
+//        triggerPir = dataApplication.getTriggerPir();
+//        triggerSen = dataApplication.getTriggerSen();
+//        triggerTimelapse = dataApplication.getTriggerTimelapse();
+//        wortTime1 = dataApplication.getWortTime1();
+//        workTime2 = dataApplication.getWorkTime2();
+//        workTime3 = dataApplication.getWorkTime3();
+//        workTime4 = dataApplication.getWorkTime4();
+//        sendMode = dataApplication.getSendMode();
+//        remoteControl = dataApplication.getRemoteControl();
+//        passWord = dataApplication.getPassword();
+//        rename = dataApplication.getRename();
+//        sta_name = dataApplication.getStaRename();
+//        sta_password = dataApplication.getStaPassword();
+//        sta_overWrite = dataApplication.getOverWrite();
+//    }
 
     //获取元素
     private void getEle() {
@@ -121,6 +120,7 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
         textView_worktime2 = view.findViewById(R.id.textview_worktime2);
         textView_worktime3 = view.findViewById(R.id.textview_worktime3);
         textView_worktime4 = view.findViewById(R.id.textview_worktime4);
+        textview_container = view.findViewById(R.id.textview_container);
         imageView = view.findViewById(R.id.imageView_zxing);                    //生成的二维码
     }
 
@@ -164,7 +164,7 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
         message = workTime4;
         textView_worktime4.setText(message);
     }
-
+    private char[] showMessage;
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -175,11 +175,13 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
             case R.id.button_send:                    //发送信息
                 char[] message = dataApplication.getCharCam();
                 char [] arr = new char[]{'#', '0', '2','#'};
-//                Utils utils =new Utils(context);
+
+                Utils utils =new Utils(context);
+                showMessage =  utils.addChar(arr,message);
 //                utils.method("#02#",message);
                 if(dataApplication.sta_connect == 1 ){          //只有连接上了才能点击发送
-                    ChatManager.getCM().send(arr);           //点击发送时，把参数发送出去
-                    ChatManager.getCM().send(message);           //点击发送时，把参数发送出去
+//                    ChatManager.getCM().send(arr);           //点击发送时，把参数发送出去
+                    ChatManager.getCM().send(showMessage);           //点击发送时，把参数发送出去
                 }else{
                     Toast.makeText(context,"没有连接到服务器",Toast.LENGTH_SHORT).show();
                 }
@@ -212,7 +214,19 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
             case R.id.button_connectServer:
                 IP = dataApplication.getIP();
                 PORT = dataApplication.getPORT();
-                Toast.makeText(context,"连接到"+IP,Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"连接"+IP,Toast.LENGTH_SHORT).show();
+                ChatManager.getCM().connect(context, IP, PORT);
+                break;
+            case R.id.button_connectServer1:
+                IP = "192.168.0.1";
+                PORT = 5001;
+                Toast.makeText(context,"连接"+IP,Toast.LENGTH_SHORT).show();
+                ChatManager.getCM().connect(context, IP, PORT);
+                break;
+            case R.id.button_connectServer2:
+                IP = "192.168.1.30";
+                PORT = 5001;
+                Toast.makeText(context,"连接"+IP,Toast.LENGTH_SHORT).show();
                 ChatManager.getCM().connect(context, IP, PORT);
                 break;
 //            case R.id.button_start:
