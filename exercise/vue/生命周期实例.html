@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>vue生命周期</title>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="app"></div>
+	<script>
+		//生命周期函数就是vue实例，在某一时间点会自动执行 的函数
+
+
+		/*
+			new Vue，创建一个实例，其中过程：
+			1、初始化事件和生命周期相关内容；
+			2、会自动执行，beforeCreate函数;
+			3、处理外部注入、双向绑定相关内容；
+			4、会自动执行，created函数；
+			5、询问是否有el选项
+			6、如果有el选项，询问是否有template属性；
+			7、如果没有template属性，会把el外层的当作模板；如果有template属性，使用其模板渲染到页面；
+			8、在渲染之前，会执行beforeMout;
+			9、模板和数据生成的最终生成的dom元素，挂载到页面之上；
+			10、之后mounted会自动执行；
+
+			11、当dom数据改变时，beforeUpdate会自动执行；
+			12、当dom数据改变完成之后，updated会自动执行；
+
+
+			11、当vm被销毁(调用vm.$destroy会销毁vm)时，beforeDestroy会执行；
+			12、当vm被销毁之后，destroyed会自动执行
+
+			vue实例的生命周期函数，并不放在method中，直接放到对象中；
+
+		*/
+		let vm = new Vue({
+			el:"#app",
+			template:"<div>{{test}}</div>",
+			data:{
+				test:"hello"
+			},
+			beforeCreate:function(){
+				console.log("beforeCreate");
+			},
+			created:function(){
+				console.log("created");
+			},
+			beforeMount:function(){
+				console.log(this.$el);
+				console.log("beforeMount");
+			},
+			mounted:function(){
+				console.log(this.$el);
+				console.log('mounted');
+			},
+			beforeDestroy:function(){
+				console.log('beforeDestroy')
+			},
+			destroyed:function(){
+				console.log("destroyed");
+			},
+			beforeUpdate:function(){
+				console.log("beforeUpate")
+			},
+			updated:function(){
+				console.log('updated')
+			}
+		})
+		</script>
+</body>
+</html>

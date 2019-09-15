@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>组件使用中的细节</title>
+	<script type="text/javascript" src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<table>
+		<tbody>
+			<!-- //在html5中，table下的tbody里面只能写tr标签。如果写成row，则会出现问题； -->
+			<row></row>
+			<row></row>
+			<row></row>
+	<!-- //可以在tr中添加属性is，其值为template模板的名 -->
+	<!-- 在一些模板的标签时，会出现一定的问题，建议 使用is属性-->
+			<tr is="row"></tr>
+			<tr is="row"></tr>
+			<tr is="row"></tr>
+
+		</tbody>
+		</table>
+		<table>
+			
+			<tbody>
+				<tr is="row"></tr>
+				<tr is="row"></tr>
+				<tr is="row"></tr>
+			</tbody>
+
+		</table>
+
+		<div id="root">
+			
+			<div @click="handleOnclick" ref="hello" >hello</div>
+		</div>
+		<div id="test">
+			<counter ref="one" @change="handleChange"></counter>
+			<counter ref="two" @change="handleChange"></counter>
+			<div>{{total}}</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		//在其子组件中添加data，必须以函数形式书写其值，并且有返回值；
+		//在vue中操作dom.在标签中添加ref属性，表示启用的名字为ref的值；使用this.$refs.hello获取ref属性值为hello的dom节点；
+		// Vue.component("row",{
+		// 	data:function(){
+		// 		return { content:"this is a row"}
+		// 	},
+		// 	template:"<tr><td>{{content}}</td></tr>"
+		// })
+
+		Vue.component('counter',{
+			template:"<div @click='handleClick'>{{number}}</div>",
+			data:function(){
+				return {
+					number:0
+				}
+			},
+			methods:{
+				handleClick:function(){
+					this.number++
+					//子组件向父组件传值
+					this.$emit('change')
+				}
+			}
+		})
+
+		var vm = new Vue({
+			el:"#app",
+			data:{
+				total:0
+			},
+			methods:{
+				handleOnclick:function(){
+					// alert("click");
+					console.log(this.$refs.hello)
+				},
+				handleChange:function(){
+					this.total = this.$refs.one.number + this.$refs.two.number;
+				}
+			}
+		})
+
+	</script>
+
+</body>
+</html>

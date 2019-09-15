@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>计算属性，方法，侦听器</title>
+	<script type="text/javascript" src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		{{fullName}}
+		{{age}}
+
+		{{twofullName()}}
+		{{threefullName}}
+	</div>
+
+	<script type="text/javascript">
+			let vm = new Vue({
+				el:"#app",
+				data:{
+					firstName:"Dell",
+					lastName:"lee",
+					threefullName:"Dell lee",
+					age:28
+				},
+				//方法一
+				//计算属性,它是内置缓存的;
+				//如果下次页面渲染时，内部需要的属性没有修改，它会直接调用之前的缓存，不会再运行一次 
+				computed:{
+					fullName:function(){
+						console.log("计算了一次");
+						return this.firstName + " "+this.lastName
+					}
+				},
+//方法二
+				//使用方法，获取计算的结果
+				methods:{
+					twofullName:function(){
+						console.log('2计算了一次');
+						return this.firstName + " " + this.lastName;
+					}
+				},
+				//侦听器
+				watch:{
+					firstName:function(){
+						console.log("3计算了一次")
+						this.threefullName = this.firstName + " " + this.lastName;
+					},
+					lastName:function(){
+						this.threefullName = this.firstName + " "+ this.lastName;
+					}
+				}
+
+			})
+
+	</script>
+
+</body>
+</html>
