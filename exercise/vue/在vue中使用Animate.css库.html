@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>在vue中使用Animate.css库</title>
+	<link rel="stylesheet" type="text/css" href="./Animate.css">
+	<!-- <style type="text/css">
+		
+		@keyframes bounce-in{
+			0%{
+				transform:scale(0);
+			}
+			50%{
+				transform:scale(1.5);
+			}
+			100%{
+				transform:scale(1);
+			}
+		}
+
+		.v-enter-active{ 
+			transform-origin: left center;
+			animation:bounce-in 1s;
+		}
+		 .v-leave-active{
+		 	transform-origin: left center;
+			animation:bounce-in 1s reverse;
+		}
+		.active,.leave{
+			transform-origin: left center;
+			animation:bounce-in 1s;
+		}
+	</style> -->
+</head>
+<body>
+
+	<div id="app">
+		<transition name='v'> 
+			<div v-show='show'>hello</div>
+		</transition>
+		<transition name='c'
+			enter-active-class='active'
+			leave-active-class='leave'
+		> 
+			<div v-show='show'>hello222</div>
+		</transition>
+
+		<!-- 使用animate.css的动画,先在标签中使用animated表示使用animate.css里的动画，后面跟上对应动画名-->
+		<transition name='v'
+			enter-active-class='animated swing'
+			leave-active-class='animated shake'
+		> 
+			<div v-show='show'>hello</div>
+		</transition>
+
+		<button @click='handle'>点击</button>
+	</div>	
+
+	<script type="text/javascript" src="./vue.js"></script>
+	<script type="text/javascript">
+		
+		let vm = new Vue({
+			el:"#app",
+			data:{
+				show:true
+			},
+			methods:{
+				handle:function(){
+					this.show = !this.show
+				}
+			}
+
+		})
+
+	</script>
+</body>
+</html>

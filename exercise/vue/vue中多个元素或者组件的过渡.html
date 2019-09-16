@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>多个元素或者组件的过渡</title>
+	<style type="text/css">
+		.fade-enter,.fade-leave-to{
+			opacity: 0;
+		}
+		.fade-enter-active,.fade-leave-active{
+			transition:opacity 1s;
+		}
+
+	</style>
+</head>
+<body>
+
+	<div id="app">
+		<!-- mode设置为in-out时，元素的切换会先切换后隐藏 ；使用out-in会先隐藏在显示-->
+		<transition name='fade' mode='out-in'>
+			<component :is='type'></component>
+			
+			<!-- 如果是这种多个元素之间的切换，vue会直接操作的dom， dom的复用不会产生动画效果 -->
+			<!-- <div v-if='show' key="hello">123123123</div>
+			<div v-else key='bye'>bye</div> -->
+		</transition>
+		<button @click="handles">点击</button>
+	</div>
+
+	<script type="text/javascript" src="./vue.js"></script>
+	<script type="text/javascript">
+		
+		Vue.component('child',{
+			template:'<div>child</div>'
+		})
+		Vue.component('child2',{
+			template:'<div>child2</div>'
+		})
+
+		let vm= new Vue({
+			el:'#app',
+			data:{
+				show:true,
+				type:'child'
+			},
+			methods:{
+				handles:function(){
+					// this.show = !this.show
+					this.type = this.type==='child'?'child2':'child';
+				}
+			}
+		})
+
+	</script>
+
+</body>
+</html>

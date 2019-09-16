@@ -228,5 +228,44 @@ Vue.component('child',{
 >**使用二十九.**v-once指令
 >> 在模板标签中使用v-once指令，会在第一次加载后把该模板添加到缓存中，下次使用的时候，直接调用缓存中的模板；如果不添加，修改时会直接销毁，再添加；
 
+>**使用三十.**Vue中的过渡动画原理
+>> 1. 其使用transition标签包裹要添加过渡动画的标签，使用name标识该动画效果；在一个元素被transition包裹之后，vue会自动分析元素的css样式，然后构建一个动画的流程；在动画执行的一瞬间，在元素中增加两个class,一个时初始状态值，一个是过渡动画监听器；在第一帧结束，第二帧开始前，会把其中一个class清除，删除的是初始状态的class；再添加一个class,到最后动画结束后再把自动添加的的class都清除；
+>> 2. 例子：opacity的从0-1的过渡，会在开始的一瞬间增加两个类，fade-enter和fade-enter-active;在第二帧开始时，会把fade-enter清除，添加一个fade-enter-to,最后展示完成后会把之前的fade-enter-active和fade-enter-to去掉；
+>> 3. 例子：opacity的从1-0的过渡，在开始的一瞬间添加两个类，fade-leave和fade-leave-active,在动画第二帧开始，清除fade-leave,创建fade-leave-to，直到结束，删除新添加的fade-leave-active和fade-leave-to
+>> 4. 可以在transition标签中添加属性enter-active-class,重命名其enter-active类，同理重命名leave-active类；其在style样式中使用其值来定义样式
+>> 5. 可以不添加name值，如果不添加name，则表示所有的transition都生效
+
+>**使用三十一.**在vue中使用css3的keyframs动画
+>> 1. 因为其在动画执行过程中，一直存在enter-active和leave-active类，所以要把动画放到该类中；
+```其css：外部定义一个@keyframes name，在其类中指定animation:name time ```
+>> 2. 使用animate.css的动画时，必须要使用重命名enter-active-class和leave-active-class的方式，在重命名中使用animated animateName的值，表示使用animate.css里的animateName动画样式
+>> 3. 想要在页面加载之后第一次就加载动画效果，就添加appear属性和appear-active-class属性，appear属性不需要添加值，而appear-active-class要添加初始动画；
+>> 4. 在动画标签中，的enter-active-class值里，添加animate.css的动画，也可以一起添加v-enter-active的过渡动画，使其出现两个效果；当又有keyframes动画又有transition动画，两个时长不一致时，使用type来定义使用谁的时长去执行动画；
+>> 5. 在transition里，添加属性```:duration="1000"```设置动画时长为1s;其时长的值可以写成对象形式{enter:1000,leave:2000}表示入场动画时长为1s,离场动画时长为2s
+
+>**使用三十二.**在vue中使用js动画及velocity.js应用
+>> 1. 在transition中添加@before-enter属性，其值时一个函数，意思为指定一个在动画入场之前执行的函数；该函数可以接收一个参数el,其指的是动画包裹的标签；
+>> 2. 在transition中添加@enter属性，其值是一个函数，意思是指定一个动画执行的函数，该函数接收两个参数，一个el为动画包裹的元素，一个为done，为其回调函数，需要在执行完成之后执行；
+>> 3. 在done执行之后，会触发transition中添加的@after-enter属性中的事件，其为动画执行完毕后的事件；
+>> 4. 出场动画分别为：@before-leave,@leave,@after-leave;
+>> 5. 使用velocity.js的动画时，可以直接在@enter对应的方法中，写入```Velocity(el,{opacity:1},{duration:1000,complete:done})```,其中el为动画执行元素，opacity为动画执行是事件，duration为动画执行时间，complete为动画执行结束后操作的函数
+
+>**使用三十三.**在vue中多个元素和组件的动画效果
+>> 1. 在transition下包裹多个元素时，多个元素之间的切换的动画效果，使用在style中添加.fade-enter和.fade-enter-active的类的方式来产生动画效果，注意还要给每个元素添加唯一key值，因为没有添加唯一key值时，多个元素之间的切换，vue会直接复用的dom 不会产生动画的效果；
+>> 2. 使用多个组件的时候，和多个元素的方式一致；而且可以写成动态组件的方式，即添加一个component标签，在其中添加：is='type'属性，然后在动态的更改type值达到切换组件的情况
+
+>**使用三十四.**在vue中的列表过渡
+>> 1. 在列表外添加transition-group标签，用法和transition一致，也是在style中添加.v-enter,.v-leave,.v-enter-active,.v-leave-active几个类的样式；
+>> 2. 它就相当于在列表中的每一项都添加了一个transition外标签；
+
+>**使用三十五.**vue中的动画封装
+>> 1. 
+>>> - 先写好css样式，即.v-enter,.v-leave,.v-enter-active,.v-leave-active几个类的样式;
+> - 再在模板标签中添加：shows='show',把外部的show的值传递给模板的shows变量；
+> - 在创建的模板中使用props获取shows的变量，在模板中创建transition标签，内部是slot标签，获取插槽值，slot标签中使用v-if=‘shows’来控制显示隐藏   
+
+>> 2. 使用js动画，就直接在模板中添加@before-enter，@enter,@after-enter，@before-leave,@leave,@after-leave这几个钩子属性，并在模板中配上对应的函数；
+
+
 vue渲染页面时，会去尝试复用页面中已经存在的dom,其内容不会被清空；
 解决方式：在标签中添加key="key",在标签中添加key属性时，vue会知道该标签是页面中唯一的元素；

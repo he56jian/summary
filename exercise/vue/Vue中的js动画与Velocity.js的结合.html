@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue中的js动画与velocity.js</title>
+	<script type="text/javascript" src="./velocity.js"></script>
+</head>
+<body>
+
+	<div id="app">
+		<transition
+			name='fade'
+			@before-enter='handleBeforeEnter'
+			@enter = 'handleEnter'
+			@after-enter='handleAfter'
+		>
+			<div v-show="show">hello</div>
+		</transition>
+
+		<button @click='handle'>toggle</button>
+	</div>
+	<script type="text/javascript" src="./vue.js"></script>
+	<script type="text/javascript">
+		
+		let vm= new Vue({
+			el:'#app',
+			data:{
+				show:true
+			},
+			methods:{
+				handle:function(){
+					this.show = !this.show;
+				},
+				//
+				handleBeforeEnter:function(el){
+					el.style.opacity = 0;
+					el.style.color = 'red'
+				},
+				handleEnter:function(el,done){
+					//el为动画包裹的元素，done为一个回调函数
+					// 在enter这个钩子里运行真正的动画效果
+					// setTimeout(()=>{
+					// 	el.style.color="green"
+						
+					// },1000);
+					// setTimeout(()=>{
+					// 	done();
+					// },3000)
+					//使用velocity带有的动画效果，使el元素的opacity变为1，时间是1s，在动画结束后执行done；
+					Velocity(el,{opacity:1},{duration:1000,complete:done})
+				},
+				handleAfter:function(el){
+					console.log('动画执行完毕')
+					el.style.color='#000'
+				}
+			}
+
+		})
+
+	</script>
+
+</body>
+</html>

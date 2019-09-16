@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue中css动画原理</title>
+
+	<!-- 在动画开始之前，自动添加了一个fade-enter的类，使其透明，在动画开始的一瞬间，清楚了fade-enter的类，即opacity一瞬间变为1，而fade-enter-active是监听其opacity的变化的，当监听到opacity变化时，就影响其在3s内执行完成 -->
+	<style type="text/css">
+		.fade-enter{
+			opacity: 0;
+		}
+		.fade-enter-active{
+			transition: opacity 3s;
+		}
+
+		.fade-leave-to{
+			opacity: 0
+		}
+		.fade-leave-active{
+			transition:opacity 3s;
+		}
+	</style>
+
+</head>
+<body>
+
+	<div id="app">
+		<!-- 其包裹的内容有过渡的动画效果,添加name是为了方便标识
+		 在一个元素被transition包裹之后，view会自动的分析元素的css样式，然后构建一个动画的流程；在动画执行一瞬间，在元素中增加两个className,fade-enter和fade-enter-active;
+		在第一帧结束，第二帧开始时，会把fade-enter的class名清除，再添加一个fade-enter-to,在执行到最后时，他会把之前添加的fade-enter-active和fade-enter-to的class去除掉；-->
+
+		<!-- 在元素从显示到隐藏时的流程，先构建一个动画的流程，在动画执行的一瞬间，在元素中添加两个类，fade-leave和fade-leave-active，在动画第一帧开始后，清除fade-leave类，创建fade-leave-to类，知道最后结束，删除添加的fade-leave-active和fade-leave-to类  -->
+
+		<transition name='fade'>
+			<div v-if='show'>hello</div>
+		</transition>
+		<button @click='handleClick'>切换</button>
+	</div>
+	<script type="text/javascript" src="./vue.js"></script>
+	<script type="text/javascript">
+		let vm = new Vue({
+			el:'#app',
+			data:{
+				show:true
+			},
+			methods:{
+				handleClick:function(){
+					this.show = !this.show;
+				}
+			}
+		})
+
+	</script>
+</body>
+</html>

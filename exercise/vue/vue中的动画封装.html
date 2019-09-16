@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue中的动画封装</title>
+	<style type="text/css">
+		.v-enter,.v-leave-to{
+			opacity: 0;
+		}
+		.v-enter-active,.v-leave-active{
+			transition:opacity 2s;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="app">
+		<fade :shows='show'>
+			<div>内容</div>
+		</fade>
+		<fade2 :shows='show'>
+			<div>内容</div>
+		</fade2>
+		<button @click='handle'>add</button>
+	</div>
+
+	<script type="text/javascript" src="./vue.js"></script>
+	<script type="text/javascript">
+		Vue.component('fade',{
+			props:['shows'],
+			template:`
+				<transition>
+					<slot v-if='shows'></slot>
+				</transition>
+			`
+		})
+
+		Vue.component('fade2',{
+			props:['shows'],
+			template:`
+				<transition
+					@before-enter='handleBeforeEnter'
+					@enter='handleEnter'
+				>
+					<slot v-if='shows'></slot>
+				</transition>
+			`,
+			methods:{
+				handleBeforeEnter:function(el){
+					el.style.color = 'red'
+				},
+				handleEnter:function(el,done){
+					setTimeout(()=>{
+						el.style.color='green'
+					},1500);
+					setTimeout(()=>{
+						done();
+					},3000)
+				}
+			}
+		})
+
+		let vm = new Vue({
+			el:'#app',
+			data:{
+				show:true
+			},
+			methods:{
+				handle:function(){
+					this.show = !this.show
+				}
+			}
+		})
+
+	</script>
+</body>
+</html>
