@@ -76,10 +76,10 @@
         android:layout_height="wrap_content"
         >
         <Button
-            android:id="@+id/button_worktime"
+            android:id="@+id/button_sim_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Work time"
+            android:text="sim"
             android:layout_gravity="center"
             android:layout_marginRight="10dp"
             />

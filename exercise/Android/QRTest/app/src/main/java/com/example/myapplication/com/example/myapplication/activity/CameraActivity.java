@@ -117,10 +117,10 @@ public class CameraActivity extends Activity {
         spinner_videoSize = findViewById(R.id.spinner_videoSize);
         spinner_videoLength = findViewById(R.id.spinner_videoLength);
         if (list_videoSize.isEmpty()) {
-            list_videoSize.add("1440P");
-            list_videoSize.add("1080P");
+            list_videoSize.add("D1");
             list_videoSize.add("720P");
-            list_videoSize.add("WVGA");
+            list_videoSize.add("1080P");
+            list_videoSize.add("1440P");
         }
         //photo size选择器选择监听
         utils.listSelect(list_videoSize, spinner_videoSize, "videoSize");
@@ -158,14 +158,13 @@ public class CameraActivity extends Activity {
 
         if (list_photoSize.isEmpty()) {
             //往列表中添加选项
+            list_photoSize.add("1080P");
             list_photoSize.add("3MP");
             list_photoSize.add("5MP");
-            list_photoSize.add("8MP");
 //            list_photoSize.add("12MP");
 //            list_photoSize.add("16Mp");
 //            list_photoSize.add("20MP");
         }
-
         //photo size选择器选择监听
         utils.listSelect(list_photoSize, spinner_photoSize, "photoSize");
 

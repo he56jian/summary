@@ -45,7 +45,9 @@ public class ConnectFragment extends Fragment implements View.OnClickListener {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         char[] arr = "#03#".toCharArray();
-        ChatManager.getCM().send(arr);
+
+        ChatManager.getCM().sendCharToStream(arr,true);
+//        ChatManager.getCM().send(arr);
         dataApplication = new DataApplication(context).getDataApplication();
         dataApplication.protecte = true;
     }

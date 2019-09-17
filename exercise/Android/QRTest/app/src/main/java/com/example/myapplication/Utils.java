@@ -85,10 +85,10 @@ public class Utils {
 //        }
 //    }
 
-    //把传进来的值转成对应字符数组
-    public static char[] strToCharList(Object object){
-        return null;
-    }
+//    //把传进来的值转成对应字符数组
+//    public static char[] strToCharList(Object object){
+//        return null;
+//    }
 
     //合并字符数组
     public static char[] method(String now, List<char[]> list) {
@@ -117,10 +117,8 @@ public class Utils {
         return value;
     }
 
-
-
-    //把字符串转成字符数组
-    public static char[] strToCharList(String str){
+    //把字符串转成ascii之后转成字符数组
+    public static char[] strToCharList(String str,int length){
         byte[] bytes = str.getBytes();
         String ret = "";
         for(int i=0;i< bytes.length;i++){
@@ -130,9 +128,15 @@ public class Utils {
             }
             ret+=hex;
         }
-        System.out.println(ret);
-        char[] result = ret.toCharArray();
-        return result;
+//        System.out.println(ret);
+        char[] value = ret.toCharArray();
+//        char[] result = new char[length];
+//        if(value.length != 0 ){
+//            for(int i=0;i<value.length;i++){
+//                result[i] = value[i];
+//            }
+//        }
+        return value;
     }
     //把整型转成字符数组
     public static char[] intToCharList(int num){

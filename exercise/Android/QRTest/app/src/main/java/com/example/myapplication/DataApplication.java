@@ -3,6 +3,7 @@ package com.example.myapplication;
 
 import android.content.Context;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,28 @@ import static com.example.myapplication.Utils.strToCharList;
 
 public class DataApplication {
     public Boolean protecte = false;
-    private String cameraMode, photoSize, photoBurst, burstSpeed, sendingOption, shutterSpeed, flashPower, videoSize, videoLength,
-            triggerPir, triggerTimelapse, triggerSen, wortTime1, workTime2, workTime3, workTime4, sendMode, remoteControl, rename, password;
+    public String cameraMode;
+    private String photoSize;
+    private String photoBurst;
+    private String burstSpeed;
+    private String sendingOption;
+    private String shutterSpeed;
+    private String flashPower;
+    private String videoSize;
+    private String videoLength;
+    private String triggerPir;
+    private String triggerTimelapse;
+    private String triggerSen;
+    private String wortTime1;
+    private String workTime2;
+    private String workTime3;
+    private String workTime4;
+    private String sendMode;
+    private String remoteControl;
+    private String rename;
+    private String password;
+
+    private String sim_apn, sim_acount, sim_passwd;
     private Boolean staName = false, staPassword = false, overWrite = false;
     private static DataApplication dataApplication = new DataApplication();
     private String status = "default";
@@ -21,6 +42,32 @@ public class DataApplication {
     private int PORT;
     Context context;
     int sta_connect = 0;
+
+    public String getSim_apn() {
+        return sim_apn;
+    }
+
+    public void setSim_apn(String sim_apn) {
+        this.sim_apn = sim_apn;
+        System.out.println("传进来的：" + sim_apn);
+    }
+
+    public String getSim_acount() {
+        return sim_acount;
+    }
+
+    public void setSim_acount(String sim_acount) {
+        this.sim_acount = sim_acount;
+    }
+
+    public String getSim_passwd() {
+        return sim_passwd;
+    }
+
+    public void setSim_passwd(String sim_passwd) {
+        this.sim_passwd = sim_passwd;
+    }
+
     List<String> serverMegList;
     private String retServer = "";
 
@@ -46,8 +93,11 @@ public class DataApplication {
         this.overWrite = false;
         this.triggerSen = "Auto";
         this.password = "0000";
-        this.PORT=5001;
-        this.IP="192.168.0.1";
+        this.PORT = 5001;
+        this.IP = "192.168.0.1";
+        this.sim_apn = "";
+        this.sim_acount = "";
+        this.sim_passwd = "";
     }
 
     public DataApplication(Context context) {
@@ -324,6 +374,16 @@ public class DataApplication {
             case "remoteControl":
                 value = dataApplication.getRemoteControl();
                 break;
+            case "sim_apn":
+                value = dataApplication.getSim_apn();
+                break;
+            case "sim_acount":
+                value = dataApplication.getSim_acount();
+                break;
+            case "sim_passwd":
+                value = dataApplication.getSim_passwd();
+                break;
+
         }
         return value;
     }
@@ -383,7 +443,6 @@ public class DataApplication {
         int charVideoSize = getCharWithPar("videoSize", videoSize);
         int charVideoLength = getCharWithPar("videoLength", videoLength);
 
-//        System.out.println("当前Sen值为："+triggerSen);
         int charTriggerSen = getCharWithPar("triggerSen", triggerSen);
         int charTriggerPir = getCharWithPar("triggerPir", triggerPir);
         int charTriggerTimelapse = getCharWithPar("triggerTimelapse", triggerTimelapse);
@@ -393,6 +452,7 @@ public class DataApplication {
 //        int charRename = getCharWithPar("rename", rename);
         int charStaPassword = getCharWithPar("staPassword", staPassword + "");
 //        int charPassword = getCharWithPar("staName", password);
+
 
         System.out.println("charCam:" + charCam + "   cameraMode：" + cameraMode);
         System.out.println("charPhotoSize:" + charPhotoSize + "   photoSize：" + photoSize);
@@ -412,6 +472,9 @@ public class DataApplication {
         System.out.println("rename:" + rename + "   rename：" + rename);
         System.out.println("charStaPassword:" + charStaPassword + "   staPassword：" + staPassword);
         System.out.println("password:" + password + "   password：" + password);
+        System.out.println("sim_apn:" + sim_apn + "   sim_apn：" + sim_apn);
+        System.out.println("sim_acount:" + sim_acount + "   sim_acount：" + sim_acount);
+        System.out.println("sim_passwd:" + sim_passwd + "   sim_passwd：" + sim_passwd);
 
         list.add(intToCharList(charCam));
         list.add(intToCharList(charPhotoSize));
@@ -428,24 +491,41 @@ public class DataApplication {
         list.add(intToCharList(charSendMode));
         list.add(intToCharList(charRemoteControl));
         list.add(intToCharList(charStaName));
-        if (staName) {
-            list.add(strToCharList(rename));
-        } else {
-            list.add(strToCharList("uovision"));
+        utils = new Utils(context);
+        char[] arr = new char[]{'#', '#'};
+        char[] charRename,charPasswd;
+        if (!staName) {
+            rename = "uovision";
         }
+        charRename = utils.addChar(strToCharList(rename, 16), arr);
+        list.add(charRename);
         list.add(intToCharList(charStaPassword));
-        if (staPassword) {
-            list.add(strToCharList(password));
-        } else {
-            list.add(strToCharList("0000"));
+
+        if (!staPassword) {
+            password = "0000";
         }
+        charPasswd = utils.addChar(strToCharList(password, 8),arr);
+        list.add(charPasswd);
+//        list.add(strToCharList(sim_apn,64));
+//        list.add(strToCharList(sim_acount,64));
+//        list.add(strToCharList(sim_passwd,64));
+
+        char[] charsim_apn = utils.addChar(strToCharList(sim_apn, 64), arr);
+        char[] charsim_acount = utils.addChar(strToCharList(sim_acount, 64), arr);
+        char[] charsim_passwd = utils.addChar(strToCharList(sim_passwd, 64), arr);
+
+        list.add(charsim_apn);
+        list.add(charsim_acount);
+        list.add(charsim_passwd);
 
         char[] value = method("", list);
+        System.out.println(value);
         return value;
     }
 
+
     //把相机设置转成二进制；
-    private int getCharWithPar(String key, String value) {
+    public int getCharWithPar(String key, String value) {
         int result = 0;
         switch (key) {
             case "cameraMode":
@@ -461,13 +541,13 @@ public class DataApplication {
             case "photoSize":
                 switch (value) {
                     case "3MP":
-                        result = 0;
-                        break;
-                    case "5MP":
                         result = 1;
                         break;
-                    case "8MP":
+                    case "5MP":
                         result = 2;
+                        break;
+                    case "1080P":
+                        result = 0;
                         break;
 //                    case "12MP":
 //                        result = 3;
@@ -586,7 +666,7 @@ public class DataApplication {
                 break;
             case "videoSize":
                 switch (value) {
-                    case "wvga":
+                    case "D1":
                         result = 0;
                     case "720P":
                         result = 1;
@@ -958,7 +1038,6 @@ public class DataApplication {
     }
 
 
-
     //保存服务器返回的数据
     public void setServerMeg(String value) {
         addServerMegList(value);
@@ -984,7 +1063,7 @@ public class DataApplication {
         return sta_connect;
     }
 
-    public void setIP(String value){
+    public void setIP(String value) {
         this.IP = value;
     }
 
@@ -992,11 +1071,11 @@ public class DataApplication {
         return IP;
     }
 
-    public void setPORT(int value){
+    public void setPORT(int value) {
         this.PORT = value;
     }
 
-    public int getPORT(){
+    public int getPORT() {
         return PORT;
     }
 

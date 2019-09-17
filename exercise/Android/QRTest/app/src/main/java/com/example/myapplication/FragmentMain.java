@@ -32,7 +32,8 @@ public class FragmentMain extends FragmentActivity implements View.OnClickListen
             public void run() {
                 while (true) {
                     if (dataApplication.sta_connect == 1) {
-                        ChatManager.getCM().send(chars);               //一开始就发送#01#
+//                        ChatManager.getCM().send(chars);               //一开始就发送#01#
+                        ChatManager.getCM().sendCharToStream(chars,true);
                         break;
                     }
                 }

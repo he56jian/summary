@@ -55,6 +55,8 @@
             android:name="com.example.myapplication.com.example.myapplication.activity.ConnectScoket"/>
         <activity
             android:name="com.example.myapplication.ConnectSetting"/>
+        <activity
+            android:name="com.example.myapplication.com.example.myapplication.activity.SimInfoActivity"/>
     </application>
     <!--&lt;!&ndash;允许应用程序改变网络状态&ndash;&gt;-->
     <!--<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>-->
