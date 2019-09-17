@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue中的样式绑定</title>
+	<script type="text/javascript" src="./vue.js"></script>
+	<style type="text/css">
+		.activated{
+			color: red
+		}
+		.activated2{
+			color:green;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div @click="handleDivclick" :class="{activated:isActivated}">hello</div>
+		<div @click="handleDivclick" :class="[activatedName]">hello2</div>
+		<div @click="handleDivclick" :style="styleObj">hello2</div>
+		<div @click="handleDivclick" :style="[styleObj]">hello2</div>
+	</div>
+
+	<script type="text/javascript">
+		let vm = new Vue({
+			el:"#app",
+			data:{
+
+				//在标签中，添加了：class="{activated:isActivated}"时，说明class的值取决于isActivated的值，即isActivated为true时，class才为activated;
+				isActivated:false,
+				activatedName:"",
+				styleObj:{
+					color:"yellow"
+				}
+			},
+			methods:{
+				handleDivclick:function(){
+					this.isActivated = !this.isActivated;
+					this.activatedName = this.activatedName === "activated2"?"":"activated2";
+					this.styleObj.color = this.styleObj.color === "blue"?"red":"blue"
+				}
+			}
+
+		})
+
+
+
+	</script>
+
+
+</body>
+</html>

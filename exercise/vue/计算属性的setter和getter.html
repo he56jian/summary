@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>计算属性的setter和getter</title>
+	<script type="text/javascript" src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		{{fullName}}
+
+	</div>
+	<script type="text/javascript">
+		
+		let vm = new Vue({
+			el:'#app',
+			data:{
+				firstName:"dell",
+				lasterName:"lee"
+			},
+			computed:{
+				fullName:{
+
+					//和之前不添加get和set的时候，添加了get和set的是为了分开获取和设置的功能；
+					get:function(){
+						return this.firstName + " "+ this.lasterName;
+					},
+
+					//在set里面，如果其get依赖的值发生了改变，会直接执行get方法；
+					set:function(value){
+						console.log(value);
+					}
+				}
+			}
+
+		})
+
+	</script>
+
+</body>
+</html>

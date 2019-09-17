@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>列表渲染</title>
+	<script type="text/javascript" src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- 对list做循环，每一项都给item -->
+		<template v-for="(item,index) of list" :key="item.id">
+			<div>
+				{{item.text}} ----{{index}}
+			</div>
+			<span>
+				{{item.text}} ----{{index}}
+			</span>
+		</template>
+		<div v-for="item of userInfo">
+			{{item}}
+		</div>
+	</div>
+
+	<script type="text/javascript">
+			let vm = new Vue({
+				el:"#app",
+				data:{
+					list:[{
+						id:"1",
+						text:"hello"
+					},{
+						id:"2",
+						text:"dell"
+					},{
+						id:"3",
+						text:"nice"
+					},{
+						id:"4", 
+						text:"to"
+					},{
+						id:"5",
+						text:"meet"
+					},{
+						id:"6",
+						text:"you"
+					}],
+					userInfo:{
+						name:'de',
+						age:22,
+						gender:'male'
+					}
+				}
+
+			})
+
+
+	</script>
+
+</body>
+</html>

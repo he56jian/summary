@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>在Vue中使用插槽</title>
+</head>
+<body>
+	<div id="app">
+		<chlid content="<p>dell</p>"></chlid>
+		<newchlid content="<p>dell</p>"></newchlid>
+		<newchlid2>
+			<p>插槽</p>
+		</newchlid2>
+	</div>
+
+	<script type="text/javascript" src="./vue.js"></script>
+	<script type="text/javascript">
+
+		//父组件传递给子组件的是一个标签对象时，如果使用之前的方式，就会发生转义，把js代码转成字符串的形式；
+		Vue.component('chlid',{
+			props:['content'],
+			template:`<div>{{content}}</div>`
+		})
+
+		//这样就可以把父组件传进来的标签，以js的形式展示了
+		Vue.component('newchlid',{
+			props:['content'],
+			template:`<div>
+						<p>hello</p>
+						<div v-html="this.content"></div>
+					</div>`
+		})
+
+		//使用插槽
+			Vue.component('newchlid2',{
+			props:['content'],
+			//<slot>标签，表示的就是在newchlid2中插入的内容
+			//在slot标签中内部输入默认内容，在模板标签没有添加插槽的时候显示的值；
+			//如果在插槽内容不止一行时，<slot>标签表示的是所有的插槽的内容
+			//具名插槽
+			//在模板标签中添加多个插槽，在模板中获取插槽时，要在模板标签中添加slot属性，其值为name，再在模板中的slot标签中使用name='name'来获取对应的插槽
+			template:`<div>
+						<slot>default</slot>
+					</div>`
+		})
+
+		var vm = new Vue({
+			el:'#app'
+
+		})
+
+
+	</script>
+</body>
+</html>

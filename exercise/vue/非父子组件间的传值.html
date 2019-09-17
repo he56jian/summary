@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>非父子组件间的传值</title>
+	<script type="text/javascript" src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<child content = "dell"></child>
+		<child content = "lee"></child>
+	</div>
+
+	<script type="text/javascript">
+
+		//在Vue类中挂载bus属性，使每一个vue都有bus这个属性,都指向一个Vue实例
+		Vue.prototype.bus = new Vue()
+		//相当于把vue里的方法都翻到了bus里；
+
+		Vue.component('child',{
+			//把接收值传递给本地值
+			data:function(){
+				return {
+					selContent:this.content
+				}
+			},
+			//接收值
+			props:{
+				content:String
+			},
+			template:"<div @click='handle'>{{selContent}}</div>",
+			methods:{
+				handle:function(){
+					this.bus.$emit('change',this.selContent);
+				}
+			},
+			//页面重新渲染之后执行
+			mounted:function(){
+				let this_ = this
+				//监听change事件
+				console.log('页面加载')
+				this.bus.$on('change',function(msg){
+					console.log(msg)
+					this_.selContent = msg
+				});
+			}
+		})
+
+		let vm = new Vue({
+			el:"#app",
+		})
+		//方式一，使用vueX方式
+		//方式二，发布订阅方式；
+
+
+	</script>
+
+</body>
+</html>

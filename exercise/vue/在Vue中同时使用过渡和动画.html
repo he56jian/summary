@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>同时使用过渡和动画</title>
+	<link rel="stylesheet" type="text/css" href="./Animate.css">
+	<style type="text/css">
+		.v-enter,.v-leave-to{
+			opacity: 0;
+		}
+		.v-enter-active,
+		.v-leave-active{
+			transition:opacity 3s;
+		}
+
+
+	</style>
+</head>
+<body>
+
+	<!--想要在页面加载的第一次就执行动画，必须要添加appear和appear-active-class -->
+	<div id="app">
+		<transition
+			type='transition' 
+			name='v'
+			enter-active-class="animated swing v-enter-active"
+			leave-active-class='animated shake  v-leave-active'
+
+			appear
+			appear-active-class='animated swing'
+
+		>
+			<div v-show='show'>你好</div>
+		</transition>
+		<button @click='handle'>点击</button>
+	</div>
+	
+
+
+	<script type="text/javascript" src="./vue.js"></script>
+	<script type="text/javascript">
+		
+		let vm= new Vue({
+			el:'#app',
+			data:{
+				show:true
+			},
+			methods:{
+				handle:function(){
+					console.log(this.show)
+					this.show = !this.show
+				}
+			}
+		})
+
+	</script>
+</body>
+</html>

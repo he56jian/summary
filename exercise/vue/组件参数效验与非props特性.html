@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>组件参数校验和非props特性</title>
+	<script type="text/javascript" src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<child content="hello"></child>
+	</div>
+
+	<script type="text/javascript">
+		
+		//props特性：父组件调用子组件的时候调用了content,而且在子组件中的props中声明了content,父子组件有个对应关系，这就是props特性；
+		//特点：
+		//1.其content="hello"的内容不会在标签中显示，会直接显示在值里面；
+		//2.父子组件有对应关系后，在子组件中能使用插值表达式获取其传递的参数；
+		
+		//组件的参数校验，校验父组件传递过来的值
+		Vue.component('child',{
+			// props:['content'],
+			props:{
+				// content:String				//这样写，可以约束子组件收到的参数的类型
+				content:{
+					type:String,
+					required:true,//表示必传
+					default:"default value",//表示标签中没有content时的默认值
+					validator:function(value){
+						//校验器，如果返回false，则会报错
+						return (value.length>5)
+					}
+				}
+			},
+
+			template:"<div>{{content}}</div>"
+		})
+
+
+		let vm = new Vue({
+			el:'#app'
+
+
+		})
+
+
+	</script>
+
+
+</body>
+</html>
