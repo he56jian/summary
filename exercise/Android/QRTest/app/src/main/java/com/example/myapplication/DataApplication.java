@@ -2,14 +2,14 @@ package com.example.myapplication;
 
 
 import android.content.Context;
+import android.util.Xml;
 
-import java.lang.reflect.Array;
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.myapplication.Utils.intToCharList;
 import static com.example.myapplication.Utils.method;
-import static com.example.myapplication.Utils.strToCharList;
 
 public class DataApplication {
     public Boolean protecte = false;
@@ -428,30 +428,130 @@ public class DataApplication {
     }
 
     List<char[]> list;
-
+    Utils utils;
     //获取设置的参数的字节数组
-    public char[] getCharCam() {
+//    public char[] getCharCam() {
+//        list = new ArrayList<>();
+//        int charCam = getCharWithPar("cameraMode", cameraMode);
+//        int charPhotoSize = getCharWithPar("photoSize", photoSize);
+//        int charPhotoBurst = getCharWithPar("photoBurst", photoBurst);
+//        int charBurstSpeed = getCharWithPar("burstSpeed", burstSpeed);
+//        int charSendingOption = getCharWithPar("sendingOption", sendingOption);
+//        int charShutterSpeed = getCharWithPar("shutterSpeed", shutterSpeed);
+//        int charFlashPower = getCharWithPar("flashPower", flashPower);
+//        int charVideoSize = getCharWithPar("videoSize", videoSize);
+//        int charVideoLength = getCharWithPar("videoLength", videoLength);
+//
+//        int charTriggerSen = getCharWithPar("triggerSen", triggerSen);
+//        int charTriggerPir = getCharWithPar("triggerPir", triggerPir);
+//        int charTriggerTimelapse = getCharWithPar("triggerTimelapse", triggerTimelapse);
+//        int charSendMode = getCharWithPar("sendMode", sendMode);
+//        int charRemoteControl = getCharWithPar("remoteControl", remoteControl);
+//        int charStaName = getCharWithPar("staName", staName + "");
+//        int charStaPassword = getCharWithPar("staPassword", staPassword + "");
+//
+////       char[] newChar =new char[]{1,charCam};
+//
+//
+//
+//
+//        System.out.println("charCam:" + charCam + "   cameraMode：" + cameraMode);
+//        System.out.println("charPhotoSize:" + charPhotoSize + "   photoSize：" + photoSize);
+//        System.out.println("charPhotoBurst:" + charPhotoBurst + "   photoBurst：" + photoBurst);
+//        System.out.println("charBurstSpeed:" + charBurstSpeed + "   burstSpeed：" + burstSpeed);
+//        System.out.println("charSendingOption:" + charSendingOption + "   sendingOption：" + sendingOption);
+//        System.out.println("charShutterSpeed:" + charShutterSpeed + "   shutterSpeed：" + shutterSpeed);
+//        System.out.println("charFlashPower:" + charFlashPower + "   flashPower：" + flashPower);
+//        System.out.println("charVideoSize:" + charVideoSize + "   videoSize：" + videoSize);
+//        System.out.println("charVideoLength:" + charVideoLength + "   videoLength：" + videoLength);
+//        System.out.println("charTriggerSen:" + charTriggerSen + "   triggerSen：" + triggerSen);
+//        System.out.println("charTriggerPir:" + charTriggerPir + "   triggerPir：" + triggerPir);
+//        System.out.println("charTriggerTimelapse:" + charTriggerTimelapse + "   triggerTimelapse：" + triggerTimelapse);
+//        System.out.println("charSendMode:" + charSendMode + "   sendMode：" + sendMode);
+//        System.out.println("charRemoteControl:" + charRemoteControl + "   remoteControl：" + remoteControl);
+//        System.out.println("charStaName:" + charStaName + "   staName：" + staName);
+//        System.out.println("rename:" + rename + "   rename：" + rename);
+//        System.out.println("charStaPassword:" + charStaPassword + "   staPassword：" + staPassword);
+//        System.out.println("password:" + password + "   password：" + password);
+//        System.out.println("sim_apn:" + sim_apn + "   sim_apn：" + sim_apn);
+//        System.out.println("sim_acount:" + sim_acount + "   sim_acount：" + sim_acount);
+//        System.out.println("sim_passwd:" + sim_passwd + "   sim_passwd：" + sim_passwd);
+//
+//        list.add(intToCharList(charCam));
+//        list.add(intToCharList(charPhotoSize));
+//        list.add(intToCharList(charPhotoBurst));
+//        list.add(intToCharList(charBurstSpeed));
+//        list.add(intToCharList(charSendingOption));
+//        list.add(intToCharList(charShutterSpeed));
+//        list.add(intToCharList(charFlashPower));
+//        list.add(intToCharList(charVideoSize));
+//        list.add(intToCharList(charVideoLength));
+//        list.add(intToCharList(charTriggerSen));
+//        list.add(intToCharList(charTriggerPir));
+//        list.add(intToCharList(charTriggerTimelapse));
+//        list.add(intToCharList(charSendMode));
+//        list.add(intToCharList(charRemoteControl));
+//        list.add(intToCharList(charStaName));
+//
+//
+//
+//        utils = new Utils(context);
+//        char[] arr = new char[]{'#', '#'};
+//        char[] charRename,charPasswd;
+//        if (!staName) {
+//            rename = "uovision";
+//        }
+//        charRename = rename.toCharArray();
+//        list.add(utils.addZeorChar(charRename,8));
+//        list.add(intToCharList(charStaPassword));
+//        if (!staPassword) {
+//            password = "0000";
+//        }
+//        charPasswd = password.toCharArray();
+//        list.add(utils.addZeorChar(charPasswd,4));
+//
+//        char[] charsim_apn=sim_apn.toCharArray();
+//        list.add(utils.addZeorChar(charsim_apn,32));
+//        char[] charsim_acount=sim_acount.toCharArray();
+//        list.add(utils.addZeorChar(charsim_acount,32));
+//        char[] charsim_passwd=sim_passwd.toCharArray();
+//        list.add(utils.addZeorChar(charsim_passwd,32));
+//
+//        char[] value = method("", list);
+//        System.out.println(value);
+//        return value;
+//    }
+    byte[] Rename = new byte[8];
+    byte[] Passwd = new byte[4];
+    byte[] Sim_apn = new byte[32];
+    byte[] Sim_acount = new byte[32];
+    byte[] Sim_passwd = new byte[32];
+    byte[] resultByte;
+    //获取设置的参数的字节数组
+    public byte[] getCharCam() {
         list = new ArrayList<>();
-        Utils utils = new Utils(context);
-        int charCam = getCharWithPar("cameraMode", cameraMode);
-        int charPhotoSize = getCharWithPar("photoSize", photoSize);
-        int charPhotoBurst = getCharWithPar("photoBurst", photoBurst);
-        int charBurstSpeed = getCharWithPar("burstSpeed", burstSpeed);
-        int charSendingOption = getCharWithPar("sendingOption", sendingOption);
-        int charShutterSpeed = getCharWithPar("shutterSpeed", shutterSpeed);
-        int charFlashPower = getCharWithPar("flashPower", flashPower);
-        int charVideoSize = getCharWithPar("videoSize", videoSize);
-        int charVideoLength = getCharWithPar("videoLength", videoLength);
+        byte charCam = getByteWithPar("cameraMode", cameraMode);
+        byte charPhotoSize = getByteWithPar("photoSize", photoSize);
+        byte charPhotoBurst = getByteWithPar("photoBurst", photoBurst);
+        byte charBurstSpeed = getByteWithPar("burstSpeed", burstSpeed);
+        byte charSendingOption = getByteWithPar("sendingOption", sendingOption);
+        byte charShutterSpeed = getByteWithPar("shutterSpeed", shutterSpeed);
+        byte charFlashPower = getByteWithPar("flashPower", flashPower);
+        byte charVideoSize = getByteWithPar("videoSize", videoSize);
+        byte charVideoLength = getByteWithPar("videoLength", videoLength);
 
-        int charTriggerSen = getCharWithPar("triggerSen", triggerSen);
-        int charTriggerPir = getCharWithPar("triggerPir", triggerPir);
-        int charTriggerTimelapse = getCharWithPar("triggerTimelapse", triggerTimelapse);
-        int charSendMode = getCharWithPar("sendMode", sendMode);
-        int charRemoteControl = getCharWithPar("remoteControl", remoteControl);
-        int charStaName = getCharWithPar("staName", staName + "");
-//        int charRename = getCharWithPar("rename", rename);
-        int charStaPassword = getCharWithPar("staPassword", staPassword + "");
-//        int charPassword = getCharWithPar("staName", password);
+        byte charTriggerSen = getByteWithPar("triggerSen", triggerSen);
+        byte charTriggerPir = getByteWithPar("triggerPir", triggerPir);
+        byte charTriggerTimelapse = getByteWithPar("triggerTimelapse", triggerTimelapse);
+        byte charSendMode = getByteWithPar("sendMode", sendMode);
+        byte charRemoteControl = getByteWithPar("remoteControl", remoteControl);
+        byte charStaName = getByteWithPar("staName", staName + "");
+        byte charStaPassword = getByteWithPar("staPassword", staPassword + "");
+
+        ArrayList<Byte> bytelist = new ArrayList<>();
+//       char[] newChar =new char[]{1,charCam};
+
+
 
 
         System.out.println("charCam:" + charCam + "   cameraMode：" + cameraMode);
@@ -476,55 +576,78 @@ public class DataApplication {
         System.out.println("sim_acount:" + sim_acount + "   sim_acount：" + sim_acount);
         System.out.println("sim_passwd:" + sim_passwd + "   sim_passwd：" + sim_passwd);
 
-        list.add(intToCharList(charCam));
-        list.add(intToCharList(charPhotoSize));
-        list.add(intToCharList(charPhotoBurst));
-        list.add(intToCharList(charBurstSpeed));
-        list.add(intToCharList(charSendingOption));
-        list.add(intToCharList(charShutterSpeed));
-        list.add(intToCharList(charFlashPower));
-        list.add(intToCharList(charVideoSize));
-        list.add(intToCharList(charVideoLength));
-        list.add(intToCharList(charTriggerSen));
-        list.add(intToCharList(charTriggerPir));
-        list.add(intToCharList(charTriggerTimelapse));
-        list.add(intToCharList(charSendMode));
-        list.add(intToCharList(charRemoteControl));
-        list.add(intToCharList(charStaName));
+
+        byte[] bytes = new byte[]{charCam,charPhotoSize,charPhotoBurst,charBurstSpeed,charSendingOption,charShutterSpeed,charFlashPower,charVideoSize
+                                    ,charVideoLength,charTriggerSen,charTriggerPir,charTriggerTimelapse,charSendMode,charRemoteControl,charStaName,
+                                };
+
         utils = new Utils(context);
-        char[] arr = new char[]{'#', '#'};
-        char[] charRename,charPasswd;
-        if (!staName) {
-            rename = "uovision";
+        int renameLen = rename.getBytes().length;        //实际
+        for(int i =0;i<Rename.length;i++){
+            if(i<renameLen){
+                Rename[i] = rename.getBytes()[i];
+            }else{
+                Rename[i]=0;
+            }
         }
-        charRename = utils.addChar(strToCharList(rename, 16), arr);
-        list.add(charRename);
-        list.add(intToCharList(charStaPassword));
+        resultByte= utils.byteMerger(bytes,Rename);
 
-        if (!staPassword) {
-            password = "0000";
+        resultByte= utils.byteMerger(resultByte,new byte[]{charStaPassword});
+
+        int passwdLen = password.getBytes().length;        //实际
+        for(int i =0;i<Passwd.length;i++){
+            if(i<passwdLen){
+                Passwd[i] = password.getBytes()[i];
+            }else{
+                Passwd[i]=0;
+            }
         }
-        charPasswd = utils.addChar(strToCharList(password, 8),arr);
-        list.add(charPasswd);
-//        list.add(strToCharList(sim_apn,64));
-//        list.add(strToCharList(sim_acount,64));
-//        list.add(strToCharList(sim_passwd,64));
+       resultByte= utils.byteMerger(resultByte,Passwd);
 
-        char[] charsim_apn = utils.addChar(strToCharList(sim_apn, 64), arr);
-        char[] charsim_acount = utils.addChar(strToCharList(sim_acount, 64), arr);
-        char[] charsim_passwd = utils.addChar(strToCharList(sim_passwd, 64), arr);
+        int len = sim_apn.getBytes().length;        //实际
+        for(int i =0;i<32;i++){
+            if(i<len){
+                Sim_apn[i] = sim_apn.getBytes()[i];
+            }else{
+                Sim_apn[i]=0;
+            }
+        }
+        resultByte= utils.byteMerger(resultByte,Sim_apn);
 
-        list.add(charsim_apn);
-        list.add(charsim_acount);
-        list.add(charsim_passwd);
+        len = sim_acount.getBytes().length;        //实际
+        for(int i =0;i<32;i++){
+            if(i<len){
+                Sim_acount[i] = sim_acount.getBytes()[i];
+            }else{
+                Sim_acount[i]=0;
+            }
+        }
 
-        char[] value = method("", list);
-        System.out.println(value);
-        return value;
+        resultByte= utils.byteMerger(resultByte,Sim_acount);
+
+        len = sim_passwd.getBytes().length;        //实际
+        for(int i =0;i<32;i++){
+            if(i<len){
+                Sim_passwd[i] = sim_passwd.getBytes()[i];
+            }else{
+                Sim_passwd[i]=0;
+            }
+        }
+
+        resultByte= utils.byteMerger(resultByte,Sim_passwd);
+
+//        char[] value = method("", list);
+//        System.out.println(value);
+        return resultByte;
     }
 
 
-    //把相机设置转成二进制；
+    /**
+     * 把相机参数转化成整型；
+     * @param key
+     * @param value
+     * @return
+     */
     public int getCharWithPar(String key, String value) {
         int result = 0;
         switch (key) {
@@ -736,7 +859,6 @@ public class DataApplication {
                 }
                 break;
             case "triggerPir":
-                System.out.println(value);
                 switch (value) {
                     case "0Sec":
                         result = 0;
@@ -869,7 +991,7 @@ public class DataApplication {
                         result = 5;
                         break;
                     case "30Sec":
-                        result = 60;
+                        result = 6;
                         break;
                     case "35Sec":
                         result = 7;
@@ -1021,21 +1143,1037 @@ public class DataApplication {
                 }
                 break;
         }
+       String  newresult = Integer.toHexString(result);     //转成十六进制数
+
         return result;
     }
 
-    //显示二维码数
-    public String getQRCode() {
-        char[] showValue = getCharCam();
-//        System.out.println(showValue);
-//        char[] showValue = getValue();
-//        System.out.println(showValue);
-        String count = "";
-        for (int i = 0; i < showValue.length; i++) {
-            count += showValue[i];
+    public Byte getByteWithPar(String key, String value) {
+        int result = 0;
+        switch (key) {
+            case "cameraMode":
+                switch (value) {
+                    case "photo":
+                        result = 0;
+                        break;
+                    case "video":
+                        result = 1;
+                        break;
+                }
+                break;
+            case "photoSize":
+                switch (value) {
+                    case "3MP":
+                        result = 1;
+                        break;
+                    case "5MP":
+                        result = 2;
+                        break;
+                    case "1080P":
+                        result = 0;
+                        break;
+//                    case "12MP":
+//                        result = 3;
+//                    break;
+//                    case "16Mp":
+//                        result = 4;
+//                    break;
+//                    case "20MP":
+//                        result = 5;
+//                    break;
+                }
+                break;
+            case "photoBurst":
+                switch (value) {
+                    case "1photo":
+                        result = 0;
+                        break;
+                    case "2photos":
+                        result = 1;
+                        break;
+                    case "3photos":
+                        result = 2;
+                        break;
+                    case "4photos":
+                        result = 3;
+                        break;
+                    case "5photos":
+                        result = 4;
+                        break;
+                    case "6photos":
+                        result = 5;
+                        break;
+                    case "7photos":
+                        result = 6;
+                        break;
+                    case "8photos":
+                        result = 7;
+                        break;
+                    case "9photos":
+                        result = 8;
+                        break;
+                    case "10photos":
+                        result = 9;
+                        break;
+                }
+                break;
+            case "burstSpeed":
+                switch (value) {
+                    case "Fast(200ms)":
+                        result = 0;
+                        break;
+                    case "Show(500ms)":
+                        result = 1;
+                        break;
+                }
+                break;
+            case "sendingOption":
+                switch (value) {
+                    case "1st":
+                        result = 0;
+                        break;
+                    case "2st":
+                        result = 1;
+                        break;
+                    case "3st":
+                        result = 2;
+                        break;
+                    case "4st":
+                        result = 0;
+                        break;
+                    case "5st":
+                        result = 1;
+                        break;
+                    case "6st":
+                        result = 2;
+                        break;
+                    case "7st":
+                        result = 0;
+                        break;
+                    case "8st":
+                        result = 1;
+                        break;
+                    case "9st":
+                        result = 2;
+                        break;
+                    case "10st":
+                        result = 2;
+                        break;
+                }
+                break;
+            case "shutterSpeed":
+                switch (value) {
+                    case "Normal":
+                        result = 0;
+                        break;
+                    case "Fast":
+                        result = 1;
+                        break;
+                    case "High":
+                        result = 2;
+                        break;
+                }
+                break;
+            case "flashPower":
+                switch (value) {
+                    case "Low":
+                        result = 0;
+                        break;
+                    case "Normal":
+                        result = 1;
+                        break;
+                    case "High":
+                        result = 2;
+                        break;
+                }
+                break;
+            case "videoSize":
+                switch (value) {
+                    case "D1":
+                        result = 0;
+                    case "720P":
+                        result = 1;
+                        break;
+                    case "1080P":
+                        result = 2;
+                        break;
+                    case "1440P":
+                        result = 3;
+                        break;
+                }
+                break;
+            case "videoLength":
+                switch (value) {
+                    case "5sec":
+                        result = 0;
+                        break;
+                    case "10sec":
+                        result = 1;
+                        break;
+                    case "15sec":
+                        result = 2;
+                        break;
+                    case "20sec":
+                        result = 3;
+                        break;
+                    case "25sec":
+                        result = 4;
+                        break;
+                    case "30sec":
+                        result = 5;
+                        break;
+                    case "35sec":
+                        result = 6;
+                        break;
+                    case "40sec":
+                        result = 7;
+                        break;
+                    case "45sec":
+                        result = 8;
+                        break;
+                    case "50sec":
+                        result = 9;
+                        break;
+                    case "55sec":
+                        result = 10;
+                        break;
+                    case "60sec":
+                        result = 11;
+                        break;
+                }
+                break;
+            case "triggerSen":
+                switch (value) {
+                    case "off":
+                        result = 0;
+                        break;
+                    case "Low":
+                        result = 1;
+                        break;
+                    case "Auto":
+                        result = 2;
+                        break;
+                    case "High":
+                        result = 3;
+                        break;
+                }
+                break;
+            case "triggerPir":
+                switch (value) {
+                    case "0Sec":
+                        result = 0;
+                        break;
+                    case "1Sec":
+                        result = 1;
+                        break;
+                    case "2Sec":
+                        result = 2;
+                        break;
+                    case "3Sec":
+                        result = 3;
+                        break;
+                    case "4Sec":
+                        result = 4;
+                        break;
+                    case "5Sec":
+                        result = 5;
+                        break;
+                    case "10Sec":
+                        result = 6;
+                        break;
+                    case "15Sec":
+                        result = 7;
+                        break;
+                    case "20Sec":
+                        result = 8;
+                        break;
+                    case "25Sec":
+                        result = 9;
+                        break;
+                    case "30Sec":
+                        result = 10;
+                        break;
+                    case "35Sec":
+                        result = 11;
+                        break;
+                    case "40Sec":
+                        result = 12;
+                        break;
+                    case "45Sec":
+                        result = 13;
+                        break;
+                    case "50Sec":
+                        result = 14;
+                        break;
+                    case "55Sec":
+                        result = 15;
+                        break;
+                    case "1min":
+                        result = 16;
+                        break;
+                    case "2min":
+                        result = 17;
+                        break;
+                    case "3min":
+                        result = 18;
+                        break;
+                    case "4min":
+                        result = 19;
+                        break;
+                    case "5min":
+                        result = 20;
+                        break;
+                    case "10min":
+                        result = 21;
+                        break;
+                    case "15min":
+                        result = 22;
+                        break;
+                    case "20min":
+                        result = 23;
+                        break;
+                    case "25min":
+                        result = 24;
+                        break;
+                    case "30min":
+                        result = 25;
+                        break;
+                    case "35min":
+                        result = 26;
+                        break;
+                    case "40min":
+                        result = 27;
+                        break;
+                    case "45min":
+                        result = 28;
+                        break;
+                    case "50min":
+                        result = 29;
+                        break;
+                    case "55min":
+                        result = 30;
+                        break;
+                    case "60min":
+                        result = 31;
+                        break;
+                }
+                break;
+            case "triggerTimelapse":
+                switch (value) {
+//                    case "0Sec":
+//                        return 0;
+//                    break;
+//                    case "1Sec":
+//                        return 1;
+//                    break;
+//                    case "2Sec":
+//                        return 2;
+//                    break;
+//                    case "3Sec":
+//                        return 3;
+//                    break;
+//                    case "4Sec":
+//                        return 4;
+//                    break;
+                    case "5Sec":
+                        result = 1;
+                        break;
+                    case "10Sec":
+                        result = 2;
+                        break;
+                    case "15Sec":
+                        result = 3;
+                        break;
+                    case "20Sec":
+                        result = 4;
+                        break;
+                    case "25Sec":
+                        result = 5;
+                        break;
+                    case "30Sec":
+                        result = 6;
+                        break;
+                    case "35Sec":
+                        result = 7;
+                        break;
+                    case "40Sec":
+                        result = 8;
+                        break;
+                    case "45Sec":
+                        result = 9;
+                        break;
+                    case "50Sec":
+                        result = 10;
+                        break;
+                    case "55Sec":
+                        result = 11;
+                        break;
+                    case "1min":
+                        result = 12;
+                        break;
+                    case "2min":
+                        result = 13;
+                        break;
+                    case "3min":
+                        result = 14;
+                        break;
+                    case "4min":
+                        result = 15;
+                        break;
+                    case "5min":
+                        result = 16;
+                        break;
+                    case "10min":
+                        result = 17;
+                        break;
+                    case "15min":
+                        result = 18;
+                        break;
+                    case "20min":
+                        result = 19;
+                        break;
+                    case "25min":
+                        result = 20;
+                        break;
+                    case "30min":
+                        result = 21;
+                        break;
+                    case "35min":
+                        result = 22;
+                        break;
+                    case "40min":
+                        result = 23;
+                        break;
+                    case "45min":
+                        result = 24;
+                        break;
+                    case "50min":
+                        result = 25;
+                        break;
+                    case "55min":
+                        result = 26;
+                        break;
+                    case "1Hour":
+                        result = 27;
+                        break;
+                    case "2Hour":
+                        result = 28;
+                        break;
+                    case "3Hour":
+                        result = 29;
+                        break;
+                    case "4Hour":
+                        result = 30;
+                        break;
+                    case "5Hour":
+                        result = 31;
+                        break;
+                    case "6Hour":
+                        result = 32;
+                        break;
+                    case "7Hour":
+                        result = 33;
+                    case "8Hour":
+                        result = 34;
+                        break;
+                    case "12Hour":
+                        result = 35;
+                        break;
+                    case "20Hour":
+                        result = 36;
+                        break;
+                    case "24Hour":
+                        result = 37;
+                        break;
+                }
+                break;
+            case "sendMode":
+                int sendMode2 = Integer.parseInt(value);
+                result = sendMode2;
+                break;
+            case "remoteControl":
+                switch (value) {
+                    case "Realtime":
+                        result = 0;
+                        break;
+                    case "Delay 0.5H":
+                        result = 1;
+                        break;
+                    case "Delay 1H":
+                        result = 2;
+                        break;
+                    case "Delay 2H":
+                        result = 3;
+                        break;
+                    case "Delay 3H":
+                        result = 4;
+                        break;
+                    case "Delay 4H":
+                        result = 5;
+                        break;
+                    case "Delay 6H":
+                        result = 6;
+                        break;
+                    case "Delay 12H":
+                        result = 7;
+                        break;
+                    case "Delay 24H":
+                        result = 8;
+                        break;
+                }
+                break;
+            case "staName":
+                switch (value) {
+                    case "false":
+                        result = 0;
+                        break;
+                    case "true":
+                        result = 1;
+                        break;
+                }
+                break;
+            case "staPassword":
+                switch (value) {
+                    case "false":
+                        result = 0;
+                        break;
+                    case "true":
+                        result = 1;
+                        break;
+                }
+                break;
         }
-        return count;
+
+        Integer cam= Integer.valueOf(result);
+        Byte resultByte = cam.byteValue();
+        return resultByte;
     }
+
+
+
+    /***
+     * 对照参数，把参数转换成对应的十六进制字符数组；
+     * @param key
+     * @param value
+     * @return
+     */
+//    public char[] getCharWithValue(String key, String value) {
+//        int result = 0;
+//        switch (key) {
+//            case "cameraMode":
+//                switch (value) {
+//                    case "photo":
+//                        result = 0;
+//                        break;
+//                    case "video":
+//                        result = 1;
+//                        break;
+//                }
+//                break;
+//            case "photoSize":
+//                switch (value) {
+//                    case "3MP":
+//                        result = 1;
+//                        break;
+//                    case "5MP":
+//                        result = 2;
+//                        break;
+//                    case "1080P":
+//                        result = 0;
+//                        break;
+////                    case "12MP":
+////                        result = 3;
+////                    break;
+////                    case "16Mp":
+////                        result = 4;
+////                    break;
+////                    case "20MP":
+////                        result = 5;
+////                    break;
+//                }
+//                break;
+//            case "photoBurst":
+//                switch (value) {
+//                    case "1photo":
+//                        result = 0;
+//                        break;
+//                    case "2photos":
+//                        result = 1;
+//                        break;
+//                    case "3photos":
+//                        result = 2;
+//                        break;
+//                    case "4photos":
+//                        result = 3;
+//                        break;
+//                    case "5photos":
+//                        result = 4;
+//                        break;
+//                    case "6photos":
+//                        result = 5;
+//                        break;
+//                    case "7photos":
+//                        result = 6;
+//                        break;
+//                    case "8photos":
+//                        result = 7;
+//                        break;
+//                    case "9photos":
+//                        result = 8;
+//                        break;
+//                    case "10photos":
+//                        result = 9;
+//                        break;
+//                }
+//                break;
+//            case "burstSpeed":
+//                switch (value) {
+//                    case "Fast(200ms)":
+//                        result = 0;
+//                        break;
+//                    case "Show(500ms)":
+//                        result = 1;
+//                        break;
+//                }
+//                break;
+//            case "sendingOption":
+//                switch (value) {
+//                    case "1st":
+//                        result = 0;
+//                        break;
+//                    case "2st":
+//                        result = 1;
+//                        break;
+//                    case "3st":
+//                        result = 2;
+//                        break;
+//                    case "4st":
+//                        result = 0;
+//                        break;
+//                    case "5st":
+//                        result = 1;
+//                        break;
+//                    case "6st":
+//                        result = 2;
+//                        break;
+//                    case "7st":
+//                        result = 0;
+//                        break;
+//                    case "8st":
+//                        result = 1;
+//                        break;
+//                    case "9st":
+//                        result = 2;
+//                        break;
+//                    case "10st":
+//                        result = 2;
+//                        break;
+//                }
+//                break;
+//            case "shutterSpeed":
+//                switch (value) {
+//                    case "Normal":
+//                        result = 0;
+//                        break;
+//                    case "Fast":
+//                        result = 1;
+//                        break;
+//                    case "High":
+//                        result = 2;
+//                        break;
+//                }
+//                break;
+//            case "flashPower":
+//                switch (value) {
+//                    case "Low":
+//                        result = 0;
+//                        break;
+//                    case "Normal":
+//                        result = 1;
+//                        break;
+//                    case "High":
+//                        result = 2;
+//                        break;
+//                }
+//                break;
+//            case "videoSize":
+//                switch (value) {
+//                    case "D1":
+//                        result = 0;
+//                    case "720P":
+//                        result = 1;
+//                        break;
+//                    case "1080P":
+//                        result = 2;
+//                        break;
+//                    case "1440P":
+//                        result = 3;
+//                        break;
+//                }
+//                break;
+//            case "videoLength":
+//                switch (value) {
+//                    case "5sec":
+//                        result = 0;
+//                        break;
+//                    case "10sec":
+//                        result = 1;
+//                        break;
+//                    case "15sec":
+//                        result = 2;
+//                        break;
+//                    case "20sec":
+//                        result = 3;
+//                        break;
+//                    case "25sec":
+//                        result = 4;
+//                        break;
+//                    case "30sec":
+//                        result = 5;
+//                        break;
+//                    case "35sec":
+//                        result = 6;
+//                        break;
+//                    case "40sec":
+//                        result = 7;
+//                        break;
+//                    case "45sec":
+//                        result = 8;
+//                        break;
+//                    case "50sec":
+//                        result = 9;
+//                        break;
+//                    case "55sec":
+//                        result = 10;
+//                        break;
+//                    case "60sec":
+//                        result = 11;
+//                        break;
+//                }
+//                break;
+//            case "triggerSen":
+//                switch (value) {
+//                    case "off":
+//                        result = 0;
+//                        break;
+//                    case "Low":
+//                        result = 1;
+//                        break;
+//                    case "Auto":
+//                        result = 2;
+//                        break;
+//                    case "High":
+//                        result = 3;
+//                        break;
+//                }
+//                break;
+//            case "triggerPir":
+//                System.out.println(value);
+//                switch (value) {
+//                    case "0Sec":
+//                        result = 0;
+//                        break;
+//                    case "1Sec":
+//                        result = 1;
+//                        break;
+//                    case "2Sec":
+//                        result = 2;
+//                        break;
+//                    case "3Sec":
+//                        result = 3;
+//                        break;
+//                    case "4Sec":
+//                        result = 4;
+//                        break;
+//                    case "5Sec":
+//                        result = 5;
+//                        break;
+//                    case "10Sec":
+//                        result = 6;
+//                        break;
+//                    case "15Sec":
+//                        result = 7;
+//                        break;
+//                    case "20Sec":
+//                        result = 8;
+//                        break;
+//                    case "25Sec":
+//                        result = 9;
+//                        break;
+//                    case "30Sec":
+//                        result = 10;
+//                        break;
+//                    case "35Sec":
+//                        result = 11;
+//                        break;
+//                    case "40Sec":
+//                        result = 12;
+//                        break;
+//                    case "45Sec":
+//                        result = 13;
+//                        break;
+//                    case "50Sec":
+//                        result = 14;
+//                        break;
+//                    case "55Sec":
+//                        result = 15;
+//                        break;
+//                    case "1min":
+//                        result = 16;
+//                        break;
+//                    case "2min":
+//                        result = 17;
+//                        break;
+//                    case "3min":
+//                        result = 18;
+//                        break;
+//                    case "4min":
+//                        result = 19;
+//                        break;
+//                    case "5min":
+//                        result = 20;
+//                        break;
+//                    case "10min":
+//                        result = 21;
+//                        break;
+//                    case "15min":
+//                        result = 22;
+//                        break;
+//                    case "20min":
+//                        result = 23;
+//                        break;
+//                    case "25min":
+//                        result = 24;
+//                        break;
+//                    case "30min":
+//                        result = 25;
+//                        break;
+//                    case "35min":
+//                        result = 26;
+//                        break;
+//                    case "40min":
+//                        result = 27;
+//                        break;
+//                    case "45min":
+//                        result = 28;
+//                        break;
+//                    case "50min":
+//                        result = 29;
+//                        break;
+//                    case "55min":
+//                        result = 30;
+//                        break;
+//                    case "60min":
+//                        result = 31;
+//                        break;
+//                }
+//                break;
+//            case "triggerTimelapse":
+//                switch (value) {
+////                    case "0Sec":
+////                        return 0;
+////                    break;
+////                    case "1Sec":
+////                        return 1;
+////                    break;
+////                    case "2Sec":
+////                        return 2;
+////                    break;
+////                    case "3Sec":
+////                        return 3;
+////                    break;
+////                    case "4Sec":
+////                        return 4;
+////                    break;
+//                    case "5Sec":
+//                        result = 1;
+//                        break;
+//                    case "10Sec":
+//                        result = 2;
+//                        break;
+//                    case "15Sec":
+//                        result = 3;
+//                        break;
+//                    case "20Sec":
+//                        result = 4;
+//                        break;
+//                    case "25Sec":
+//                        result = 5;
+//                        break;
+//                    case "30Sec":
+//                        result = 6;
+//                        break;
+//                    case "35Sec":
+//                        result = 7;
+//                        break;
+//                    case "40Sec":
+//                        result = 8;
+//                        break;
+//                    case "45Sec":
+//                        result = 9;
+//                        break;
+//                    case "50Sec":
+//                        result = 10;
+//                        break;
+//                    case "55Sec":
+//                        result = 11;
+//                        break;
+//                    case "1min":
+//                        result = 12;
+//                        break;
+//                    case "2min":
+//                        result = 13;
+//                        break;
+//                    case "3min":
+//                        result = 14;
+//                        break;
+//                    case "4min":
+//                        result = 15;
+//                        break;
+//                    case "5min":
+//                        result = 16;
+//                        break;
+//                    case "10min":
+//                        result = 17;
+//                        break;
+//                    case "15min":
+//                        result = 18;
+//                        break;
+//                    case "20min":
+//                        result = 19;
+//                        break;
+//                    case "25min":
+//                        result = 20;
+//                        break;
+//                    case "30min":
+//                        result = 21;
+//                        break;
+//                    case "35min":
+//                        result = 22;
+//                        break;
+//                    case "40min":
+//                        result = 23;
+//                        break;
+//                    case "45min":
+//                        result = 24;
+//                        break;
+//                    case "50min":
+//                        result = 25;
+//                        break;
+//                    case "55min":
+//                        result = 26;
+//                        break;
+//                    case "1Hour":
+//                        result = 27;
+//                        break;
+//                    case "2Hour":
+//                        result = 28;
+//                        break;
+//                    case "3Hour":
+//                        result = 29;
+//                        break;
+//                    case "4Hour":
+//                        result = 30;
+//                        break;
+//                    case "5Hour":
+//                        result = 31;
+//                        break;
+//                    case "6Hour":
+//                        result = 32;
+//                        break;
+//                    case "7Hour":
+//                        result = 33;
+//                    case "8Hour":
+//                        result = 34;
+//                        break;
+//                    case "12Hour":
+//                        result = 35;
+//                        break;
+//                    case "20Hour":
+//                        result = 36;
+//                        break;
+//                    case "24Hour":
+//                        result = 37;
+//                        break;
+//                }
+//                break;
+//            case "sendMode":
+//                int sendMode2 = Integer.parseInt(value);
+//                result = sendMode2;
+//                break;
+//            case "remoteControl":
+//                switch (value) {
+//                    case "Realtime":
+//                        result = 0;
+//                        break;
+//                    case "Delay 0.5H":
+//                        result = 1;
+//                        break;
+//                    case "Delay 1H":
+//                        result = 2;
+//                        break;
+//                    case "Delay 2H":
+//                        result = 3;
+//                        break;
+//                    case "Delay 3H":
+//                        result = 4;
+//                        break;
+//                    case "Delay 4H":
+//                        result = 5;
+//                        break;
+//                    case "Delay 6H":
+//                        result = 6;
+//                        break;
+//                    case "Delay 12H":
+//                        result = 7;
+//                        break;
+//                    case "Delay 24H":
+//                        result = 8;
+//                        break;
+//                }
+//                break;
+//            case "staName":
+//                switch (value) {
+//                    case "false":
+//                        result = 0;
+//                        break;
+//                    case "true":
+//                        result = 1;
+//                        break;
+//                }
+//                break;
+//            case "staPassword":
+//                switch (value) {
+//                    case "false":
+//                        result = 0;
+//                        break;
+//                    case "true":
+//                        result = 1;
+//                        break;
+//                }
+//                break;
+//        }
+//        String text = Integer.toHexString(result);
+//        if(text.length() == 1){
+//            text = '0'+text;
+//        }
+//        return  text.toCharArray();
+//    }
+
+    //显示二维码数
+
+    /**
+     * 获取二维码
+     * @return
+     */
+//    public String getQRCode() {
+//        char[] showValue = getCharCam();
+//        String count = "";
+//        for (int i = 0; i < showValue.length; i++) {
+//            count += showValue[i];
+//        }
+//        return count;
+//    }
 
 
     //保存服务器返回的数据

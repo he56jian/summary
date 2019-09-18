@@ -1,10 +1,8 @@
 package com.example.myapplication;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextDirectionHeuristic;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,18 +16,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.com.example.myapplication.activity.CameraActivity;
 import com.example.myapplication.com.example.myapplication.activity.ChatManager;
-import com.example.myapplication.com.example.myapplication.activity.ConnectScoket;
-import com.example.myapplication.com.example.myapplication.activity.MainActivity;
 import com.example.myapplication.com.example.myapplication.activity.NetActivity;
-import com.example.myapplication.com.example.myapplication.activity.ShowQRCodeActivity;
 import com.example.myapplication.com.example.myapplication.activity.SimInfoActivity;
 import com.example.myapplication.com.example.myapplication.activity.SysActivity;
 import com.example.myapplication.com.example.myapplication.activity.TriggerModeActivity;
-import com.example.myapplication.com.example.myapplication.activity.WorkTimeActivity;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
-import static com.example.myapplication.Utils.intToCharList;
-import static com.example.myapplication.Utils.strToCharList;
 
 public class ParamFragment extends Fragment implements View.OnClickListener {
     private Context context;
@@ -37,7 +29,6 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
     private View view;
     private Intent intent;
     private String cameraMode, photoSize, photoBurst, sendingOption, shutterSpeed, flashPower, videoSize, videoLength, triggerPir, triggerSen, triggerTimelapse,  sendMode, remoteControl, passWord, rename;
-
     private int sta_name, sta_password, sta_overWrite;
 
     private TextView textView_cameraMode, textView_cameraFlash, textView_triggerPir, textView_timelapse, textView_worktime1, textView_worktime2, textView_worktime3, textView_worktime4,textview_container;
@@ -48,6 +39,7 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
         this.context = context;
     }
     String IP;
+    Utils utils;
     int PORT;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +57,7 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        utils = new Utils(context);
         dataApplication = new DataApplication(context).getDataApplication();
         dataApplication.defaultSetting();
         init();
@@ -134,7 +127,8 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
 //                startActivityForResult(intent, 1);
 //                break;
             case R.id.button_send:                    //发送信息
-                toSend();
+                toSend3();
+//                toSend2();
 //                new Thread(){
 //                    @Override
 //                    public void run() {
@@ -180,7 +174,7 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
                 ChatManager.getCM().connect(context, IP, PORT);
                 break;
             case R.id.button_connectServer2:
-                IP = "192.168.1.30";
+                IP = "192.168.1.194";
                 PORT = 5001;
                 Toast.makeText(context,"连接"+IP,Toast.LENGTH_SHORT).show();
                 ChatManager.getCM().connect(context, IP, PORT);
@@ -206,75 +200,33 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
     }
 
     //发送参数
-    private void toSend() {
-        char[] message = dataApplication.getCharCam();
-        char [] arr = new char[]{'#', '0', '2','#'};
-        Utils utils =new Utils(context);
-        showMessage =  utils.addChar(arr,message);
-//                utils.method("#02#",message);
+//    private void toSend() {
+//        char[] message = dataApplication.getCharCam();
+//        char [] arr = new char[]{'#', '0', '2','#'};
+//        Utils utils =new Utils(context);
+//        showMessage =  utils.addChar(arr,message);
+//        if(dataApplication.sta_connect == 1 ){          //只有连接上了才能点击发送
+//            ChatManager.getCM().sendCharToStream(showMessage,true);
+//        }else{
+//            Toast.makeText(context,"没有连接到服务器",Toast.LENGTH_SHORT).show();
+//        }
+//    }
+
+    //发送参数
+    private void toSend3() {
+        byte[] message = dataApplication.getCharCam();
+        byte [] arr = new byte[]{'#', '0', '2','#'};
+        byte[] byte_showMessage =  utils.byteMerger(arr,message);
+
+        System.out.println(utils.toHexString(byte_showMessage));
         if(dataApplication.sta_connect == 1 ){          //只有连接上了才能点击发送
-            ChatManager.getCM().sendCharToStream(showMessage,true);
+//            ChatManager.getCM().sendByteToStream(byte_showMessage,true);
+//            ChatManager.getCM().sendCharToStream(utils.toHexString(byte_showMessage),true);
+            ChatManager.getCM().sendByteToStream(byte_showMessage,true);
         }else{
             Toast.makeText(context,"没有连接到服务器",Toast.LENGTH_SHORT).show();
         }
     }
-    char[] charRename,charPasswd,charSimApn,charSimAcount,charSimpasswd;
-    private void toSend2(){
-        ChatManager.getCM().sendCharToStream(new char[]{'#', '0', '2','#'},false);
-        int charCam = dataApplication.getCharWithPar("cameraMode", dataApplication.getCameraMode());
-        ChatManager.getCM().sendIntToStream(charCam);
-        int charPhotoSize = dataApplication.getCharWithPar("photoSize", dataApplication.getPhotoSize());
-        ChatManager.getCM().sendIntToStream(charPhotoSize);
-        int charPhotoBurst = dataApplication.getCharWithPar("photoBurst", dataApplication.getPhotoBurst());
-        ChatManager.getCM().sendIntToStream(charPhotoBurst);
-        int charBurstSpeed = dataApplication.getCharWithPar("burstSpeed", dataApplication.getBurstSpeed());
-        ChatManager.getCM().sendIntToStream(charBurstSpeed);
-        int charSendingOption = dataApplication.getCharWithPar("sendingOption", dataApplication.getSendingOption());
-        ChatManager.getCM().sendIntToStream(charSendingOption);
-        int charShutterSpeed = dataApplication.getCharWithPar("shutterSpeed", dataApplication.getShutterSpeed());
-        ChatManager.getCM().sendIntToStream(charShutterSpeed);
-        int charFlashPower = dataApplication.getCharWithPar("flashPower", dataApplication.getFlashPower());
-        ChatManager.getCM().sendIntToStream(charFlashPower);
-        int charVideoSize = dataApplication.getCharWithPar("videoSize", dataApplication.getVideoSize());
-        ChatManager.getCM().sendIntToStream(charVideoSize);
-        int charVideoLength = dataApplication.getCharWithPar("videoLength", dataApplication.getVideoLength());
-        ChatManager.getCM().sendIntToStream(charVideoLength);
-        int charTriggerSen = dataApplication.getCharWithPar("triggerSen", dataApplication.getTriggerSen());
-        ChatManager.getCM().sendIntToStream(charTriggerSen);
-        int charTriggerPir = dataApplication.getCharWithPar("triggerPir", dataApplication.getTriggerPir());
-        ChatManager.getCM().sendIntToStream(charTriggerPir);
-        int charTriggerTimelapse = dataApplication.getCharWithPar("triggerTimelapse", dataApplication.getTriggerTimelapse());
-        ChatManager.getCM().sendIntToStream(charTriggerTimelapse);
-        int charSendMode = dataApplication.getCharWithPar("sendMode", dataApplication.getSendMode());
-        ChatManager.getCM().sendIntToStream(charSendMode);
-        int charRemoteControl = dataApplication.getCharWithPar("remoteControl", dataApplication.getRemoteControl());
-        ChatManager.getCM().sendIntToStream(charRemoteControl);
-        int charStaName = dataApplication.getStaRename();
-        ChatManager.getCM().sendIntToStream(charStaName);
-        if (dataApplication.getStaRename() ==1) {
-           charRename = strToCharList(dataApplication.getRename(),16);
-        } else {
-            charRename = strToCharList("uovision",16);
-        }
-        ChatManager.getCM().sendCharToStream(charRename,false);
-
-        int charStaPassword =dataApplication.getStaPassword();
-        ChatManager.getCM().sendIntToStream(charStaPassword);
-        if (charStaPassword == 1) {
-            charPasswd = strToCharList(dataApplication.getPassword(),8);
-        } else {
-            charPasswd = strToCharList("0000",8);
-        }
-        ChatManager.getCM().sendCharToStream(charPasswd,false);
-        int charOverwriet =dataApplication.getOverWrite();
-        ChatManager.getCM().sendIntToStream(charOverwriet);
-
-        ChatManager.getCM().sendCharToStream(strToCharList(dataApplication.getSim_apn(),64),false);
-        ChatManager.getCM().sendCharToStream(strToCharList(dataApplication.getSim_acount(),64),false);
-        ChatManager.getCM().sendCharToStream(strToCharList(dataApplication.getSim_passwd(),64),false);
-        ChatManager.getCM().send();
-    }
-
 
     @Override
     public void onStart() {
@@ -282,44 +234,5 @@ public class ParamFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "onStart");
     }
     char [] arr = new char[]{'#','0','4','#'};
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        Log.d(TAG, "onResume");
-//        if (dataApplication.protecte) {
-//            ChatManager.getCM().send(arr);           //关闭
-//        }
-//    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d(TAG, "onDestroyView");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.d(TAG, "onDetach");
-    }
-
 
 }

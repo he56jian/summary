@@ -16,6 +16,7 @@ public class FragmentMain extends FragmentActivity implements View.OnClickListen
     FrameLayout show_des;
     ParamFragment paramFragment;
     String IP = "192.168.0.1";
+//    String IP = "192.168.1.194";
     int PORT = 5001;
     char[] chars=  new char[]{'#','0','1','#'};
     @Override
@@ -26,7 +27,6 @@ public class FragmentMain extends FragmentActivity implements View.OnClickListen
         getSupportFragmentManager().beginTransaction().replace(R.id.show_des, paramFragment).commit();
         DataApplication dataApplication = DataApplication.getDataApplication();
         ChatManager.getCM().connect(this, IP, PORT);
-        System.out.println("运行了FragmentMain界面");
         new Thread() {
             @Override
             public void run() {

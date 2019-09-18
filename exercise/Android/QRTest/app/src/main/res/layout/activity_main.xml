@@ -152,7 +152,7 @@
             android:id="@+id/button_connectServer2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="连接192.168.1.30" ></Button>
+            android:text="连接192.168.1.194" ></Button>
     </LinearLayout>
 
     <Button

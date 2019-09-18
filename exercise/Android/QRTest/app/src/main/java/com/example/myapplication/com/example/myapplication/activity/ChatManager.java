@@ -1,33 +1,17 @@
 package com.example.myapplication.com.example.myapplication.activity;
-
-import android.app.AlertDialog;
 import android.content.Context;
-import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
-import android.os.SystemClock;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.ThemedSpinnerAdapter;
 import android.widget.Toast;
-
 import com.example.myapplication.DataApplication;
-import com.example.myapplication.R;
 import com.example.myapplication.Utils;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.SocketAddress;
-
-import static java.lang.Thread.sleep;
 
 public class ChatManager {
     private Socket socket;
@@ -36,23 +20,17 @@ public class ChatManager {
     BufferedReader reader;
     PrintWriter writer;
     DataApplication dataApplication;
-    String message, status;
-    private Object File;
     Utils utils;
     private static final ChatManager instance = new ChatManager();
-
     public static ChatManager getCM() {
         return instance;
     }
-
     public int clock = 0;
-
     private ChatManager() {
         dataApplication = DataApplication.getDataApplication();
     }
-
     DataOutputStream dataOutpuStream;
-
+    OutputStream out_socket;
     //链接服务器
     public void connect(Context context, String ip, int port) {
         this.IP = ip;
@@ -72,11 +50,8 @@ public class ChatManager {
                         dataApplication.setStaConnect(2);
                         utils.subHandler.sendEmptyMessage(2);
                         socket = new Socket(IP, PORT);
-//                        OutputStream outputStream = socket.getOutputStream();
-                        //获取socket的输入流和输出流，客户端的输入流和服务端的输出流项链
+                        out_socket =  socket.getOutputStream();
                         writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
-
-//                        dataOutpuStream = new DataOutputStream(socket.getOutputStream());
                         reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                         System.out.println("获取输入流：" + reader);
                         System.out.println("获取输出流：" + writer);
@@ -107,10 +82,30 @@ public class ChatManager {
         }
     }
 
+    public void sendByteToStream(byte[] out,Boolean send){
+        String o = utils.toHexString(out);
+        System.out.print(o);
+        if(writer !=null){
+//            while()
+            new Thread(){
+                @Override
+                public void run() {
+                    try {
+                        out_socket.write(out);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    if(send){
+                        writer.flush();
+                    }
+                }
+            }.start();
+        }
+    }
+
     //往流中输入char[]
     public void sendCharToStream(char[] out,Boolean send) {
         if(writer !=null){
-//            System.out.println("进入了这里："+out);
 //            while()
             new Thread(){
                 @Override
@@ -123,7 +118,6 @@ public class ChatManager {
             }.start();
         }
     }
-
 
     //发送数据
     public void send() {

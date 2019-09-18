@@ -22,9 +22,9 @@ public class ShowQRCodeActivity extends AppCompatActivity {
 
         DataApplication dataApplication = new DataApplication(this).getDataApplication();
         Utils utils = new Utils(this);
-        String count = dataApplication.getQRCode();
-        textView.setText(count);
-        imageView.setImageBitmap(utils.generateBitmap(count, 600, 600));
+//        String count = dataApplication.getQRCode();
+//        textView.setText(count);
+//        imageView.setImageBitmap(utils.generateBitmap(count, 600, 600));
     }
 
 
