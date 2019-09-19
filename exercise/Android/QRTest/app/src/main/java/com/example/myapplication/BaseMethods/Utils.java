@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.BaseMethods;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
+import com.example.myapplication.Database.DataApplication;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
@@ -18,7 +19,6 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +35,12 @@ public class Utils {
     private ArrayAdapter<String> adapter;
     private String sInfo;
 
-    //下拉列表的选择
+    /**
+     * 下拉列表的监听；
+     * @param list_ele 包含下拉列表项的集合
+     * @param spinnerEle 进行监听的spinner控件；
+     * @param name
+     */
     public void listSelect(final List<String> list_ele, Spinner spinnerEle, final String name) {
         //第二步：为下拉列表定义一个适配器
         adapter = new ArrayAdapter<String>(this.context, android.R.layout.simple_spinner_item, list_ele);
@@ -51,7 +56,6 @@ public class Utils {
                 sInfo = adapterView.getItemAtPosition(i).toString();
 //                    app.setData(name,sInfo);
                 dataApplication.setValue(name, sInfo);
-
             }
 
             @Override
@@ -193,6 +197,10 @@ public class Utils {
     Boolean pingResult;
     private String status;
     private String message;
+
+    /**
+     * 用于在多线程用提醒用户
+     */
     public Handler subHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what){
@@ -273,6 +281,11 @@ public class Utils {
     }
 
 
+    /**
+     * 设置下拉选项框的默认值
+     * @param spinner
+     * @param value
+     */
     public void setSpinnerDefaultValue(Spinner spinner, String value) {
         SpinnerAdapter apsAdapter = spinner.getAdapter();
         int size = apsAdapter.getCount();
@@ -338,6 +351,20 @@ public class Utils {
         return hexString.toString().toLowerCase();
     }
 
+    /**
+     * 把字符串转成固定长度字节数组，不足的前面补零
+     */
+    public static byte[] createByte(String oldString,int len){
+        byte[] result = new byte[len];
+        for(int i =0;i<len;i++){
+            if(i<oldString.length()){
+                result[i] = oldString.getBytes()[i];
+            }else{
+                result[i]=0;
+            }
+        }
+        return result;
+    }
 
 
 }

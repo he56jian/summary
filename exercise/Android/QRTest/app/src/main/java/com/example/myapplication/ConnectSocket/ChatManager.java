@@ -1,9 +1,9 @@
-package com.example.myapplication.com.example.myapplication.activity;
+package com.example.myapplication.ConnectSocket;
 import android.content.Context;
 import android.os.Looper;
 import android.widget.Toast;
-import com.example.myapplication.DataApplication;
-import com.example.myapplication.Utils;
+import com.example.myapplication.Database.DataApplication;
+import com.example.myapplication.BaseMethods.Utils;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -106,11 +106,15 @@ public class ChatManager {
     //往流中输入char[]
     public void sendCharToStream(char[] out,Boolean send) {
         if(writer !=null){
-//            while()
             new Thread(){
                 @Override
                 public void run() {
                     writer.write(out);
+                    if(out[2] == 3){
+                        dataApplication.setProtected(true);
+                    }else if(out[2] == 4){
+                        dataApplication.setProtected(false);
+                    }
                     if(send){
                         writer.flush();
                     }

@@ -89,6 +89,13 @@
                 android:layout_height="match_parent"
                 android:text="10:00-20:00" />
         </LinearLayout>
+
     </LinearLayout>
+    <Button
+        android:id="@+id/button_trigger_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="save"
+        ></Button>
 
 </LinearLayout>

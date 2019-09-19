@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,16 +8,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.com.example.myapplication.activity.ChatManager;
+import com.example.myapplication.ConnectSocket.ChatManager;
+import com.example.myapplication.Database.DataApplication;
+import com.example.myapplication.R;
+import com.example.myapplication.BaseMethods.Utils;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 
 import static java.lang.Thread.sleep;
 
@@ -45,11 +46,7 @@ public class ConnectFragment extends Fragment implements View.OnClickListener {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         char[] arr = "#03#".toCharArray();
-
         ChatManager.getCM().sendCharToStream(arr,true);
-//        ChatManager.getCM().send(arr);
-        dataApplication = new DataApplication(context).getDataApplication();
-        dataApplication.protecte = true;
     }
 
     @Nullable
@@ -63,58 +60,7 @@ public class ConnectFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        init();
-//        thread = new Thread() {
-//            @Override
-//            public void run() {
-//                while (true) {
-//                    if (sta_connect == 1) {
-//                        addView(showMessage,"connecting...");
-//                        //如果一有服务器端发来的数据，直接使用；
-//                        reader = ChatManager.getCM().getServerMeg();
-//                        try {
-//                            if (((line = reader.readLine()) != null)) {
-//                                System.out.println(line);
-//                                dataApplication.setValue("retServer", line);//把服务器的返回结果保存到dataApplication.retServer里面；
-//                                String message = "服务器：" + line;
-//                                addView(showMessage,message);
-//                                dataApplication.setValue("retServer", "");
-//                            }
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                    } else {
-//                        addView(showMessage,"链接失败...");
-//                        System.out.println("链接失败");
-//                    }
-//                    try {
-//                        sleep(5000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    break;
-//                }
-//            }
-//        };
-//
-//        thread.start();
     }
-
-//    private void init() {
-//        showMessage = view.findViewById(R.id.showMessage);
-//        dataApplication = new DataApplication(context).getDataApplication();
-//        eqcode = dataApplication.getQRCode();
-//        sta_connect = dataApplication.getStaConnect();
-//
-//        editText = view.findViewById(R.id.edit_qrcode);
-//        editText.setText(eqcode);
-//
-//        button_send = view.findViewById(R.id.button_send);
-//        button_send.setOnClickListener(this);
-//
-//        utils = new Utils(context);
-//
-//    }
 
 
     //添加View

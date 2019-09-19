@@ -1,4 +1,4 @@
-package com.example.myapplication.com.example.myapplication.activity;
+package com.example.myapplication.Activity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -6,9 +6,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.DataApplication;
+import com.example.myapplication.Database.DataApplication;
 import com.example.myapplication.R;
-import com.example.myapplication.Utils;
+import com.example.myapplication.BaseMethods.Utils;
 
 public class ShowQRCodeActivity extends AppCompatActivity {
 

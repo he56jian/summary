@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,9 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.myapplication.com.example.myapplication.activity.ChatManager;
+import com.example.myapplication.BaseMethods.Utils;
+import com.example.myapplication.ConnectSocket.ChatManager;
+import com.example.myapplication.Database.DataApplication;
+import com.example.myapplication.R;
 
-public class ConnectSetting extends Activity implements View.OnClickListener {
+public class ConnectSettingActivity extends Activity implements View.OnClickListener {
     EditText edit_port, edit_ip,edit_message;
     DataApplication dataApplication;
     String IP;
@@ -42,19 +45,19 @@ public class ConnectSetting extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_tcp_connec:
-                if (dataApplication.sta_connect == 0) {
+                if (dataApplication.getStaConnect() == 0) {
                     IP =  edit_ip.getText().toString();
                     if (IP.equals("")) {
-                        Toast.makeText(ConnectSetting.this, "请输入IP", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ConnectSettingActivity.this, "请输入IP", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(ConnectSetting.this, "开始连接", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(ConnectSetting.this, "连接IP："+IP, Toast.LENGTH_SHORT).show();
-                        ChatManager.getCM().connect(ConnectSetting.this, IP, PORT);
+                        Toast.makeText(ConnectSettingActivity.this, "开始连接", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ConnectSettingActivity.this, "连接IP："+IP, Toast.LENGTH_SHORT).show();
+                        ChatManager.getCM().connect(ConnectSettingActivity.this, IP, PORT);
                     }
-                }else if(dataApplication.sta_connect == 1){
-                    Toast.makeText(ConnectSetting.this, "已经连接上了"+IP, Toast.LENGTH_SHORT).show();
-                }else if(dataApplication.sta_connect == 2){
-                    Toast.makeText(ConnectSetting.this, "正在连接。。。", Toast.LENGTH_SHORT).show();
+                }else if(dataApplication.getStaConnect() == 1){
+                    Toast.makeText(ConnectSettingActivity.this, "已经连接上了"+IP, Toast.LENGTH_SHORT).show();
+                }else if(dataApplication.getStaConnect() == 2){
+                    Toast.makeText(ConnectSettingActivity.this, "正在连接。。。", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.button_save:

@@ -1,7 +1,6 @@
-package com.example.myapplication.com.example.myapplication.activity;
+package com.example.myapplication.Activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +8,7 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
-import com.example.myapplication.DataApplication;
+import com.example.myapplication.Database.DataApplication;
 import com.example.myapplication.R;
 
 public class SimInfoActivity extends Activity implements View.OnClickListener {

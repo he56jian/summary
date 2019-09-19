@@ -1,27 +1,18 @@
-package com.example.myapplication.com.example.myapplication.activity;
+package com.example.myapplication.Activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.text.Editable;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.KeyEventDispatcher;
-
-import com.example.myapplication.DataApplication;
+import com.example.myapplication.Database.DataApplication;
 import com.example.myapplication.R;
 
 public class SysActivity extends Activity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
@@ -100,7 +91,6 @@ public class SysActivity extends Activity implements CompoundButton.OnCheckedCha
                 sta_rename=(b?1:0);
                 //如果当前为on
                 if (sta_rename == 1) {
-                    Toast.makeText(this, "当前为on", Toast.LENGTH_SHORT).show();
                     edit_rename.setVisibility(View.VISIBLE);
 
                     dataApplication.setStaName(true);
@@ -148,31 +138,25 @@ public class SysActivity extends Activity implements CompoundButton.OnCheckedCha
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_save:
-
-//                Log.i("当前rename",dataApplication.getRename());
-//                Log.i("当前password",dataApplication.getPassword());
                 rename = edit_rename.getText().toString();
                 password = edit_password.getText().toString();
-                if (sta_rename == 1) {      //如果是on模式
-                    if(rename.length()==0){
-                        dataApplication.setRename("uovision");
-                    }else{
+//                if (sta_rename == 1) {      //如果是on模式
+//                    if(rename.length()==0){
+//                        dataApplication.setRename("uovision");
+//                    }else{
                         dataApplication.setRename(rename);
-                    }
-                }else{
-                    dataApplication.setRename("uovision");
-                }
-                if (sta_password ==1 ) {
-                    if(password.length()==0){
-                        dataApplication.setPassword("0000");
-                    }else{
+//                    }
+//                }
+//                if (sta_password ==1 ) {
+//                    if(password.length()==0){
+//                        dataApplication.setPassword("0000");
+//                    }else{
 
                     dataApplication.setPassword(password);
-                    }
-                }else{
-                    dataApplication.setPassword("0000");
-
-                }
+//                    }
+//                }else{
+//                    dataApplication.setPassword("0000");
+//                }
                 break;
         }
     }

@@ -20,7 +20,7 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="parcam"></Button>
+            android:text="param"></Button>
 
         <Button
             android:layout_weight="1"
@@ -29,12 +29,12 @@
             android:layout_height="wrap_content"
             android:text="connect"></Button>
 
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/btn_other"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="other"></Button>
+<!--        <Button-->
+<!--            android:layout_weight="1"-->
+<!--            android:id="@+id/btn_other"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="other"></Button>-->
 
     </LinearLayout>
 

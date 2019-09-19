@@ -7,7 +7,7 @@
     xmlns:kevin="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="5dp"
-    tools:context=".com.example.myapplication.activity.MainActivity">
+    tools:context=".Activity.MainActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -134,32 +134,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="发送" ></Button>
-    <Button
-        android:id="@+id/button_connectServer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="连接" ></Button>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-    <Button
-        android:id="@+id/button_connectServer1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="连接192.168.0.1" ></Button>
-        <Button
-            android:id="@+id/button_connectServer2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="连接192.168.1.194" ></Button>
-    </LinearLayout>
+<!--    <Button-->
+<!--        android:id="@+id/button_connectServer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="连接" ></Button>-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_height="wrap_content">-->
+<!--    <Button-->
+<!--        android:id="@+id/button_connectServer1"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="连接192.168.0.1" ></Button>-->
+<!--        <Button-->
+<!--            android:id="@+id/button_connectServer2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="连接192.168.1.194" ></Button>-->
+<!--    </LinearLayout>-->
 
-    <Button
-        android:id="@+id/button_setting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="connect_Settings" ></Button>
+<!--    <Button-->
+<!--        android:id="@+id/button_setting"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="connect_Settings" ></Button>-->
 
 </LinearLayout>
 

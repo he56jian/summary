@@ -1,6 +1,4 @@
-package com.example.myapplication;
-
-import androidx.annotation.Nullable;
+package com.example.myapplication.com.example.myapplication.activity;
 
 class ClientThread extends Thread{
 

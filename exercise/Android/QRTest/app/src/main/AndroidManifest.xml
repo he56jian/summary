@@ -23,7 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
-<!--        <PreferenceScreen android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"></PreferenceScreen>-->
+
         <activity
             android:name=".FragmentMain"
             android:label="@string/app_name">
@@ -34,29 +34,30 @@
         </activity>
         <activity
             android:label="Back"
-            android:name=".com.example.myapplication.activity.CameraActivity">
+            android:name=".Activity.CameraActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".com.example.myapplication.activity.MainActivity"></meta-data>
+                android:value=".Activity.MainActivity"></meta-data>
         </activity>
         <activity
-            android:name="com.example.myapplication.com.example.myapplication.activity.ShowQRCodeActivity"/>
+            android:name="com.example.myapplication.Activity.ShowQRCodeActivity"/>
         <activity
-            android:name="com.example.myapplication.com.example.myapplication.activity.MainActivity"/>
+            android:name="com.example.myapplication.Activity.MainActivity"/>
         <activity
-            android:name="com.example.myapplication.com.example.myapplication.activity.SysActivity"/>
+            android:name="com.example.myapplication.Activity.SysActivity"/>
         <activity
-            android:name="com.example.myapplication.com.example.myapplication.activity.NetActivity"/>
+            android:name="com.example.myapplication.Activity.NetActivity"/>
         <activity
             android:label="Back"
-            android:name="com.example.myapplication.com.example.myapplication.activity.TriggerModeActivity"/>
+            android:name="com.example.myapplication.Activity.TriggerModeActivity"/>
         <activity
-            android:name="com.example.myapplication.com.example.myapplication.activity.WorkTimeActivity"/>
+            android:name="com.example.myapplication.Activity.WorkTimeActivity"/>
         <activity
             android:name="com.example.myapplication.com.example.myapplication.activity.ConnectScoket"/>
         <activity
             android:name="com.example.myapplication.ConnectSetting"/>
         <activity
-            android:name="com.example.myapplication.com.example.myapplication.activity.SimInfoActivity"/>
+            android:name="com.example.myapplication.Activity.SimInfoActivity"/>
+
     </application>
     <!--&lt;!&ndash;允许应用程序改变网络状态&ndash;&gt;-->
     <!--<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>-->

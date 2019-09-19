@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="camera_mode">
+        <item>photo</item>
+        <item>video</item>
+    </string-array>
+    <string-array name="photo_size">
+        <item>1080P</item>
+        <item>3MP</item>
+        <item>5MP</item>
+    </string-array>
+    <string-array name="photo_burst">
+        <item>1photo</item>
+        <item>2photos</item>
+        <item>3photos</item>
+        <item>4photos</item>
+        <item>5photos</item>
+        <item>6photos</item>
+        <item>7photos</item>
+        <item>8photos</item>
+        <item>9photos</item>
+        <item>10photos</item>
+    </string-array>
+    <string-array name="burst_Speed">
+        <item>Fast(200ms)</item>
+        <item>Show(500ms)</item>
+    </string-array>
+    <string-array name="sending_option">
+        <item>1st</item>
+        <item>2st</item>
+        <item>3st</item>
+        <item>4st</item>
+        <item>5st</item>
+        <item>6st</item>
+        <item>7st</item>
+        <item>8st</item>
+        <item>9st</item>
+        <item>10st</item>
+    </string-array>
+    <string-array name="shutter_speed">
+        <item>Normal</item>
+        <item>Fast</item>
+        <item>High</item>
+    </string-array>
+    <string-array name="flash_power">
+        <item>Low</item>
+        <item>Normal</item>
+        <item>High</item>
+    </string-array>
+    <string-array name="video_size">
+        <item>D1</item>
+        <item>720P</item>
+        <item>1080P</item>
+        <item>1440P</item>
+    </string-array>
+    <string-array name="video_length">
+        <item>5sec</item>
+        <item>10sec</item>
+        <item>15sec</item>
+        <item>20sec</item>
+        <item>25sec</item>
+        <item>30sec</item>
+        <item>35sec</item>
+        <item>40sec</item>
+        <item>45sec</item>
+        <item>50sec</item>
+        <item>55sec</item>
+        <item>60sec</item>
+    </string-array>
+    <string-array name="trigger_sen">
+        <item>off</item>
+        <item>Low</item>
+        <item>Auto</item>
+        <item>High</item>
+    </string-array>
+    <string-array name="trigger_pir">
+        <item>0Sec</item>
+        <item>1Sec</item>
+        <item>2Sec</item>
+        <item>3Sec</item>
+        <item>4Sec</item>
+        <item>5Sec</item>
+        <item>10Sec</item>
+        <item>15Sec</item>
+        <item>20Sec</item>
+        <item>25Sec</item>
+        <item>30Sec</item>
+        <item>35Sec</item>
+        <item>40Sec</item>
+        <item>45Sec</item>
+        <item>50Sec</item>
+        <item>55Sec</item>
+        <item>1min</item>
+        <item>2min</item>
+        <item>3min</item>
+        <item>4min</item>
+        <item>5min</item>
+        <item>10min</item>
+        <item>15min</item>
+        <item>20min</item>
+        <item>25min</item>
+        <item>30min</item>
+        <item>35min</item>
+        <item>40min</item>
+        <item>45min</item>
+        <item>50min</item>
+        <item>55min</item>
+        <item>60min</item>
+    </string-array>
+    <string-array name="trigger_timelapse">
+        <item>5Sec</item>
+        <item>10Sec</item>
+        <item>15Sec</item>
+        <item>20Sec</item>
+        <item>25Sec</item>
+        <item>30Sec</item>
+        <item>35Sec</item>
+        <item>40Sec</item>
+        <item>45Sec</item>
+        <item>50Sec</item>
+        <item>55Sec</item>
+        <item>1min</item>
+        <item>2min</item>
+        <item>3min</item>
+        <item>4min</item>
+        <item>5min</item>
+        <item>10min</item>
+        <item>15min</item>
+        <item>20min</item>
+        <item>25min</item>
+        <item>30min</item>
+        <item>35min</item>
+        <item>40min</item>
+        <item>45min</item>
+        <item>50min</item>
+        <item>55min</item>
+        <item>1Hour</item>
+        <item>2Hour</item>
+        <item>3Hour</item>
+        <item>4Hour</item>
+        <item>5Hour</item>
+        <item>6Hour</item>
+        <item>7Hour</item>
+        <item>8Hour</item>
+        <item>12Hour</item>
+        <item>20Hour</item>
+        <item>24Hour</item>
+    </string-array>
+    <string-array name="remote_control">
+        <item>Realtime</item>
+        <item>Delay 0.5H</item>
+        <item>Delay 1H</item>
+        <item>Delay 2H</item>
+        <item>Delay 3H</item>
+        <item>Delay 4H</item>
+        <item>Delay 6H</item>
+        <item>Delay 12H</item>
+        <item>Delay 24H</item>
+    </string-array>
+</resources>

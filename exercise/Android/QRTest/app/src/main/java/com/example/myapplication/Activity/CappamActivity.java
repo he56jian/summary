@@ -1,4 +1,4 @@
-package com.example.myapplication.com.example.myapplication.activity;
+package com.example.myapplication.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,15 +8,14 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.myapplication.DataApplication;
+import com.example.myapplication.Database.DataApplication;
 import com.example.myapplication.R;
+import com.example.myapplication.com.example.myapplication.activity.ConnectScoket;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.kevin.tabindicator.TabIndicator;
-import com.kevin.tabindicator.TabPageIndicatorEx;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,7 +26,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class CappamActivity extends FragmentActivity implements View.OnClickListener{
+
     private Bundle bundle;
     private ImageView imageView;
     private TextView textView;
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dataApplication = new DataApplication(this).getDataApplication();
         dataApplication.defaultSetting();
         init();
+
         //一创建，自动链接服务器,并且发送#02#指令，获取信息
 //        ChatManager.getCM().connect("192.168.1.224", 5001);
 //        ChatManager.getCM().send("#02#");
@@ -154,31 +155,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_zxing:                                     //生成二维码
-                intent = new Intent(MainActivity.this, ShowQRCodeActivity.class);
+                intent = new Intent(this, ShowQRCodeActivity.class);
                 startActivityForResult(intent, 1);
                 break;
             case R.id.button_camera:                    //单击进入cameraMode界面
-                intent = new Intent(MainActivity.this, CameraActivity.class);
+                intent = new Intent(this, CameraActivity.class);
                 startActivityForResult(intent, 1);                //回执
                 break;
             case R.id.button_trigger:                   //点击进入触发界面
-                intent = new Intent(MainActivity.this, TriggerModeActivity.class);
+                intent = new Intent(this, TriggerModeActivity.class);
                 startActivityForResult(intent, 1);
                 break;
             case R.id.button_net:                   //点击进入设置net界面
-                intent = new Intent(MainActivity.this, NetActivity.class);
+                intent = new Intent(this, NetActivity.class);
                 startActivityForResult(intent, 1);
                 break;
             case R.id.button_worktime:                  //点击进入工作时间界面
-                intent = new Intent(MainActivity.this, WorkTimeActivity.class);
+                intent = new Intent(this, WorkTimeActivity.class);
                 startActivityForResult(intent, 1);
                 break;
             case R.id.button_sys:
-                intent = new Intent(MainActivity.this, SysActivity.class);
+                intent = new Intent(this, SysActivity.class);
                 startActivityForResult(intent, 1);
                 break;
             case R.id.button_connect:
-                intent = new Intent(MainActivity.this, ConnectScoket.class);
+                intent = new Intent(this, ConnectScoket.class);
                 startActivityForResult(intent, 1);
                 break;
 //            case R.id.button_start:
@@ -304,5 +305,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        }
 //
 //    }
-
 }
