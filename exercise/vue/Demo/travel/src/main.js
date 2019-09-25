@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import fastClick from 'fastClick'
-import './assets/styles/H-ui.reset.css'
+import './assets/styles/reset.css'
 import './assets/styles/border.css'
 
 Vue.config.productionTip = false

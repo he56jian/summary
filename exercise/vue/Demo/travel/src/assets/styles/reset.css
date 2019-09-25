@@ -1,6 +1,4 @@
 ﻿@charset "utf-8";
-
-/*就是对基础样式的修饰，用于统一所有的浏览器默认样式*/
 /* -----------H-ui前端框架-----------------------
 H-ui.reset.css v1.2
 重定义浏览器默认样式
@@ -20,7 +18,7 @@ Created & Modified by guojunhui.
 html,body,h1,h2,h3,h4,h5,h6,hr,p,iframe,dl,dt,dd,ul,ol,li,pre,form,button,input,textarea,th,td,fieldset{margin:0;padding:0}
 ul,ol,dl{list-style-type:none}
 html,body{*position:static}
-html{font-family: sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
+html{font-family: sans-serif;-webkit-text-size-adjust:100%;font-size:50px;-ms-text-size-adjust:100%}
 address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:normal}
 input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit}
 input,button{overflow: visible;vertical-align:middle;outline:none}

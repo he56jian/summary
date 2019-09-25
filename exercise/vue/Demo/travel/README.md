@@ -111,7 +111,15 @@ user-scalable是否允许双指缩放
 移动端点击延迟300ms问题：
 在某些机型、浏览器中，使用click事件，会有延迟300ms后才处理。使用fastclick模块处理
 
+在项目中使用缩进出现不能使用tab的情况；
+是由于使用vue-cli构建项目时，安装了eslint，导致了tab键一使用就报错，必须变成两个空格；
 注意：
 1、在每个文件末尾都要添加一个换行符，否则会报错
 2、在使用router时，每一个value值前面都添加一个空格
+
+header头部导航
+需要用到styleus模块，需要npm install stylus -s 安装
+还是styleus-loader
+
+在home里创建一个components文件夹，用于存放小模块，Home.vue是整个页面最外层的容器，其内部可以拆分成很多小的组件；
 
