@@ -11,8 +11,13 @@ HEADERS = {
     'X-Requested-With': 'XMLHttpRequest',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 '
                   '(KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
-    'Referer': 'http://www.mzitu.com'
+    # 'Referer': 'http://www.mzitu.com'
+    'Referer': 'http://m2.5y1rsxmzh.rocks'
+
 }
+
+
+
 
 # 下载图片保存路径
 DIR_PATH = r"F:\mzitu"
@@ -22,18 +27,24 @@ def get_urls():
     """
     获取 mzitu 网站下所有套图的 url
     """
-    page_urls = ['http://www.mzitu.com/page/{cnt}'.format(cnt=cnt)
-                 for cnt in range(1, 193)]
+    page_urls = ['http://m2.5y1rsxmzh.rocks/pw/html_data/49/1910/{cnt}.html'.format(cnt=cnt)
+                 for cnt in range(4350028, 4354028)]
     print("Please wait for second ...")
     img_urls = []
     for page_url in page_urls:
         try:
-            bs = BeautifulSoup(
-                requests.get(page_url, headers=HEADERS, timeout=10).text,
-                'html.parser').find('ul', id="pins")
-            result = re.findall(r"(?<=href=)\S+", str(bs))      # 匹配所有 urls
-            img_url = [url.replace('"', "") for url in result]
-            img_urls.extend(img_url)
+        	bs = BeautifulSoup(
+                requests.get(page_url, headers=HEADERS, timeout=30).text,
+                'html.parser').find('div', id="read_tpc")
+        	# print(page_url)
+        	 # result = re.findall(r"(?<=href=)\S+", str(bs))      # 匹配所有 urls
+
+            # bs = BeautifulSoup(
+            #     requests.get(page_url, headers=HEADERS, timeout=10).text,
+            #     'html.parser').find('div', id="read_tpc")
+            # result = re.findall(r"(?<=href=)\S+", str(bs))      # 匹配所有 urls
+            # img_url = [url.replace('"', "") for url in result]
+            # img_urls.extend(img_url)
         except Exception as e:
             print(e)
     return set(img_urls)    # 利用 set 去重 urls

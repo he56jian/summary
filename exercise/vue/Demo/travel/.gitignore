@@ -7,6 +7,8 @@ yarn-error.log*
 /test/unit/coverage/
 /test/e2e/reports/
 selenium-debug.log
+static/mock
+#在这个文件夹下写的文件不会提交到git仓库
 
 # Editor directories and files
 .idea

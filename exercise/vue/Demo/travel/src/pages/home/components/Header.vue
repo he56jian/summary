@@ -7,7 +7,7 @@
 	<span class="iconfont search">&#xe632;</span>
 输入城市、景点、游玩主题</div>
 <div class="header-right">
-	城市
+	{{this.city}}
 	<span class="iconfont">&#xe64a;</span>
 </div>
 </div>
@@ -15,9 +15,15 @@
 
 <script>
 export default {
-  name: 'HomeHeader'
+  name: 'HomeHeader',
+
+  //父组件传递进来的city变量，定义其为字符串类型
+  props:{
+  	city:String
+  }
 }
 </script>
+//stylus就是一个预编译器，就是把css样式写法变得更加简洁
 // 在style中使用lang='stylus'表示，样式使用stylus的样式；
 //添加了scoped表示只对当前的页面有效
 <style lang="stylus" scoped>

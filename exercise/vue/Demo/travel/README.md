@@ -53,7 +53,7 @@ index.html				项目首页模板
 .eslintignore           在该文件中存放的文件夹不受.eslintrc.js文件的检测 
 .editorconfig           配置了编辑器的语法
 .babelrc				项目是vue的单文件组件的写法，需要该文件的语法解析器对项目进行转换；
-static文件夹				存放静态资源
+static文件夹				存放静态资源,存放在该文件夹下的文件能直接访问
 node_modules 			存放项目依赖文件的第三方包
 pages					存放所有网页的集合
 |---home				首页
@@ -123,3 +123,7 @@ header头部导航
 
 在home里创建一个components文件夹，用于存放小模块，Home.vue是整个页面最外层的容器，其内部可以拆分成很多小的组件；
 
+
+在chrome浏览器中添加插件vue devtools，用于调试vue
+
+在vue中可以使用axios,跨平台的数据请求第三方模块

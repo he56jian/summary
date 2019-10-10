@@ -8,6 +8,13 @@ import 'styles/reset.css'
 import 'styles/border.css'
 //因为每个页面都要引入，所以放到这个页面
 import 'styles/iconfont.css'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+
+// require styles
+import 'swiper/dist/css/swiper.css'
+
+Vue.use(VueAwesomeSwiper, /* { default global options } */)
+
 
 Vue.config.productionTip = false
 fastClick.attach(document.body)
