@@ -6,10 +6,14 @@
 <div class="header-input">
 	<span class="iconfont search">&#xe632;</span>
 输入城市、景点、游玩主题</div>
-<div class="header-right">
-	{{this.city}}
-	<span class="iconfont">&#xe64a;</span>
-</div>
+
+<!-- 用于内置的页面跳转组件，d点击该组件，跳转到to属性值的地址 -->
+<router-link to='/city'>
+	<div class="header-right">
+		{{this.city}}
+		<span class="iconfont">&#xe64a;</span>
+	</div>
+</router-link>
 </div>
 </template>
 
@@ -58,4 +62,5 @@ export default {
 		padding:0 .1rem
 		text-align:center
 		font-size:.3rem
+		color:#fff
 </style>
