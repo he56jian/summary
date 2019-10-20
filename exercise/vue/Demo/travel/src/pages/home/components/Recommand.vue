@@ -2,14 +2,19 @@
 	<div>
 		<div class='recommend-title'>热销推荐</div>
 		<ul >
-			<li class="recommend-item border-bottom" v-for="item of recommend" :key="item.id" >
+
+			<!-- <router-link to='/detail'> 这个相当于a标签，要添加成tag=‘li'把它当成li标签 -->
+			<router-link 
+			tag='li'
+			:to="'/detail/' + item.id"
+			class="recommend-item border-bottom" v-for="item of recommend" :key="item.id" >
 				<img :src=item.img class="item-img">
 				<div class="item-info">
 					<p class="item-title">{{item.title}}</p>
 					<p class="item-desc">{{item.desc}}</p>
 					<button class="item-button">查看详情</button>
 				</div>
-			</li>
+			</router-link>
 		</ul>
 	</div>
 </template>

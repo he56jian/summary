@@ -127,3 +127,11 @@ header头部导航
 在chrome浏览器中添加插件vue devtools，用于调试vue
 
 在vue中可以使用axios,跨平台的数据请求第三方模块
+
+Vuex,数据框架，vue只能承担视图层的内容，涉及到数据的时候使用vuex的框架 
+安装vuex，使用 npm install vuex --save
+引入vuex
+
+使用keepalive进行性能优化
+//每次路由切换的时候，都会进行请求；
+//

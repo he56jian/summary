@@ -9,7 +9,7 @@
 				</div>
 				<div class="button-list">
 					<div class="button-wrapper">
-						<div class="button">北京</div>
+						<div class="button">{{this.currentCity}}</div>
 					</div>
 				</div>
 			</div>
@@ -18,7 +18,9 @@
 					热门城市
 				</div>
 				<div class="button-list">
-					<div class="button-wrapper" v-for="item of hot" :key="item.id">
+					<div class="button-wrapper" v-for="item of hot" :key="item.id"
+					@click='handleCityClick(item.name)'
+					>
 						<div class="button ">{{item.name}}</div>
 					</div>
 				</div>
@@ -37,6 +39,7 @@
 						<div class="item border-bottom"
 						  v-for="innerItem of item"
 						  :key="innerItem.id"
+						  @click='handleCityClick(innerItem.name)'
 						  >{{innerItem.name}}</div>
 					</div>
 				</div>
@@ -47,13 +50,20 @@
 
 <script>
 import Bscroll from 'better-scroll'
-
+import {mapState,mapMutations} from 'vuex'
 
 export default {
 	props:{
 		hot:Array,
 		cities:Object,
 		letter:String
+	},
+	computed:{
+		//映射用法，把city映射为currentCity
+		...mapState({
+			currentCity:'city'
+		})
+
 	},
   name: 'CityList',
   // 生命周期函数，会在页面dom挂载完毕后执行
@@ -70,6 +80,18 @@ export default {
   			this.scroll.scrollToElement(element)
   		}
   	}
+  },
+  methods:{
+  	
+  	handleCityClick(city){
+  		//执行公用数据的改变函数之前需要调用该方法，跳转到store中执行changeCity
+  		// 一、 this.$store.dispatch('changeCity',city)
+  		//二、 this.$store.commit('changeCity',city)	//好像不用写dispatch，直接写当前这个就可以了
+  		//三、 使用vuex带的mapMutations即可
+  		this.changeCity(city)
+  		this.$router.push('/')
+  	},
+  	...mapMutations(['changeCity'])
   }
 }
 </script>

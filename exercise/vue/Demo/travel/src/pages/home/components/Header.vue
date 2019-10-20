@@ -6,11 +6,11 @@
 <div class="header-input">
 	<span class="iconfont search">&#xe632;</span>
 输入城市、景点、游玩主题</div>
-
 <!-- 用于内置的页面跳转组件，d点击该组件，跳转到to属性值的地址 -->
 <router-link to='/city'>
 	<div class="header-right">
-		{{this.city}}
+		<!-- 获取其vuex中的store中的state公用数据的city -->
+			{{this.city}}
 		<span class="iconfont">&#xe64a;</span>
 	</div>
 </router-link>
@@ -18,12 +18,13 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
   name: 'HomeHeader',
-
-  //父组件传递进来的city变量，定义其为字符串类型
-  props:{
-  	city:String
+  computed:{
+  	//把mapState里的数据映射到当前组件的computed的计算属性中；已当前格式书写就是把city映射到city之中
+  	...mapState(['city'])
   }
 }
 </script>
@@ -32,6 +33,7 @@ export default {
 //添加了scoped表示只对当前的页面有效
 <style lang="stylus" scoped>
 @import '~styles/varibles.styl'
+@import '~styles/minins.styl'
 .header
 	display:flex
 	// padding:.12rem 0
@@ -57,10 +59,13 @@ export default {
 		.search 
 			padding:0 .1rem
 	.header-right
-		width:1.24rem
+		min-width:1.04rem
 		float:right
 		padding:0 .1rem
 		text-align:center
 		font-size:.3rem
 		color:#fff
+		.arrow-icon
+			margin-left:-.04rem
+			font-size:.24rem
 </style>
