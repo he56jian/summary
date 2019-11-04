@@ -21,5 +21,9 @@ export default new Router({
       name:'Detail',
       component: Detail
     }
-  ]
+  ],
+  //解决各个页面之间滚动的联动
+  scrollBehavior(to,from,savedPosition){
+    return {x:0,y:0}
+  }
 })
