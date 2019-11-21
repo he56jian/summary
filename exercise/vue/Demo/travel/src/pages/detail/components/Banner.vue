@@ -7,33 +7,40 @@
 			<img src="//imgs.qunarzz.com/p/tts1/1608/17/13c00ead103a8802.jpg_r_480x320x90_0a613ba0.jpg" class="banner-img"> -->
 
 			<div class="banner-info">
-				<div class="banner-title">深圳-海口 5天跟团游</div>
-				<div class="banner-number "><span class="iconfont banner-icon">&#xe600;</span>39</div>
+				<div class="banner-title">{{this.sightName}}</div>
+				<div class="banner-number "><span class="iconfont banner-icon">&#xe600;</span>{{this.gallaryImgs.length}}</div>
 			</div>
 		</div>
-		<!-- 刚开始轮播图处于隐藏状态，再次让他显示，其宽度会出现问题 -->
-		<common-gallary 
-		:imags='imags' 
-		v-show='showGallary'
-		@close='handleGallaryClose'
-		></common-gallary>
+		<fade-animation>
+			<!-- 刚开始轮播图处于隐藏状态，再次让他显示，其宽度会出现问题 -->
+			<common-gallary 
+			:imgs='gallaryImgs' 
+			v-show='showGallary'
+			@close='handleGallaryClose'
+			></common-gallary>
+
+		</fade-animation>
 	</div>
 </template>
 
 <script type="text/javascript">
 
 import CommonGallary from 'common/gallary/Gallary'
-
+import FadeAnimation from 'common/fade/Fade'
 	export default{
 		name:"DetailBanner",
+		props:{
+			sightName:String,
+			bannerImg:String,
+			gallaryImgs:Array
+		},
+		//注册组件
 		components:{
-			CommonGallary
+			CommonGallary,
+			FadeAnimation
 		},
 		data(){
 			return {
-				imags:["//imgs.qunarzz.com/vs_ceph_vs_tts/5958b155-6345-4dc8-afea-881a83d90c60.jpg_r_480x320x90_c9422665.jpg",
-						'//imgs.qunarzz.com/vs_ceph_vs_tts/67d500ae-a5c7-42a8-9ca8-2be5da8ba921.jpg_r_480x320x90_4c6597bf.jpg',
-						'//imgs.qunarzz.com/p/tts8/1703/e2/149f578bbb9c7302.jpg_r_480x320x90_0df92e9d.jpg'],
 				showGallary:false
 					}
 		},

@@ -135,3 +135,12 @@ Vuex,数据框架，vue只能承担视图层的内容，涉及到数据的时候
 使用keepalive进行性能优化
 //每次路由切换的时候，都会进行请求；
 //
+在使用真机测试时，使用ip，打不开项目时：
+在package.json中的scripts下的dev的值中添加在中间加了一个--host 0.0.0.0表示可以使用ip地址来打开项目
+
+使用低版本的安卓手机显示白屏的情况
+1、手机浏览器默认不支持promise：安装第三方包babel-polyfill,如果浏览器没有es6的新特性，会自动添加；
+
+使用npm run build，完成项目的上线；在dist中的代码，就是最后上线的代码；
+
+如果想要在访问的时候访问的时/project的路径对应的是项目的入口文件时，需要在build目录下的config文件夹里的index.js文件中的build选项的assetsPublicPath的值改为/project,这样在输入网址为IP/project时就显示的时项目的入口文件了

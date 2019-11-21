@@ -10,6 +10,7 @@ import 'styles/border.css'
 import 'styles/iconfont.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import store from './store/index'
+import 'babel-polyfill'
 // require styles
 import 'swiper/dist/css/swiper.css'
 
